@@ -1,0 +1,3353 @@
+{
+	"info": {
+		"_postman_id": "c65ddc3d-e06e-4bed-8883-b734cb10bb0b",
+		"name": "laravel-restfull-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25223819"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"John doe\",\r\n  \"username\": \"johndoe123\",\r\n  \"email\": \"john_doe@mail.com\",\r\n  \"password\": \"12345678\",\r\n  \"password_confirmation\": \"12345678\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/auth/register",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success registered",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"John doe\",\r\n  \"username\": \"johndoe123\",\r\n  \"email\": \"john_doe@mail.com\",\r\n  \"password\": \"12345678\",\r\n  \"password_confirmation\": \"12345678\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 13 Oct 2024 13:30:12 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Registered successfully and logged in\",\n    \"token\": \"18|etUQXJpCLQnHjk1G7qQcVmC9dTZvfyY8DnpRj61Sd38fc84c\",\n    \"token_type\": \"Bearer\",\n    \"data\": {\n        \"id\": \"9d3c5f39-6f66-43c4-b89f-6d9bbf2fcea9\",\n        \"name\": \"John doe\",\n        \"username\": \"johndoe123\",\n        \"email\": \"john_doe@mail.com\",\n        \"role\": null,\n        \"profile_photo_path\": \"http://127.0.0.1:8000\"\n    }\n}"
+				},
+				{
+					"name": "Error validation: input",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"\",\r\n  \"username\": \"\",\r\n  \"email\": \"\",\r\n  \"password\": \"\",\r\n  \"password_confirmation\": \"\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"status": "Unprocessable Content",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 13 Oct 2024 13:33:46 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"errors\": {\n        \"name\": [\n            \"The name field is required.\"\n        ],\n        \"username\": [\n            \"The username field is required.\"\n        ],\n        \"email\": [\n            \"The email field is required.\"\n        ],\n        \"password\": [\n            \"The password field is required.\"\n        ]\n    }\n}"
+				},
+				{
+					"name": "Error validation: has user exist",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"John doe\",\r\n  \"username\": \"johndoe123\",\r\n  \"email\": \"john_doe@mail.com\",\r\n  \"password\": \"12345678\",\r\n  \"password_confirmation\": \"12345678\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"status": "Unprocessable Content",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 13 Oct 2024 13:31:45 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"errors\": {\n        \"username\": [\n            \"The username has already been taken.\"\n        ],\n        \"email\": [\n            \"The email has already been taken.\"\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id_user\": \"johndoe123\",\r\n  \"password\": \"12345678\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/auth/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id_user\": \"johndoe123\",\r\n  \"password\": \"12345678\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 13 Oct 2024 13:48:42 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Logged in\",\n    \"token\": \"20|9GHYOrgv67bJtYU65sjqklk9NkQPjzWs5B2HKBlxaf8c02de\",\n    \"token_type\": \"Bearer\",\n    \"data\": {\n        \"id\": \"9d3c62d8-f9a7-4f57-99a2-ee3f480b3be4\",\n        \"name\": \"John doe\",\n        \"username\": \"johndoe123\",\n        \"email\": \"john_doe@mail.com\",\n        \"role\": \"user\",\n        \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n    }\n}"
+				},
+				{
+					"name": "Error validation: input",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id_user\": \"\",\r\n  \"password\": \"12345678\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "Unprocessable Content",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 13 Oct 2024 13:46:28 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"Validation error occurred.\",\n    \"errors\": {\n        \"id_user\": [\n            \"The id user field is required.\"\n        ],\n        \"password\": [\n            \"The password field is required.\"\n        ]\n    }\n}"
+				},
+				{
+					"name": "Error: credentials not match",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id_user\": \"johndoe123_wrong\",\r\n  \"password\": \"12345678\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 13 Oct 2024 13:48:01 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"These credentials do not match our records.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/auth/logout",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success logout",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/auth/logout",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 13 Oct 2024 13:42:23 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Logged out\"\n}"
+				},
+				{
+					"name": "Error not login: no auth token",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/auth/logout",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 13 Oct 2024 13:40:48 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"Please Login [POST] /api/auth/login\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Forgot password Link Send",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"john_doe@mail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/auth/forgot-password",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"forgot-password"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success sent",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"john_doe@mail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/forgot-password",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"forgot-password"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 13 Oct 2024 13:52:01 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "6"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "3"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Password reset link sent successfully\",\n    \"url_reset\": \"/api/auth/reset-password/?token=KVQyh3lKRUSfOUITkI0vilIBxiReTueesFhQjAVloFOJebOfQKBDb3uYU2i2&email=john_doe@mail.com\"\n}"
+				},
+				{
+					"name": "Error validation: input",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/forgot-password",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"forgot-password"
+							]
+						}
+					},
+					"status": "Unprocessable Content",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 13 Oct 2024 13:50:05 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "6"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"errors\": {\n        \"email\": [\n            \"The email field is required.\"\n        ]\n    }\n}"
+				},
+				{
+					"name": "Error: User not found",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"john_doe_wrong@mail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/forgot-password",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"forgot-password"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 13 Oct 2024 13:56:45 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "6"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"User not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Reset password",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"token\": \"KVQyh3lKRUSfOUITkI0vilIBxiReTueesFhQjAVloFOJebOfQKBDb3uYU2i2\",\r\n  \"email\": \"john_doe@mail.com\",\r\n  \"password\": \"12345678910\",\r\n  \"password_confirmation\": \"12345678910\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/auth/reset-password/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"reset-password",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success password reset",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"token\": \"KVQyh3lKRUSfOUITkI0vilIBxiReTueesFhQjAVloFOJebOfQKBDb3uYU2i2\",\r\n  \"email\": \"john_doe@mail.com\",\r\n  \"password\": \"12345678910\",\r\n  \"password_confirmation\": \"12345678910\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/reset-password/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"reset-password",
+								""
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 13 Oct 2024 14:03:16 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Your password has been reset.\"\n}"
+				},
+				{
+					"name": "Error validation: input",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"token\": \"\",\r\n  \"email\": \"\",\r\n  \"password\": \"\",\r\n  \"password_confirmation\": \"\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/reset-password/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"reset-password",
+								""
+							]
+						}
+					},
+					"status": "Unprocessable Content",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 13 Oct 2024 14:02:06 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"errors\": {\n        \"token\": [\n            \"The token field is required.\"\n        ],\n        \"email\": [\n            \"The email field is required.\"\n        ],\n        \"password\": [\n            \"The password field is required.\"\n        ]\n    }\n}"
+				},
+				{
+					"name": "Error: token invalid",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"token\": \"KVQyh3lKRUSfOUITkI0vilIBxiReTueesFhQjAVloFOJebOfQKBDb3uYU2i2_wrong\",\r\n  \"email\": \"john_doe@mail.com\",\r\n  \"password\": \"12345678910\",\r\n  \"password_confirmation\": \"12345678910\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/reset-password/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"reset-password",
+								""
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 13 Oct 2024 14:02:30 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"This password reset token is invalid.\"\n}"
+				},
+				{
+					"name": "Error: email invalid",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"token\": \"KVQyh3lKRUSfOUITkI0vilIBxiReTueesFhQjAVloFOJebOfQKBDb3uYU2i2\",\r\n  \"email\": \"john_doe_wrong@mail.com\",\r\n  \"password\": \"12345678910\",\r\n  \"password_confirmation\": \"12345678910\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/reset-password/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"reset-password",
+								""
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 13 Oct 2024 14:02:56 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"We can't find a user with that email address.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Verification notification send",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/auth/email/verification-notification",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"email",
+						"verification-notification"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success sent email verif",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/auth/email/verification-notification",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"email",
+								"verification-notification"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 13 Oct 2024 14:05:33 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "6"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Verification link sent\"\n}"
+				},
+				{
+					"name": "Error: not auth token",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/auth/email/verification-notification",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"email",
+								"verification-notification"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 13 Oct 2024 14:03:59 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"Please Login [POST] /api/auth/login\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Verify account",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/auth/verify-email/:user_id/:hash?expires=:epochDate&amp;signature=",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"verify-email",
+						":user_id",
+						":hash"
+					],
+					"query": [
+						{
+							"key": "expires",
+							"value": ":epochDate",
+							"description": "required (eg: 1742964780)"
+						},
+						{
+							"key": "amp;signature",
+							"value": ""
+						}
+					],
+					"variable": [
+						{
+							"key": "user_id",
+							"value": "0195d045-926e-72d4-9731-4845ca2a8f04",
+							"description": "required"
+						},
+						{
+							"key": "hash",
+							"value": "1fc5fb4dc9d681a788507c56f81a31b1e484005a",
+							"description": "required"
+						}
+					]
+				},
+				"description": "`/api/auth/verify-email/{id}/{hash}`"
+			},
+			"response": [
+				{
+					"name": "Success verify",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/verify-email/9d3c62d8-f9a7-4f57-99a2-ee3f480b3be4/1fc5fb4dc9d681a788507c56f81a31b1e484005a?expires=1728831933&amp;signature=63aaa79b3a1ed3b73b81a3dada3e027b8bbcc9c22052492f6341e9db8dd13ce8",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"verify-email",
+								"9d3c62d8-f9a7-4f57-99a2-ee3f480b3be4",
+								"1fc5fb4dc9d681a788507c56f81a31b1e484005a"
+							],
+							"query": [
+								{
+									"key": "expires",
+									"value": "1728831933"
+								},
+								{
+									"key": "amp;signature",
+									"value": "63aaa79b3a1ed3b73b81a3dada3e027b8bbcc9c22052492f6341e9db8dd13ce8"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 13 Oct 2024 14:12:08 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "6"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "5"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Email verified\"\n}"
+				},
+				{
+					"name": "Error: email already verified",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/verify-email/9d3c62d8-f9a7-4f57-99a2-ee3f480b3be4/1fc5fb4dc9d681a788507c56f81a31b1e484005a?expires=1728831933&amp;signature=63aaa79b3a1ed3b73b81a3dada3e027b8bbcc9c22052492f6341e9db8dd13ce8",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"verify-email",
+								"9d3c62d8-f9a7-4f57-99a2-ee3f480b3be4",
+								"1fc5fb4dc9d681a788507c56f81a31b1e484005a"
+							],
+							"query": [
+								{
+									"key": "expires",
+									"value": "1728831933"
+								},
+								{
+									"key": "amp;signature",
+									"value": "63aaa79b3a1ed3b73b81a3dada3e027b8bbcc9c22052492f6341e9db8dd13ce8"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 13 Oct 2024 14:12:26 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "6"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "4"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"Email already verified\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get My User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/v1/user",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"user"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 13 Oct 2024 14:15:19 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"9d3c62d8-f9a7-4f57-99a2-ee3f480b3be4\",\n    \"name\": \"John doe\",\n    \"username\": \"johndoe123\",\n    \"email\": \"john_doe@mail.com\",\n    \"email_verified_at\": \"2024-10-13T14:12:08.000000Z\",\n    \"profile_photo_path\": \"/assets/img/profile/user.png\",\n    \"role\": \"user\",\n    \"created_at\": \"2024-10-13T13:40:19.000000Z\",\n    \"updated_at\": \"2024-10-13T14:12:08.000000Z\",\n    \"deleted_at\": null\n}"
+				},
+				{
+					"name": "Error: no auth token",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 13 Oct 2024 14:15:39 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"Please Login [POST] /api/auth/login\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update my profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"John doe\",\r\n    \"email\": \"john_doe@mail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/user",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"user"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"John doe\",\r\n    \"email\": \"john_doe@mail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 28 Mar 2025 00:31:10 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "phpdebugbar-id",
+							"value": "01JQD2HVQCV95R2KYQX6Q91X6M"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": {\n        \"status\": \"profile-updated\",\n        \"text\": \"Profile updated successfully.\",\n        \"message\": \"Please verify your email address.\"\n    },\n    \"data\": {\n        \"id\": \"0195d84a-05e1-72b3-b765-2cc035bdcbec\",\n        \"name\": \"John doe\",\n        \"username\": \"johndoe123\",\n        \"email\": \"john_doe@mail.com\",\n        \"role\": \"user\",\n        \"profile_photo_path\": \"http://localhost:8000/assets/img/profile/user.png\"\n    }\n}"
+				},
+				{
+					"name": "Error: validation",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"John doe\",\r\n    \"email\": \"john_doe@mail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"status": "Unprocessable Content",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 28 Mar 2025 00:30:12 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "phpdebugbar-id",
+							"value": "01JQD2G3DKMAV3K36P4WXDB49G"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"The email has already been taken.\",\n    \"errors\": {\n        \"email\": [\n            \"The email has already been taken.\"\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Update photo profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data",
+						"description": "multipart/form-data",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "photo_profile",
+							"contentType": "multipart/form-data",
+							"type": "file",
+							"src": "postman-cloud:///1f00b6cc-345a-4420-92e9-05f1862cc6c6"
+						},
+						{
+							"key": "_method",
+							"value": "PATCH",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/user/photo",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"photo"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"description": "multipart/form-data",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photo_profile",
+									"contentType": "multipart/form-data",
+									"type": "file",
+									"src": "postman-cloud:///1f00b6cc-345a-4420-92e9-05f1862cc6c6"
+								},
+								{
+									"key": "_method",
+									"value": "PATCH",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/user/photo",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"photo"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 28 Mar 2025 01:27:28 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "phpdebugbar-id",
+							"value": "01JQD5RY69TYS8G62JY19YTQ9V"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Profile photo updated successfully.\",\n    \"data\": {\n        \"id\": \"0195da32-00bf-7306-a17b-a3adc095490b\",\n        \"name\": \"John doe\",\n        \"username\": \"johndoe123\",\n        \"email\": \"john_doe@mail.com\",\n        \"role\": \"user\",\n        \"profile_photo_path\": \"http://localhost:8000/storage/profile_photos/1743125248_67e5fb0024dc5.jpg\"\n    }\n}"
+				},
+				{
+					"name": "Error: Validation",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"description": "multipart/form-data",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photo_profile",
+									"contentType": "multipart/form-data",
+									"type": "file",
+									"src": "postman-cloud:///1f00b6cc-345a-4420-92e9-05f1862cc6c6",
+									"disabled": true
+								},
+								{
+									"key": "_method",
+									"value": "PATCH",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/user/photo",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"photo"
+							]
+						}
+					},
+					"status": "Unprocessable Content",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 28 Mar 2025 01:28:31 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "phpdebugbar-id",
+							"value": "01JQD5TVSAC00CPEWZSYEV9AYM"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"Validation error.\",\n    \"error\": \"The photo profile field is required.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete my account",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\": \"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/user/destroy/me",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"destroy",
+						"me"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/user/destroy/me",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"destroy",
+								"me"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 28 Mar 2025 00:40:26 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "phpdebugbar-id",
+							"value": "01JQD32TB1719TE8A839HWRRHM"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"User deleted successfully.\"\n}"
+				},
+				{
+					"name": "Error: password miss macth",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"1234567\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/user/destroy/me",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"destroy",
+								"me"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 28 Mar 2025 00:41:59 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "phpdebugbar-id",
+							"value": "01JQD35NV6M9FZK38VNRM93H13"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"Password does not match.\",\n    \"error\": \"The password is incorrect.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/users",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 13 Oct 2024 14:16:05 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"List of all users\",\n    \"data\": [\n        {\n            \"id\": \"012167b9-a62d-39d9-870c-48934a08ae4b\",\n            \"name\": \"Mr. Olaf Brekke\",\n            \"username\": \"krystel19\",\n            \"email\": \"djohnson@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"046a7fa4-8a4d-3aa5-8245-7238e52a2e2b\",\n            \"name\": \"Jermain Veum\",\n            \"username\": \"tia48\",\n            \"email\": \"flossie.lehner@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"05df4310-a493-3c8b-86cf-9b10ec20d510\",\n            \"name\": \"Myrna Mills V\",\n            \"username\": \"rbechtelar\",\n            \"email\": \"heathcote.darwin@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"074265cb-0eb5-33c8-8d77-6bfb19278281\",\n            \"name\": \"Aryanna Prohaska\",\n            \"username\": \"willa.flatley\",\n            \"email\": \"imayer@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"094deb98-e237-3097-bfd4-0298515e7163\",\n            \"name\": \"Prof. Geovany Block\",\n            \"username\": \"rswaniawski\",\n            \"email\": \"witting.josiane@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"0a105992-559b-3bf0-b78a-45c612fb417a\",\n            \"name\": \"Gayle Kerluke\",\n            \"username\": \"jerod86\",\n            \"email\": \"igleason@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"0c5a543f-4560-34e6-83f5-aa7f6adab303\",\n            \"name\": \"Guy McGlynn Sr.\",\n            \"username\": \"stracke.krista\",\n            \"email\": \"deven.hickle@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"0c914483-dc7c-39f6-acee-99c2f5809a52\",\n            \"name\": \"Modesta Hoeger\",\n            \"username\": \"gusikowski.shane\",\n            \"email\": \"mueller.bradley@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"0f602259-b5c1-36f5-9e1e-78dd59e75a1f\",\n            \"name\": \"Jayne Weissnat\",\n            \"username\": \"nnicolas\",\n            \"email\": \"dmaggio@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"1282167f-be84-3950-b84b-87e5532a94b7\",\n            \"name\": \"Jadyn Wiza\",\n            \"username\": \"thurman.harber\",\n            \"email\": \"crist.florian@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"149cb084-1c35-33e1-baf1-f4eadad38a01\",\n            \"name\": \"Marcelina Rowe\",\n            \"username\": \"damion.flatley\",\n            \"email\": \"swaniawski.colin@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"15bf6291-03fb-3742-b2e0-1755a2af8ecb\",\n            \"name\": \"Fredrick Rogahn\",\n            \"username\": \"mark43\",\n            \"email\": \"jalen.lang@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"16399258-d791-3ce9-9631-4ab49469b51c\",\n            \"name\": \"Mr. Jefferey Crona Sr.\",\n            \"username\": \"yfahey\",\n            \"email\": \"sofia43@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"16b111b2-d4f0-3c95-a6a4-49ea4f20e7f4\",\n            \"name\": \"Mr. Dejon Waters\",\n            \"username\": \"wilderman.melyssa\",\n            \"email\": \"zackery.jacobson@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"17088244-d415-302a-bbf7-30641ca18e97\",\n            \"name\": \"Anika Schoen\",\n            \"username\": \"jacobson.otto\",\n            \"email\": \"qstanton@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"192b6326-0dd0-3a91-8524-a7743efd9867\",\n            \"name\": \"Prof. Ibrahim Jerde DDS\",\n            \"username\": \"epadberg\",\n            \"email\": \"fmoen@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"1b2ff9a3-a6b3-32fb-a21a-05550f45aac9\",\n            \"name\": \"Dr. Rachel Hegmann\",\n            \"username\": \"billy16\",\n            \"email\": \"upton.monserrate@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"1cd1b38c-bb0a-394c-9efd-f9f5be5828f5\",\n            \"name\": \"Rashawn Lesch\",\n            \"username\": \"ggerhold\",\n            \"email\": \"kbergstrom@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"1eed7aae-ee98-399a-b628-81ed105c040a\",\n            \"name\": \"Karl Hyatt\",\n            \"username\": \"lolson\",\n            \"email\": \"reynold08@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"1f5f8748-5a0a-3d5d-8ac8-f524f50274e2\",\n            \"name\": \"Mr. Logan Stark\",\n            \"username\": \"damon97\",\n            \"email\": \"marlee.stokes@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"202c77cd-54f7-33da-a8f2-89999d17ff48\",\n            \"name\": \"Brianne Stracke\",\n            \"username\": \"pbalistreri\",\n            \"email\": \"feest.agustin@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"20e0a644-68a0-34fd-856d-42fddf6865a7\",\n            \"name\": \"Prof. Imani Deckow I\",\n            \"username\": \"tania15\",\n            \"email\": \"velda51@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"211fa419-d6fc-3da6-9278-6b692f58bf9a\",\n            \"name\": \"Clemens Berge\",\n            \"username\": \"medhurst.damon\",\n            \"email\": \"abshire.isabelle@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"2208b07f-9d75-3ac6-ba04-e803ff794da9\",\n            \"name\": \"Prof. Stewart Bayer\",\n            \"username\": \"margarita84\",\n            \"email\": \"wintheiser.lenny@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"24745a32-415b-3a00-8cdc-fa4f79413771\",\n            \"name\": \"Adrain Mayert PhD\",\n            \"username\": \"nicolas.reginald\",\n            \"email\": \"vladimir.schaden@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"25504cc7-1741-3670-9813-285a13b8e7f7\",\n            \"name\": \"Mrs. Zelma Simonis PhD\",\n            \"username\": \"zita30\",\n            \"email\": \"brenda.hansen@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"259165d1-6d54-3f90-a1e7-6e1fa38d14e3\",\n            \"name\": \"Johnson Runte PhD\",\n            \"username\": \"americo91\",\n            \"email\": \"cmarvin@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"274928da-4a63-3b59-a320-b5d8f5be5d81\",\n            \"name\": \"Bradly Jerde\",\n            \"username\": \"verna32\",\n            \"email\": \"alvera.kuphal@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"27d4135e-5576-380a-9265-702f11a6efad\",\n            \"name\": \"Rosemarie Little\",\n            \"username\": \"jose34\",\n            \"email\": \"gkling@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"284aaec2-6482-3f12-816c-5722c22a8562\",\n            \"name\": \"Prof. Wilhelm Bernhard\",\n            \"username\": \"amparo.skiles\",\n            \"email\": \"omari03@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"286e3dd9-c6fb-3bbb-b2c0-b4495b00cf6e\",\n            \"name\": \"Abby Haag\",\n            \"username\": \"qrunolfsdottir\",\n            \"email\": \"willa47@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"2b80d62f-b933-3fed-9f0d-679d72f2d6f4\",\n            \"name\": \"Florine Borer\",\n            \"username\": \"connor.frami\",\n            \"email\": \"douglas.jordy@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"2c992e33-1a16-3b55-95ab-c749b61bb69b\",\n            \"name\": \"Adelia Cummerata MD\",\n            \"username\": \"xrenner\",\n            \"email\": \"tyrell.rowe@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"2d358d9a-28a6-38a3-97ca-92622dafdd9e\",\n            \"name\": \"Filiberto Kuhn\",\n            \"username\": \"mmueller\",\n            \"email\": \"nels.emard@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"2d7fe68c-a3ee-3a89-a357-f25bb74069cb\",\n            \"name\": \"Dr. Rosalee Murphy Sr.\",\n            \"username\": \"jodie.altenwerth\",\n            \"email\": \"rhaley@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"2d910d83-895d-34fd-a77b-ba02640a6769\",\n            \"name\": \"Stephen Rogahn\",\n            \"username\": \"pansy79\",\n            \"email\": \"percival56@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"2f7a781a-f02e-34e8-8ed4-dcc1d6704411\",\n            \"name\": \"Andy Ernser I\",\n            \"username\": \"nellie.hyatt\",\n            \"email\": \"eoconner@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"3223a6e9-561d-3f92-9f05-f7de4fc103ba\",\n            \"name\": \"Rae Schimmel\",\n            \"username\": \"alejandra.braun\",\n            \"email\": \"hcarroll@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"32660367-4ae3-3465-95ff-fa809cd4abed\",\n            \"name\": \"Miss Vanessa Brekke\",\n            \"username\": \"lula.hudson\",\n            \"email\": \"bernier.tyrese@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"33159a51-fcd2-33bb-b1dd-4159498bc3e7\",\n            \"name\": \"Bennie Lowe\",\n            \"username\": \"senger.earnestine\",\n            \"email\": \"pascale.langworth@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"334c9141-191d-3aee-bd19-f85399c61cd4\",\n            \"name\": \"Dr. Katheryn Johnston\",\n            \"username\": \"zella.reynolds\",\n            \"email\": \"boehm.glenda@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"35020b39-58bb-3293-8b41-afbcff782fc2\",\n            \"name\": \"Dr. Ubaldo Fahey\",\n            \"username\": \"hattie.yost\",\n            \"email\": \"monte.abernathy@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"362918aa-d4b4-3463-9cac-7a13aac684e8\",\n            \"name\": \"Odell Fahey\",\n            \"username\": \"ortiz.abel\",\n            \"email\": \"fschiller@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"3992dc20-3685-35d5-8eb5-5355458c5e87\",\n            \"name\": \"Donavon Lehner\",\n            \"username\": \"streich.luna\",\n            \"email\": \"cshanahan@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"3c3835f9-db0f-330d-b20c-3881b60162ed\",\n            \"name\": \"Vella Buckridge\",\n            \"username\": \"vivian.bednar\",\n            \"email\": \"connor.ziemann@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"3cd06b17-7f61-3f11-b9ba-1d178934e3ed\",\n            \"name\": \"Beulah D'Amore\",\n            \"username\": \"gbrekke\",\n            \"email\": \"alaina06@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"3ffbac5e-5fcf-3758-982f-aea2911e4e96\",\n            \"name\": \"Ms. Megane O'Reilly\",\n            \"username\": \"goodwin.delpha\",\n            \"email\": \"nya.carroll@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"45ac3f58-b29c-3240-bebe-bf343cd8229d\",\n            \"name\": \"Dr. Adah Shanahan II\",\n            \"username\": \"danyka56\",\n            \"email\": \"buckridge.grayson@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"46a8d92f-e93c-3921-8bb3-3a85ecbf3e36\",\n            \"name\": \"Misty Stokes\",\n            \"username\": \"schulist.darien\",\n            \"email\": \"rromaguera@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"46ea3ccb-85b3-39be-8556-cd20e0324715\",\n            \"name\": \"Mr. Richmond Cormier\",\n            \"username\": \"alberta.howell\",\n            \"email\": \"lerdman@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"49394bd9-9aa9-3ccb-85e3-dc652913766f\",\n            \"name\": \"Mr. Oral Will\",\n            \"username\": \"bernhard.mary\",\n            \"email\": \"mhowe@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"49d5ac86-2f07-3534-9a20-4133c5995b8b\",\n            \"name\": \"Prof. Jasen Leuschke V\",\n            \"username\": \"rodriguez.mitchell\",\n            \"email\": \"schinner.baylee@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"4b08b572-ce60-3ad0-a1de-62319b654a1c\",\n            \"name\": \"Frankie Lesch\",\n            \"username\": \"kokeefe\",\n            \"email\": \"swaniawski.adrianna@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"4b3b40cf-858f-3218-b3de-630df0e04ad1\",\n            \"name\": \"Ellsworth O'Keefe\",\n            \"username\": \"qmccullough\",\n            \"email\": \"gorczany.jamel@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"4bef0016-2714-3fe9-a785-48b49be6fe15\",\n            \"name\": \"Dr. Charles Monahan\",\n            \"username\": \"dillan26\",\n            \"email\": \"ricardo.johns@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"4cb510ed-2be8-3127-8cf3-a4dcc071f0ed\",\n            \"name\": \"Sidney Wisozk I\",\n            \"username\": \"reta.schulist\",\n            \"email\": \"keagan54@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"4d5e62aa-60ea-34c5-a5f6-ffc341fcbcdb\",\n            \"name\": \"Major McLaughlin\",\n            \"username\": \"wflatley\",\n            \"email\": \"cleo34@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"4ee0bcc3-4ab8-3fbd-8d22-81da7ded7c40\",\n            \"name\": \"Amari Reynolds\",\n            \"username\": \"jadyn14\",\n            \"email\": \"gunnar.stracke@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"50d1e191-5799-3fea-a8de-0765bcdafd0c\",\n            \"name\": \"Lavonne Rippin\",\n            \"username\": \"nolson\",\n            \"email\": \"akeebler@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"51644ae6-9745-34ef-aa54-7c80562330a4\",\n            \"name\": \"Ophelia Jenkins V\",\n            \"username\": \"rogelio06\",\n            \"email\": \"joey.schmeler@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"520bfecf-6ce3-3873-b77d-951014bc93bd\",\n            \"name\": \"Ellie Mitchell\",\n            \"username\": \"antonette56\",\n            \"email\": \"kenyatta71@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"53b3f8ab-505a-387d-99a4-a9e8f1523a34\",\n            \"name\": \"Leta Hackett\",\n            \"username\": \"susana.conn\",\n            \"email\": \"nkuhic@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"53fe57ef-29f1-3c06-9fdb-a0496bf70622\",\n            \"name\": \"Garnett Schuppe\",\n            \"username\": \"kgerhold\",\n            \"email\": \"ondricka.miracle@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"545de483-351b-32bc-a2f5-75616400e361\",\n            \"name\": \"Dr. Katherine Weimann\",\n            \"username\": \"witting.paul\",\n            \"email\": \"lavern.miller@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"55084a75-9a0f-375c-bfee-39b70e4d632a\",\n            \"name\": \"Mrs. Crystel Quitzon DVM\",\n            \"username\": \"clementine23\",\n            \"email\": \"breanne.tromp@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"55e34346-74c9-3d2a-a7ad-2a2d3b54aec0\",\n            \"name\": \"Miss Rozella Dietrich PhD\",\n            \"username\": \"solon49\",\n            \"email\": \"elmer83@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"5606b94a-018a-3f74-8f55-be850e45c0b0\",\n            \"name\": \"Malvina Smitham\",\n            \"username\": \"jennyfer.abshire\",\n            \"email\": \"colt12@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"58671ae3-420b-340a-b498-56d46d884e96\",\n            \"name\": \"Sophie Jakubowski\",\n            \"username\": \"savion53\",\n            \"email\": \"veum.melvina@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"5d99f20e-0b86-3cc6-bf82-4e428b66913f\",\n            \"name\": \"Florencio Corwin\",\n            \"username\": \"brent67\",\n            \"email\": \"mhalvorson@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"5dfe01cb-9416-3868-9526-0c71937b370c\",\n            \"name\": \"Cathrine Russel\",\n            \"username\": \"fprice\",\n            \"email\": \"edgar.ferry@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"5e5b42e1-ab61-3ac9-904b-ac0b1c933c1d\",\n            \"name\": \"Audrey Batz III\",\n            \"username\": \"alva.goodwin\",\n            \"email\": \"oconnell.gudrun@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"603f22e1-0e71-30bd-b163-75b1570ddfe3\",\n            \"name\": \"Armani Dach Jr.\",\n            \"username\": \"wkutch\",\n            \"email\": \"murl90@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"61cb341b-71aa-3c3b-a9f3-150b24de60e0\",\n            \"name\": \"Emmy Reynolds\",\n            \"username\": \"vthompson\",\n            \"email\": \"ole25@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"639c466f-3c29-3921-b7dd-5a699c787e10\",\n            \"name\": \"Tyrese Orn\",\n            \"username\": \"champlin.adolphus\",\n            \"email\": \"philip84@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"65dd3d60-1ab4-3e96-8393-bd331c8b82e9\",\n            \"name\": \"Ms. Joanne Heathcote Sr.\",\n            \"username\": \"hsipes\",\n            \"email\": \"zoreilly@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"67457c1c-f737-34a9-bad5-342565e8ea42\",\n            \"name\": \"Prof. Linnea Abshire\",\n            \"username\": \"lenna.davis\",\n            \"email\": \"ewisozk@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"6ce33c99-797b-31fe-a936-91fa091fdb1b\",\n            \"name\": \"Dion Von I\",\n            \"username\": \"bins.gabriella\",\n            \"email\": \"lavern85@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"70a02a3e-dde6-3f8a-b303-568baa8c45ea\",\n            \"name\": \"Bell Aufderhar III\",\n            \"username\": \"efrain69\",\n            \"email\": \"rtreutel@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"71026cd7-2844-3cb3-8826-c544f7c4d3b9\",\n            \"name\": \"Niko Wilderman\",\n            \"username\": \"bertram.heller\",\n            \"email\": \"cdooley@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"71213c3d-8b5c-3ac5-8e33-15bbe1f62f45\",\n            \"name\": \"Natasha Stamm DVM\",\n            \"username\": \"franz.howell\",\n            \"email\": \"qchamplin@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"71a835b6-b706-3969-ad5d-803f4b444144\",\n            \"name\": \"Joyce Bode\",\n            \"username\": \"mschoen\",\n            \"email\": \"hmohr@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"71dcd54a-74a4-32fb-861e-1e2f5001679c\",\n            \"name\": \"Dr. Rey Konopelski IV\",\n            \"username\": \"cstrosin\",\n            \"email\": \"weichmann@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"736ff351-9a37-3cb9-b22b-d8172c978591\",\n            \"name\": \"Dr. Constantin Walker\",\n            \"username\": \"wolff.jacinthe\",\n            \"email\": \"ubednar@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"73beacce-57ea-3ab0-a10d-1112889407ea\",\n            \"name\": \"Candice Rohan\",\n            \"username\": \"rosalyn23\",\n            \"email\": \"miller.brian@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"73d39126-41cf-37d6-9e33-45ec9bdf6c60\",\n            \"name\": \"Prof. Justine Goldner II\",\n            \"username\": \"nbahringer\",\n            \"email\": \"pstoltenberg@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"74712e99-aae5-3b2f-805b-125be2e07760\",\n            \"name\": \"Craig Prohaska\",\n            \"username\": \"dayna75\",\n            \"email\": \"osinski.carley@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"74c3c19c-5b09-3c53-ad97-6ad45e7932ed\",\n            \"name\": \"Mr. Haskell Von\",\n            \"username\": \"obrown\",\n            \"email\": \"manuel.kerluke@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"754b6042-6174-3800-a3da-00f6d202d031\",\n            \"name\": \"Arnulfo Fay\",\n            \"username\": \"kendrick.mann\",\n            \"email\": \"koelpin.jackie@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"76e48088-1b72-3ec8-9343-7124b6ee637c\",\n            \"name\": \"Casey Cormier\",\n            \"username\": \"jackson.waelchi\",\n            \"email\": \"mgreenholt@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"76ff3f1a-58da-3165-81d2-bdf282e49be7\",\n            \"name\": \"Dr. Israel Effertz\",\n            \"username\": \"ruecker.santina\",\n            \"email\": \"kaelyn.tillman@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"79bdb0fd-848c-39ed-902f-dc27bf418e31\",\n            \"name\": \"Ms. Minnie Jacobi III\",\n            \"username\": \"jackie65\",\n            \"email\": \"zjenkins@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"7a0dd200-fe3d-321e-945c-9d0487e0859f\",\n            \"name\": \"Dr. Ford Rohan IV\",\n            \"username\": \"bernice.hackett\",\n            \"email\": \"althea.abbott@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"7ad6b2ba-e2c9-3379-b587-1adc3971397f\",\n            \"name\": \"Terry Renner\",\n            \"username\": \"rod00\",\n            \"email\": \"smedhurst@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"7b5b7fff-d9d5-3725-9bab-8fe89b384f88\",\n            \"name\": \"Megane Ullrich\",\n            \"username\": \"owillms\",\n            \"email\": \"damon.lockman@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"7b90de2d-d8d3-3ffa-b48d-cb97ce3eb05e\",\n            \"name\": \"Pamela Ruecker\",\n            \"username\": \"maverick.heathcote\",\n            \"email\": \"dach.maggie@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"7ba80ea4-fdda-3637-92e2-b47c2720956d\",\n            \"name\": \"Ms. Adrienne Davis\",\n            \"username\": \"cummerata.jerome\",\n            \"email\": \"jose26@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"7c7d7aae-0d4f-3144-adf8-94b569b74b0c\",\n            \"name\": \"Anahi Klein\",\n            \"username\": \"erdman.angeline\",\n            \"email\": \"ritchie.trystan@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"7f10838d-d5ee-362e-b454-3a6506cbba9c\",\n            \"name\": \"Valentine Gerlach\",\n            \"username\": \"mlebsack\",\n            \"email\": \"koelpin.kiera@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"814d8479-f8bf-30a1-8189-97bebd05164e\",\n            \"name\": \"Katherine Koelpin DVM\",\n            \"username\": \"ohara.katelynn\",\n            \"email\": \"jones.daisy@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"82755127-6e14-3e92-8c41-4ce2b0740628\",\n            \"name\": \"Moriah Willms\",\n            \"username\": \"abby.schiller\",\n            \"email\": \"mallie64@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"839a444a-b102-3f80-aac9-2ba7def69192\",\n            \"name\": \"Emilio Wyman\",\n            \"username\": \"kyra.hansen\",\n            \"email\": \"tsimonis@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"853faf94-ddfe-3b53-ae82-dd3ecea2c5be\",\n            \"name\": \"Prof. Merlin O'Hara PhD\",\n            \"username\": \"lenny.kozey\",\n            \"email\": \"gregoria23@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"861a45fd-140f-3401-9969-8034b70108a2\",\n            \"name\": \"Dr. Rachel Cassin\",\n            \"username\": \"deontae35\",\n            \"email\": \"corkery.keira@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"8700dcdf-1810-3062-aa8c-efb122c61feb\",\n            \"name\": \"Dawson Heaney Sr.\",\n            \"username\": \"alexandro70\",\n            \"email\": \"nettie.vonrueden@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"88a5f4ce-0571-3d19-9b4a-232448118784\",\n            \"name\": \"Maritza Lehner\",\n            \"username\": \"ondricka.ardella\",\n            \"email\": \"trisha.okuneva@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"893ac720-b99a-3b23-95b7-7e1e5e67bacd\",\n            \"name\": \"Kolby Koelpin\",\n            \"username\": \"ulices28\",\n            \"email\": \"fay.alex@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"899a5c02-c80a-3a38-b6e5-1468012d725d\",\n            \"name\": \"Miss Krista Corwin\",\n            \"username\": \"pfannerstill.nolan\",\n            \"email\": \"nola96@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"8b83724a-0023-3daf-99b0-4f033c32f41a\",\n            \"name\": \"Loyce Nolan\",\n            \"username\": \"raven.schuster\",\n            \"email\": \"considine.fredrick@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"8c179469-ee76-3930-a7e2-5c6570dbda98\",\n            \"name\": \"Jarod Schroeder DVM\",\n            \"username\": \"pfisher\",\n            \"email\": \"webster.bogisich@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"8c928bd0-5ed4-34c2-9f00-8a174a0d6861\",\n            \"name\": \"Marge Thompson\",\n            \"username\": \"dannie17\",\n            \"email\": \"nikita.klocko@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"8f1637fb-42d7-37db-8f00-0abf756b98ab\",\n            \"name\": \"Jenifer Rempel\",\n            \"username\": \"ujohns\",\n            \"email\": \"thowell@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"8fb122c3-5c03-3b95-aa92-c28fbb145d27\",\n            \"name\": \"Lacey Ondricka\",\n            \"username\": \"alanna.moen\",\n            \"email\": \"wschulist@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"918e953c-5f21-4d50-b499-5c2569aab0ec\",\n            \"name\": \"Admin User\",\n            \"username\": \"admin\",\n            \"email\": \"admin@mail.com\",\n            \"role\": \"admin\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/admin.png\"\n        },\n        {\n            \"id\": \"926e58b5-27e7-369d-ae1a-fc11a6d17c99\",\n            \"name\": \"Myron Davis\",\n            \"username\": \"dion.little\",\n            \"email\": \"reichel.ronaldo@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"934ca9c0-2438-33b5-9a53-d60990ee226d\",\n            \"name\": \"Georgette McClure\",\n            \"username\": \"sadie43\",\n            \"email\": \"icorwin@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"95957ad3-74c4-3aa4-bb9d-657fd73dfc54\",\n            \"name\": \"Prof. Madeline Lowe II\",\n            \"username\": \"jaylen.nolan\",\n            \"email\": \"shanelle.swaniawski@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"96e82bdd-6499-32a6-a899-e92c8b48e04d\",\n            \"name\": \"Prof. Lavon Parisian DVM\",\n            \"username\": \"hkoch\",\n            \"email\": \"hettie.marquardt@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"970be4cd-c2ff-3742-8c7a-5aecb914fd56\",\n            \"name\": \"Jaycee Nader\",\n            \"username\": \"kihn.makayla\",\n            \"email\": \"wcole@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"9761c520-c071-30ba-a60c-4bdcd3b8badb\",\n            \"name\": \"Mr. Maximus Champlin I\",\n            \"username\": \"maryse69\",\n            \"email\": \"candido08@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"978a1a46-aa81-39c0-8be6-9a3afe023c80\",\n            \"name\": \"Leonardo Hermiston\",\n            \"username\": \"zmoore\",\n            \"email\": \"dubuque.alvena@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"9810b9b4-3a15-3066-96bb-63bd2d446518\",\n            \"name\": \"Dean Hermiston\",\n            \"username\": \"shayna28\",\n            \"email\": \"laurence17@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"98e39c9c-57a6-3f4b-a2ba-2a66c95ce94d\",\n            \"name\": \"Garett Olson DVM\",\n            \"username\": \"trystan.mertz\",\n            \"email\": \"wehner.renee@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"9adc768b-25b2-3591-b450-9bde3ba2467e\",\n            \"name\": \"Teresa Mann\",\n            \"username\": \"hane.lydia\",\n            \"email\": \"manuel.marks@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"9ae89970-f2b5-36d1-bfd3-a570eff0e5bd\",\n            \"name\": \"Joanie Rice\",\n            \"username\": \"lstroman\",\n            \"email\": \"kuhlman.harold@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"9c97c6a4-ebb9-3e2a-b53a-42e775ef224e\",\n            \"name\": \"Celia Haag\",\n            \"username\": \"kbarrows\",\n            \"email\": \"ustreich@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"9d3a7513-e28c-41f2-8309-9567fd5715b9\",\n            \"name\": \"a123\",\n            \"username\": \"a123\",\n            \"email\": \"a123@a.ru\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"9d3c62d8-f9a7-4f57-99a2-ee3f480b3be4\",\n            \"name\": \"John doe\",\n            \"username\": \"johndoe123\",\n            \"email\": \"john_doe@mail.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"9d65b941-a0a5-3dac-b3e3-f70d27d91ab2\",\n            \"name\": \"Ricky Gislason IV\",\n            \"username\": \"andy.howe\",\n            \"email\": \"valentina.bayer@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"9e22bae0-0929-3ba1-9b3e-cbd3cb68b769\",\n            \"name\": \"Prof. Aiyana Bins MD\",\n            \"username\": \"larissa.johnson\",\n            \"email\": \"dlindgren@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"9ecffa7b-315e-301d-b216-0a5a6ff285a7\",\n            \"name\": \"Alison Gorczany\",\n            \"username\": \"lillian20\",\n            \"email\": \"ursula62@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"a070884f-bcba-3d4f-9988-4736273e6224\",\n            \"name\": \"Roxane Schowalter\",\n            \"username\": \"jgreenholt\",\n            \"email\": \"jayson.luettgen@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"a0f97537-fcfa-3a9b-9fb6-76c87d526cad\",\n            \"name\": \"Katlyn Gaylord\",\n            \"username\": \"damon.rempel\",\n            \"email\": \"harrison50@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"a40925fe-61f1-3566-92ea-f5e5ada62a47\",\n            \"name\": \"Dr. Darrin Cormier V\",\n            \"username\": \"wiegand.hannah\",\n            \"email\": \"rosetta68@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"a43cdf8c-7a50-32bb-95f8-44e2689d9fb5\",\n            \"name\": \"Russell Wiza\",\n            \"username\": \"kaelyn.brekke\",\n            \"email\": \"lukas27@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"a44e9532-e019-365d-91e8-7685bb04848f\",\n            \"name\": \"Heath Legros\",\n            \"username\": \"josiane.mitchell\",\n            \"email\": \"maurice60@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"a54c5bae-808f-34e6-bbfc-cb4d604fdbb9\",\n            \"name\": \"Zack Marquardt\",\n            \"username\": \"libbie.turcotte\",\n            \"email\": \"nicolas.nathanael@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"a5d40acc-f65b-396a-802a-f503c204786a\",\n            \"name\": \"Allen Mosciski\",\n            \"username\": \"rosenbaum.madeline\",\n            \"email\": \"gaetano.rice@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"a656e8a6-7a2c-386b-990c-447b4951c686\",\n            \"name\": \"Dr. Ariane Willms II\",\n            \"username\": \"yreynolds\",\n            \"email\": \"maggie.hammes@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"a753fe1d-62a9-3893-8751-58ecec4d77eb\",\n            \"name\": \"Dianna Bechtelar\",\n            \"username\": \"carroll.oconner\",\n            \"email\": \"macey.halvorson@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"a7c43080-1ad3-3fb1-9646-bb590be36137\",\n            \"name\": \"Mrs. Lorna Yost IV\",\n            \"username\": \"savanah.murphy\",\n            \"email\": \"gbartell@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"a91a6b50-66e8-3534-bfd5-e05de554b045\",\n            \"name\": \"Miss Bernadette Muller\",\n            \"username\": \"xbauch\",\n            \"email\": \"dixie.boyle@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"aa98303d-b8c0-3467-8e2b-ebc04ab6fe4c\",\n            \"name\": \"Grant Gottlieb Jr.\",\n            \"username\": \"smitham.hobart\",\n            \"email\": \"ehahn@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"aaf62156-3a27-354d-be5f-83cd0edc3e6f\",\n            \"name\": \"Jovanny Nader\",\n            \"username\": \"maxie60\",\n            \"email\": \"sarai87@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"abffdc32-d4d2-3555-b635-c02d792bc85b\",\n            \"name\": \"Geo Hartmann\",\n            \"username\": \"laisha19\",\n            \"email\": \"nshields@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"ad3bef47-11ca-314c-aa9e-80f78d890aa7\",\n            \"name\": \"Kellen Fay\",\n            \"username\": \"jacinthe.torphy\",\n            \"email\": \"vincenza48@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"ad78a195-ae11-3461-af8a-825005c7ae4e\",\n            \"name\": \"Prof. Glennie Flatley\",\n            \"username\": \"dwelch\",\n            \"email\": \"franz.veum@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"ade7d36b-f497-32d4-a47d-40fbf093de5f\",\n            \"name\": \"Leonard Wisozk\",\n            \"username\": \"joany80\",\n            \"email\": \"jbecker@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"ae302c64-47aa-3580-a2c7-1174627e94e3\",\n            \"name\": \"Georgiana Kilback\",\n            \"username\": \"rodriguez.trevion\",\n            \"email\": \"ulices41@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"ae306fd2-2464-4fd9-bcae-97a337583fbc\",\n            \"name\": \"Writer User\",\n            \"username\": \"writer\",\n            \"email\": \"writer@mail.com\",\n            \"role\": \"writer\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/writer.png\"\n        },\n        {\n            \"id\": \"aed4a32c-9d3b-3562-ba72-aa40c7a672c0\",\n            \"name\": \"Maybell Schoen\",\n            \"username\": \"michaela.corkery\",\n            \"email\": \"fanny21@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"affaac44-5a5f-3d5a-a63e-77832a7498c6\",\n            \"name\": \"Prof. Mya Stamm DVM\",\n            \"username\": \"huels.ressie\",\n            \"email\": \"marquardt.trey@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"b01858b0-dfc2-3420-afd0-2830696b1fc5\",\n            \"name\": \"Dr. Brody Rutherford MD\",\n            \"username\": \"graham.davin\",\n            \"email\": \"gkub@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"b0aa99a4-9495-3ded-9374-f9ce240c08e7\",\n            \"name\": \"Mr. Eli Barton IV\",\n            \"username\": \"delilah44\",\n            \"email\": \"jreilly@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"b33967a7-ea2d-3e87-b621-67ee3345aa9d\",\n            \"name\": \"Alfredo Farrell\",\n            \"username\": \"qkutch\",\n            \"email\": \"laila.von@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"b4fc0576-0aef-3d8b-a996-7541c63d7233\",\n            \"name\": \"Prof. Genoveva Beer\",\n            \"username\": \"aaliyah80\",\n            \"email\": \"penelope00@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"b611b494-7e0b-3f69-937a-49c69d24da2c\",\n            \"name\": \"Harold Gusikowski DVM\",\n            \"username\": \"gunner42\",\n            \"email\": \"qoconnell@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"b8a41612-033f-31be-b02b-2559bf3ebc6d\",\n            \"name\": \"Erna Lueilwitz DDS\",\n            \"username\": \"bednar.alvera\",\n            \"email\": \"rocio.swift@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"ba0ba5d3-dfae-3e5b-8bc3-038205c0f0a9\",\n            \"name\": \"Jermain McGlynn PhD\",\n            \"username\": \"geovanny.medhurst\",\n            \"email\": \"pprice@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"ba4bd5df-7b3d-333d-acaa-26edade2070e\",\n            \"name\": \"Prof. Adelle Beer\",\n            \"username\": \"ppagac\",\n            \"email\": \"jokuneva@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"bb279fd9-3cef-3425-814b-ad8b30482c8f\",\n            \"name\": \"Elizabeth Satterfield\",\n            \"username\": \"adolfo66\",\n            \"email\": \"isom.spinka@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"bc4b88dc-57ae-30cf-9af3-066e157d074a\",\n            \"name\": \"Felicity McKenzie\",\n            \"username\": \"psanford\",\n            \"email\": \"shudson@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"bcf089b2-c04e-307c-9877-e1a7be8776cd\",\n            \"name\": \"Maxwell Yundt MD\",\n            \"username\": \"osborne.kemmer\",\n            \"email\": \"easton91@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"bdb2e551-1a7c-3db7-98b6-9ed9631c34a7\",\n            \"name\": \"Javonte Mills\",\n            \"username\": \"elinor77\",\n            \"email\": \"gutmann.jaylen@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"bde9a424-a582-39d0-87b6-cda8c5009ce6\",\n            \"name\": \"Prof. Wilma Oberbrunner DDS\",\n            \"username\": \"ctorp\",\n            \"email\": \"pgerhold@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"c0a80a22-a55d-3a27-815f-f28f4eb67e21\",\n            \"name\": \"Quincy Wilderman\",\n            \"username\": \"kiley98\",\n            \"email\": \"tremaine73@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"c24ec8b1-c485-3e57-9d34-120b7d24f716\",\n            \"name\": \"Macie Goldner\",\n            \"username\": \"macie.bradtke\",\n            \"email\": \"jairo67@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"c2f3751e-4e6f-3979-ad4f-82a02791b917\",\n            \"name\": \"Gunner Abshire IV\",\n            \"username\": \"fabiola.brown\",\n            \"email\": \"qhamill@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"c45c3cd8-742f-34ae-a830-1ddd5a98579f\",\n            \"name\": \"Jarred Emmerich\",\n            \"username\": \"dusty.langworth\",\n            \"email\": \"freddy.balistreri@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"c55b0093-06e7-3fc3-a861-0565ddf9e0c1\",\n            \"name\": \"Mrs. Freeda Bayer I\",\n            \"username\": \"hbayer\",\n            \"email\": \"alejandra51@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"cf02dea4-48e2-3026-8fb5-306cf002e725\",\n            \"name\": \"Sally Reynolds\",\n            \"username\": \"layla.mayert\",\n            \"email\": \"blanca.beahan@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"cf18d7fb-9594-3878-9db2-975a72c3f10c\",\n            \"name\": \"Preston Spinka\",\n            \"username\": \"bernard.walter\",\n            \"email\": \"abdullah.buckridge@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"d1bffea8-f88e-379f-96a5-3b30ac5a9518\",\n            \"name\": \"Dr. Bo Botsford III\",\n            \"username\": \"ferne.ritchie\",\n            \"email\": \"ncremin@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"d5027874-9517-3bdc-ab2d-c33e02041339\",\n            \"name\": \"Marcella Aufderhar\",\n            \"username\": \"muller.rahsaan\",\n            \"email\": \"turner80@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"d54a4482-c126-3f19-8b84-b9419f44f2b5\",\n            \"name\": \"Dayne Casper\",\n            \"username\": \"karl.reilly\",\n            \"email\": \"ursula.greenfelder@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"d757d070-6dbd-3e90-bad7-5943065a0b60\",\n            \"name\": \"Saige Lebsack IV\",\n            \"username\": \"edward16\",\n            \"email\": \"rosina.fahey@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"d8016542-5936-3ebb-b559-b09fa8a6ffd4\",\n            \"name\": \"Dr. Davon VonRueden Jr.\",\n            \"username\": \"okon.mireya\",\n            \"email\": \"sauer.rudy@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"d87531b7-db23-39e0-b3df-b13a230825a1\",\n            \"name\": \"Modesto Goodwin Sr.\",\n            \"username\": \"weldon20\",\n            \"email\": \"stark.angela@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"d8ed177a-ad33-32cd-8f48-6148f83900f9\",\n            \"name\": \"Ursula Tremblay\",\n            \"username\": \"mcglynn.ed\",\n            \"email\": \"anderson03@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"df2d2f36-33d5-3277-a11f-7782678332c1\",\n            \"name\": \"Mrs. Fay Terry I\",\n            \"username\": \"gaetano93\",\n            \"email\": \"guiseppe93@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"e12984eb-3007-34e2-83f6-cc3da8139301\",\n            \"name\": \"Dr. Camille Beer IV\",\n            \"username\": \"mylene.ryan\",\n            \"email\": \"renner.conrad@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"e310d654-e809-4a4b-ba6e-6d6d28f791db\",\n            \"name\": \"Regular User\",\n            \"username\": \"user\",\n            \"email\": \"user@mail.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"e3270fbb-7c07-3c7e-863d-2fd5f0c12c63\",\n            \"name\": \"Prof. Kelli DuBuque\",\n            \"username\": \"clindgren\",\n            \"email\": \"zshields@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"e33f7e30-fc50-3ad7-8d0e-012263c14d9b\",\n            \"name\": \"Logan Gutkowski\",\n            \"username\": \"streich.janet\",\n            \"email\": \"nconnelly@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"e39bf74c-0f13-3613-9acf-439c56c0ab66\",\n            \"name\": \"Brandt Krajcik\",\n            \"username\": \"wisozk.sasha\",\n            \"email\": \"clittel@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"e4643760-35e6-3f30-85ea-14b0adbde339\",\n            \"name\": \"Carole Heller\",\n            \"username\": \"rogahn.cecilia\",\n            \"email\": \"irenner@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"e6bf2003-5088-377b-9f69-640202775335\",\n            \"name\": \"Obie Brekke Sr.\",\n            \"username\": \"amiya.grady\",\n            \"email\": \"nblock@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"e6d22817-a737-3b10-ab65-74575af628c5\",\n            \"name\": \"Mariana Nicolas\",\n            \"username\": \"eveline.kautzer\",\n            \"email\": \"nolan.heidenreich@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"e8fb73cd-31ce-3fd9-a400-d34c0e51723e\",\n            \"name\": \"Stephania Koelpin\",\n            \"username\": \"gabriel29\",\n            \"email\": \"keara.dickens@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"eaa24f99-dc82-3e9c-ae73-92f91989c5c1\",\n            \"name\": \"Mr. Jerry Fahey II\",\n            \"username\": \"kpadberg\",\n            \"email\": \"eli55@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"ebe7ade3-db22-35d6-b028-774bdbf1b2f6\",\n            \"name\": \"Abigayle Vandervort\",\n            \"username\": \"kenya44\",\n            \"email\": \"cierra.koelpin@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"ee51ec01-4168-34bb-9c31-6a2e3d52caad\",\n            \"name\": \"Ernie Kutch\",\n            \"username\": \"mreichert\",\n            \"email\": \"reynolds.nichole@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"ee6b7e04-36ce-30fd-af8c-46c1f6047abc\",\n            \"name\": \"Mr. Kendrick Stark Jr.\",\n            \"username\": \"geoffrey.aufderhar\",\n            \"email\": \"rodrick47@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"f4624f03-3d7f-3765-a161-7bb2fc80feb8\",\n            \"name\": \"Verna Marquardt I\",\n            \"username\": \"heaney.imogene\",\n            \"email\": \"funk.eriberto@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"f6177311-06dd-3306-a44b-22c5d1daf2c6\",\n            \"name\": \"Darron Cummings\",\n            \"username\": \"eokon\",\n            \"email\": \"jterry@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"f63c6cda-6e8d-32d2-a6c5-9de9bb141800\",\n            \"name\": \"Name O'Conner\",\n            \"username\": \"balistreri.kelvin\",\n            \"email\": \"elisha00@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"f7422808-628b-3f31-a04d-0e293dbd119b\",\n            \"name\": \"Myrtle Tillman DDS\",\n            \"username\": \"tpurdy\",\n            \"email\": \"hector76@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"f80a2827-cc2e-31b3-946a-8130b2310dcb\",\n            \"name\": \"Korbin Brakus V\",\n            \"username\": \"caleb.bechtelar\",\n            \"email\": \"auer.michaela@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"f8c783c7-1532-3987-831a-7c53749f4b85\",\n            \"name\": \"Merritt Cole DVM\",\n            \"username\": \"fahey.dallin\",\n            \"email\": \"wisozk.leonora@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"fbfc77bc-548d-35b6-b37b-cba3bbe2ce4b\",\n            \"name\": \"Graciela Von\",\n            \"username\": \"allen58\",\n            \"email\": \"rey89@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"fcba1b96-926d-31da-b427-97e9559ee3aa\",\n            \"name\": \"Dominic Kunze\",\n            \"username\": \"stone23\",\n            \"email\": \"rosina.veum@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"fcf9dbe9-a7ae-3bd5-b0ec-1e5cf3befe89\",\n            \"name\": \"Kelly Ryan\",\n            \"username\": \"gtreutel\",\n            \"email\": \"eula07@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"fd8f68d0-6e40-3c40-b68d-1d1815f3a7ce\",\n            \"name\": \"Aleen Harris\",\n            \"username\": \"kjacobson\",\n            \"email\": \"eloise.kohler@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"fea654ed-7e06-38d4-8873-0d5b5b575cae\",\n            \"name\": \"Ms. Kathlyn Lang\",\n            \"username\": \"margot.wisoky\",\n            \"email\": \"mattie.lesch@example.org\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"feb63136-9adc-3d2e-8c4d-86fdac669b87\",\n            \"name\": \"Oren Weber\",\n            \"username\": \"zgleason\",\n            \"email\": \"okon.yessenia@example.net\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        },\n        {\n            \"id\": \"fef0c4d6-7026-3786-b039-0d15d8c87cf6\",\n            \"name\": \"Ms. Matilda Kub Sr.\",\n            \"username\": \"rowe.jordi\",\n            \"email\": \"srunolfsson@example.com\",\n            \"role\": \"user\",\n            \"profile_photo_path\": \"http://127.0.0.1:8000/assets/img/profile/user.png\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "Error: no auth token",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 13 Oct 2024 14:16:30 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"Please Login [POST] /api/auth/login\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Users Detail",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/users/:user_id",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						":user_id"
+					],
+					"variable": [
+						{
+							"key": "user_id",
+							"value": "00567907-cdaf-3b6d-8e0b-c82c4542482b",
+							"description": "required"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Error: User Not Found",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/users/:user_id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								":user_id"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "068545c2-6b8e-3a52-b72a-dc1cf83dbd39",
+									"description": "required"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Mar 2025 15:57:02 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "phpdebugbar-id",
+							"value": "01JQC54EFMPK2SBN1WTJD4HD9W"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"User not found\"\n}"
+				},
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/users/:user_id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								":user_id"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "00567907-cdaf-3b6d-8e0b-c82c4542482b",
+									"description": "required"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Mar 2025 15:57:38 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "phpdebugbar-id",
+							"value": "01JQC55J2MX5NADR71XXBMTRBG"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"00567907-cdaf-3b6d-8e0b-c82c4542482b\",\n        \"name\": \"Dr. Vena Kuhlman\",\n        \"username\": \"habshire\",\n        \"email\": \"agustin.schuppe@example.org\",\n        \"role\": \"user\",\n        \"profile_photo_path\": \"http://localhost:8000/assets/img/profile/user.png\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Store users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"John doe\",\r\n  \"username\": \"johndoe123\",\r\n  \"email\": \"john_doe@mail.com\",\r\n  \"role\": \"admin\",\r\n  \"password\": \"12345678\",\r\n  \"password_confirmation\": \"12345678\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/users/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"John doe 2\",\r\n  \"username\": \"johndoe1234\",\r\n  \"email\": \"john_doe2@mail.com\",\r\n  \"role\": \"admin\",\r\n  \"password\": \"12345678\",\r\n  \"password_confirmation\": \"12345678\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/users/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								""
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Mar 2025 16:27:36 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "phpdebugbar-id",
+							"value": "01JQC6WDGQX4W84Q0MPWH657JB"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"User created successfully.\",\n    \"data\": {\n        \"id\": \"0195d86e-35cb-7251-8ab2-5a173a85aaed\",\n        \"name\": \"John doe 2\",\n        \"username\": \"johndoe1234\",\n        \"email\": \"john_doe2@mail.com\",\n        \"role\": \"admin\",\n        \"profile_photo_path\": \"http://localhost:8000\"\n    }\n}"
+				},
+				{
+					"name": "Error: Validation failed",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"\",\r\n  \"username\": \"johndoe123\",\r\n  \"email\": \"john_doe@mail.com\",\r\n  \"role\": \"admin\",\r\n  \"password\": \"12345678\",\r\n  \"password_confirmation\": \"12345678\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/users/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								""
+							]
+						}
+					},
+					"status": "Unprocessable Content",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Mar 2025 16:28:39 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "phpdebugbar-id",
+							"value": "01JQC6YBNFA0A7E6XJRM7Y0J3V"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"Validation failed.\",\n    \"errors\": {\n        \"name\": [\n            \"Name is required\"\n        ],\n        \"username\": [\n            \"The username has already been taken.\"\n        ],\n        \"email\": [\n            \"The email has already been taken.\"\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Update users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Dr. Vena Kuhlman\",\r\n    \"username\": \"habshire\",\r\n    \"email\": \"agustin.schuppe@example.org\",\r\n    \"role\": \"user\",\r\n    \"password\": \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/users/:userId",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						":userId"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "00567907-cdaf-3b6d-8e0b-c82c4542482b"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Dr. Vena Kuhlman\",\r\n    \"username\": \"habshire\",\r\n    \"email\": \"agustin.schuppe@example.org\",\r\n    \"role\": \"user\",\r\n    \"password\": \"\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/users/:userId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "00567907-cdaf-3b6d-8e0b-c82c4542482b",
+									"description": "required"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Mar 2025 16:41:13 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "phpdebugbar-id",
+							"value": "01JQC7NBSK3Z3Z12M49548MNTN"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"User updated successfully.\",\n    \"data\": {\n        \"id\": \"00567907-cdaf-3b6d-8e0b-c82c4542482b\",\n        \"name\": \"Dr. Vena Kuhlman\",\n        \"username\": \"habshire\",\n        \"email\": \"agustin.schuppe@example.org\",\n        \"role\": \"user\",\n        \"profile_photo_path\": \"http://localhost:8000/assets/img/profile/user.png\"\n    }\n}"
+				},
+				{
+					"name": "Error: User not found",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Dr. Vena Kuhlman\",\r\n    \"username\": \"habshire\",\r\n    \"email\": \"agustin.schuppe@example.org\",\r\n    \"role\": \"user\",\r\n    \"password\": \"\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/users/:userId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Mar 2025 16:49:43 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "phpdebugbar-id",
+							"value": "01JQC84X6WX5TEBCNXESTDPG4P"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"User not found.\"\n}"
+				},
+				{
+					"name": "Error: Validation failed",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Dr. Vena Kuhlman\",\r\n    \"username\": \"johndoe123\",\r\n    \"email\": \"agustin.schuppe@example.org\",\r\n    \"role\": \"user\",\r\n    \"password\": \"\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/users/:userId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "00567907-cdaf-3b6d-8e0b-c82c4542482b"
+								}
+							]
+						}
+					},
+					"status": "Unprocessable Content",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Mar 2025 16:51:00 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "phpdebugbar-id",
+							"value": "01JQC878Y7HAKF630ZR2QD3NXP"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"Validation failed.\",\n    \"errors\": {\n        \"username\": [\n            \"The username has already been taken.\"\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/users/:userIDd",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						":userIDd"
+					],
+					"variable": [
+						{
+							"key": "userIDd",
+							"value": "00567907-cdaf-3b6d-8e0b-c82c4542482b"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Error: User Not found",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/users/:userIDd",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								":userIDd"
+							],
+							"variable": [
+								{
+									"key": "userIDd",
+									"value": "00567907-cdaf-3b6d-8e0b-c82c4542482s"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Mar 2025 17:00:02 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "phpdebugbar-id",
+							"value": "01JQC8QSN9C0D6QVM97HMPM7BZ"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"User not found.\",\n    \"error\": \"No query results for model [App\\\\Models\\\\User] 00567907-cdaf-3b6d-8e0b-c82c4542482s\"\n}"
+				},
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/users/:userIDd",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								":userIDd"
+							],
+							"variable": [
+								{
+									"key": "userIDd",
+									"value": "00567907-cdaf-3b6d-8e0b-c82c4542482b"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.17"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Mar 2025 17:01:05 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "phpdebugbar-id",
+							"value": "01JQC8SQ5B1Z0TJZ3DMS94WWCV"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"User deleted successfully.\"\n}"
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "3|geOPFKvBukYPj4jjYotlchiYTnZusuVBlFVXETQ4e1df395f",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8000",
+			"type": "string"
+		},
+		{
+			"key": "authToken",
+			"value": "3|geOPFKvBukYPj4jjYotlchiYTnZusuVBlFVXETQ4e1df395f",
+			"type": "string"
+		}
+	]
+}

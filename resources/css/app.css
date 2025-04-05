@@ -1,0 +1,157 @@
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../../node_modules/flowbite";
+
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+@plugin '@tailwindcss/aspect-ratio';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+
+@utility container {
+    padding-inline: 1.2rem;
+    margin-inline: auto;
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+    --font-sans:
+        Figtree, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+    --color-base-100: oklch(98% 0.003 247.858);
+    --color-base-200: oklch(96% 0.007 247.896);
+    --color-base-300: oklch(92% 0.013 255.508);
+    --color-primary: oklch(20% 0 0);
+    --color-secondary: oklch(58% 0.233 277.117);
+    --color-accent: oklch(85% 0.199 91.936);
+    --color-neutral: oklch(27% 0.041 260.031);
+    --color-info: oklch(62% 0.214 259.815);
+    --color-success: oklch(70% 0.14 182.503);
+    --color-warning: oklch(79% 0.184 86.047);
+    --color-error: oklch(64% 0.246 16.439);
+    --color-light: oklch(98% 0.003 247.858);
+    --color-dark: oklch(20% 0.042 265.755);
+    --color-muted: oklch(37% 0.013 285.805);
+
+    --color-dark-base-100: oklch(25.33% 0.016 252.42);
+    --color-dark-base-200: oklch(23.26% 0.014 253.1);
+    --color-dark-base-300: oklch(21.15% 0.012 254.09);
+    --color-dark-primary: oklch(58% 0.233 277.117);
+    --color-dark-secondary: oklch(65% 0.241 354.308);
+    --color-dark-accent: oklch(77% 0.152 181.912);
+}
+
+@utility container {
+    margin-inline: auto;
+    padding-inline: 2rem;
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+
+    button:not(:disabled),
+    [role="button"]:not(:disabled) {
+        cursor: pointer;
+    }
+}
+@custom-variant hover (&:hover);
+
+.btn {
+    @apply px-2 py-1.5 rounded-md text-light;
+}
+.btn:hover {
+    @apply opacity-75;
+}
+
+.badge {
+    @apply text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm text-light;
+}
+
+/* Datatables */
+.table {
+    @apply w-full text-left border-collapse table-auto;
+}
+
+.table td,
+.table th {
+    @apply px-4 py-2 border-b border-gray-300 dark:border-gray-400;
+}
+
+.table thead {
+    @apply bg-gray-200 dark:bg-gray-800;
+}
+.table thead th {
+    @apply dark:text-white;
+}
+
+.table tbody tr:nth-child(odd) {
+    @apply bg-white dark:bg-gray-400;
+}
+.table tbody tr:nth-child(even) {
+    @apply bg-gray-100 dark:bg-gray-600;
+}
+
+.dt-container div:first-child {
+    @apply flex items-center justify-between flex-col md:flex-row;
+}
+
+.dt-container > div:nth-child(2) {
+    @apply overflow-x-auto!;
+}
+
+.dt-container > div:nth-child(3) {
+    @apply flex! items-center! justify-between!;
+    -webkit-overflow-scrolling: touch;
+}
+
+.dt-empty {
+    @apply p-2 text-center;
+}
+
+.dt-info {
+    @apply text-sm text-muted dark:text-light/80;
+}
+
+.dt-paging .pagination a:first-child {
+    @apply rounded-l;
+}
+.dt-paging .pagination a:last-child {
+    @apply rounded-r;
+}
+.dt-paging .pagination a {
+    @apply bg-base-100 dark:bg-base-300 border-dark border-[1px] text-dark font-normal px-2 py-1.5;
+    &[aria-current] {
+        @apply bg-muted text-light;
+    }
+    &[aria-disabled] {
+        @apply opacity-50 cursor-not-allowed;
+    }
+}
+
+.dt-length {
+    @apply gap-0! -space-y-1!;
+}
+.dt-length select {
+    @apply md:order-first order-last px-6 mr-2 text-sm text-gray-700 border-gray-400 rounded-md shadow-xs outline-hidden bg-light ring-0 focus:border-secondary focus:ring-2 focus:ring-secondary;
+}
+
+.dt-search input {
+    @apply text-sm text-gray-700 border-gray-400 rounded-md shadow-xs outline-hidden bg-light ring-0 focus:border-secondary focus:ring-2 focus:ring-secondary;
+}
