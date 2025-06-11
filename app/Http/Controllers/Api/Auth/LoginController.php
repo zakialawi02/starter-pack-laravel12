@@ -36,6 +36,7 @@ class LoginController extends Controller
             'message' => 'Logged in',
             'token' => $token,
             'token_type' => 'Bearer',
+            'redirect' => request('redirect') ?? '',
             'data' => new UserResource($user)
         ], 200);
     }
