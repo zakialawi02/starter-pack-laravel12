@@ -79,6 +79,14 @@ This starter pack is designed to kickstart your Laravel 12 projects. Customize i
 
 Contributions are welcome! If you find any issues or have suggestions for improvements, please submit an issue or a pull request to the repository.
 
+## Support and Donations
+
+If you find this project useful and would like to support its further development, you can make a donation via the following platforms:
+
+https://ko-fi.com/zakialawi
+
+Every contribution you make is greatly appreciated. Thank you!
+
 ## License
 
 This project is open-source and available under the [MIT License](LICENSE).
