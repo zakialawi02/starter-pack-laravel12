@@ -289,6 +289,14 @@ Authorization: Bearer {your-token}
 
 If you discover any security vulnerabilities, please send an email to hallo@zakialawi.my.id instead of using the issue tracker.
 
+## Support and Donations
+
+If you find this project useful and would like to support its further development, you can make a donation via the following platforms:
+
+https://ko-fi.com/zakialawi
+
+Every contribution you make is greatly appreciated. Thank you!
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
