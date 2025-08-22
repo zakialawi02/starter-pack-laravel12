@@ -15,10 +15,10 @@
                 this.backdrop.className = `absolute inset-0 bg-gray-800 bg-opacity-50`;
 
                 this.popupContent = document.createElement('div');
-                this.popupContent.className = `relative z-10 max-w-md w-full p-4 rounded-lg shadow-sm bg-white dark:bg-gray-700`;
+                this.popupContent.className = `relative z-10 max-w-md w-full p-4 rounded-lg shadow-sm bg-background text-foreground border border-border`;
 
                 this.popupContent.innerHTML = `
-                    <button id="zk-popup-close" class="absolute end-2.5 top-3 ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white" type="button">
+                    <button id="zk-popup-close" class="absolute end-2.5 top-3 ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-gray-400 hover:bg-gray-200 hover:text-gray-900" type="button">
                         <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                         </svg>
@@ -26,7 +26,7 @@
                     </button>
                     <div class="p-4 text-center md:p-5">
                         <div id="zk-popup-icon" class="mx-auto mb-4"></div>
-                        <h3 id="zk-popup-message" class="mb-5 text-lg font-normal text-gray-900 dark:text-gray-100"></h3>
+                        <h3 id="zk-popup-message" class="mb-5 text-lg font-normal"></h3>
                         <button id="zk-popup-confirm" class="text-sm px-4 py-2 text-center rounded-lg">Yes</button>
                         <button id="zk-popup-cancel" class="ms-3 text-sm px-4 py-2 rounded-lg">No</button>
                     </div>
@@ -62,13 +62,13 @@
 
                 const confirmButton = document.getElementById('zk-popup-confirm');
                 confirmButton.textContent = confirmText || 'Yes';
-                confirmButton.className = confirmClass || "text-sm px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-300 dark:focus:ring-red-600";
+                confirmButton.className = confirmClass || "text-sm px-4 py-2 text-white bg-error rounded-lg hover:bg-error/80 focus:outline-none focus:ring-4 focus:ring-error";
 
                 const cancelButton = document.getElementById('zk-popup-cancel');
                 cancelButton.textContent = cancelText || 'No';
-                cancelButton.className = cancelClass || "ms-3 text-sm px-4 py-2 text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-400 dark:bg-gray-200  dark:hover:bg-gray-300 dark:focus:ring-gray-300";
+                cancelButton.className = cancelClass || "ms-3 text-sm px-4 py-2 text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100";
 
-                this.popupContent.className = `relative z-10 max-w-md w-full p-4 rounded-lg shadow-sm ${popupClass || 'bg-white dark:bg-gray-700'}`;
+                this.popupContent.className = `relative z-10 max-w-md w-full p-4 rounded-lg shadow-sm ${popupClass || 'bg-background text-foreground border border-border'}`;
                 this.backdrop.className = `absolute inset-0 ${backdropClass || 'bg-gray-800/50'}`;
 
                 confirmButton.onclick = () => {

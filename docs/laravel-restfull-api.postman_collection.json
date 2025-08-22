@@ -1635,7 +1635,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"John doe\",\r\n    \"email\": \"john_doe@mail.com\"\r\n}",
+					"raw": "{\r\n    \"name\" : \"John doe2\",\r\n    \"email\": \"john_doe2@mail.com\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1804,7 +1804,7 @@
 			]
 		},
 		{
-			"name": "Update photo profile",
+			"name": "Update photo myprofile",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -2627,7 +2627,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"name\": \"John doe\",\r\n  \"username\": \"johndoe123\",\r\n  \"email\": \"john_doe@mail.com\",\r\n  \"role\": \"admin\",\r\n  \"password\": \"12345678\",\r\n  \"password_confirmation\": \"12345678\"\r\n}\r\n",
+					"raw": "{\r\n  \"name\": \"John doe\",\r\n  \"username\": \"johndoe123\",\r\n  \"email\": \"john_doe@mail.com\",\r\n  \"role\": \"user\",\r\n  \"password\": \"12345678\",\r\n  \"password_confirmation\": \"12345678\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -2822,7 +2822,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Dr. Vena Kuhlman\",\r\n    \"username\": \"habshire\",\r\n    \"email\": \"agustin.schuppe@example.org\",\r\n    \"role\": \"user\",\r\n    \"password\": \"\"\r\n}\r\n",
+					"raw": "{\r\n    \"name\": \"Dr. Vena\",\r\n    \"username\": \"habshire\",\r\n    \"email\": \"agustin.schuppe@example.org\",\r\n    \"role\": \"user\",\r\n    // \"email_verified_at\": 1,\r\n    \"password\": \"\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -2843,7 +2843,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "00567907-cdaf-3b6d-8e0b-c82c4542482b"
+							"value": "0198d0b6-43f1-717a-b4af-2921ffea5423"
 						}
 					]
 				}
@@ -3311,7 +3311,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "3|geOPFKvBukYPj4jjYotlchiYTnZusuVBlFVXETQ4e1df395f",
+				"value": "2|J6gVPHk7fqH6y4I0p35UUWuyuuMW8ZqotLN3m46t1b564c0e",
 				"type": "string"
 			}
 		]
@@ -3346,7 +3346,7 @@
 		},
 		{
 			"key": "authToken",
-			"value": "3|geOPFKvBukYPj4jjYotlchiYTnZusuVBlFVXETQ4e1df395f",
+			"value": "2|J6gVPHk7fqH6y4I0p35UUWuyuuMW8ZqotLN3m46t1b564c0e",
 			"type": "string"
 		}
 	]

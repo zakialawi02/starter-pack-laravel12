@@ -14,7 +14,29 @@ class LogoutController extends Controller
     public function logout(Request $request): JsonResponse
     {
         try {
-            $request->user()->currentAccessToken()->delete();
+            $user = $request->user();
+            $currentToken = $user->currentAccessToken();
+            $bearerToken = $request->bearerToken();
+
+            $token = null;
+
+            // Try to find the correct token from the Authorization header
+            if ($bearerToken) {
+                $tokenId = explode('|', $bearerToken, 2)[0] ?? null;
+                if ($tokenId && is_numeric($tokenId)) {
+                    $token = $user->tokens()->where('id', $tokenId)->first();
+                }
+            }
+
+            // Fallback to currentAccessToken() if manual parsing fails and it's not a TransientToken
+            if (!$token && $currentToken && !($currentToken instanceof \Laravel\Sanctum\TransientToken)) {
+                $token = $currentToken;
+            }
+
+            // Only delete if it's a real database token, not a TransientToken
+            if ($token && !($token instanceof \Laravel\Sanctum\TransientToken)) {
+                $token->delete();
+            }
 
             return response()->json([
                 'success' => true,
@@ -23,8 +45,8 @@ class LogoutController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => $e->getMessage()
-            ], 401);
+                'message' => 'Unable to logout: ' . $e->getMessage()
+            ], 500);
         }
     }
 }

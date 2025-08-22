@@ -4,13 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use Illuminate\View\View;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
-use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Auth\Events\Registered;
+use App\Http\Requests\Auth\RegisterRequest;
 
 class RegisteredUserController extends Controller
 {
@@ -29,6 +28,11 @@ class RegisteredUserController extends Controller
      */
     public function store(RegisterRequest $request): RedirectResponse
     {
+        if (!empty($request->input('_code'))) {
+            // Alih-alih melempar exception, redirect kembali dengan pesan di session
+            return redirect()->back()
+                ->with('error', 'Something went wrong.');
+        }
         $user = User::create([
             'username' => $request->username,
             'name' => $request->name,

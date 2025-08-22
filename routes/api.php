@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
@@ -16,8 +15,8 @@ Route::prefix('v1')->as('api.')->group(function () {
     Route::middleware(['auth:sanctum'])->group(function () {
         //
     });
-});
+})->middleware('api');
 
 
-// Auth routes for API
-require __DIR__ . '/api_auth.php';
+// Include auth routes
+require __DIR__ . '/api/auth.php';

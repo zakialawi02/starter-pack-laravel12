@@ -55,30 +55,30 @@
 
             static getTemplate(id, message, type, customIcon) {
                 return `
-        <div id="${id}" role="alert" class="toast relative flex max-w-xs items-center rounded-lg bg-white p-4 text-gray-500 shadow-md dark:bg-gray-800 dark:text-gray-400 transition-all duration-300 transform translate-x-5 opacity-0">
-            <div class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${this.getBgColor(type)}">
-                ${customIcon || this.getIcon(type)}
-            </div>
-            <div class="ml-3 text-sm font-normal me-2">${message}</div>
-            <button onclick="MyZkToast.close('${id}')" class="ml-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-white p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-900 focus:ring-2 focus:ring-gray-300 dark:bg-gray-800 dark:text-gray-500 dark:hover:bg-gray-700 dark:hover:text-white">
-                <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 14 14">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"></path>
-                </svg>
-            </button>
-            <div class="absolute bottom-0 left-0 h-1 w-full bg-gray-200 overflow-hidden">
-                <div class="zk-progress-bar h-full bg-blue-500 transition-all duration-[5000ms] ease-linear w-full"></div>
-            </div>
-        </div>
-        `;
+                <div id="${id}" role="alert" class="toast relative flex max-w-xs items-center rounded-lg bg-background p-4 text-foreground shadow-md transition-all duration-300 transform translate-x-5 opacity-0">
+                    <div class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${this.getBgColor(type)}">
+                        ${customIcon || this.getIcon(type)}
+                    </div>
+                    <div class="ml-3 text-sm font-normal me-2">${message}</div>
+                    <button onclick="MyZkToast.close('${id}')" class="ml-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-background p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-900 focus:ring-2 focus:ring-gray-300">
+                        <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 14 14">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"></path>
+                        </svg>
+                    </button>
+                    <div class="absolute bottom-0 left-0 h-1 w-full bg-gray-200 overflow-hidden">
+                        <div class="zk-progress-bar h-full bg-blue-500 transition-all duration-[5000ms] ease-linear w-full"></div>
+                    </div>
+                </div>
+                `;
             }
 
             static getBgColor(type) {
                 return {
-                    success: "bg-green-100 text-green-500 dark:bg-green-800 dark:text-green-200",
-                    error: "bg-red-100 text-red-500 dark:bg-red-800 dark:text-red-200",
-                    warning: "bg-yellow-100 text-yellow-500 dark:bg-yellow-800 dark:text-yellow-200",
-                    info: "bg-blue-100 text-blue-500 dark:bg-blue-800 dark:text-blue-200",
-                } [type] || "bg-blue-100 text-blue-500 dark:bg-blue-800 dark:text-blue-200";
+                    success: "bg-success/20 text-success",
+                    error: "bg-error/20 text-error",
+                    warning: "bg-warning/20 text-warning",
+                    info: "bg-info/20 text-info",
+                } [type] || "bg-blue-50 text-blue-500";
             }
 
             static getIcon(type) {
@@ -106,5 +106,10 @@
                 this.show(message, "info", customIcon);
             }
         }
+
+        // MyZkToast.success("Data berhasil disimpan!", customIcon);
+        // MyZkToast.error("Terjadi kesalahan!", customIcon);
+        // MyZkToast.warning("Harap periksa kembali input Anda.", customIcon);
+        // MyZkToast.info("Update terbaru telah tersedia.", customIcon);
     </script>
 @endpush

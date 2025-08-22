@@ -7,42 +7,71 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>@yield('title', config('app.name'))</title>
+        <meta content="@yield('meta_description', '') name="description"">
+        <meta name="author" content="Ahmad Zaki Alawi" />
 
-        <!-- Fonts -->
-        <link href="https://fonts.bunny.net" rel="preconnect">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link type="image/png" href="{{ asset('/assets/img/favicon.png') }}" rel="icon">
 
-        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet" integrity="sha512-XcIsjKMcuVe0Ucj/xgIXQnytNwBttJbNjltBV18IOnru2lDPe9KRRyvCXw6Y5H415vbBLRm8+q6fmLUU7DfO6Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+        <style>
+            /* Edge (lama) & IE: hilangkan tombol eye & clear */
+            input::-ms-reveal,
+            input::-ms-clear {
+                display: none !important;
+            }
+
+            /* WebKit “auto-fill/contact” button (Safari/Chrome varian) */
+            ::-webkit-contacts-auto-fill-button {
+                visibility: hidden !important;
+                display: none !important;
+                pointer-events: none !important;
+            }
+
+            /* Opsional: netralisir background kuning autofill (kalau terlanjur terisi) */
+            input:-webkit-autofill {
+                -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+                -webkit-text-fill-color: inherit !important;
+                caret-color: inherit !important;
+            }
+        </style>
         @stack('css')
+        {{ $css ?? '' }}
 
         <!-- Scripts -->
+        <script>
+            (function() {
+                if (localStorage.getItem("theme") === "dark") {
+                    document.documentElement.classList.add("dark");
+                }
+            })();
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
 
     <body class="font-sans antialiased">
-        <section class="bg-base-200 dark:bg-dark-base-200">
-            <div class="mx-auto flex flex-col items-center justify-center px-6 py-8 md:min-h-screen lg:py-4">
-                <div class="mb-4 flex items-center text-xl font-semibold text-gray-900 dark:text-white">
-                    <a href="/">
-                        <x-application-logo class="h-14 w-14 fill-current text-gray-500" />
-                    </a>
-                </div>
+        {{ $slot }}
 
-                <div class="dark:border-muted dark:bg-dark-base-100 bg-base-100 w-full rounded-lg shadow sm:max-w-md md:mt-0 xl:p-0 dark:border">
-                    <div class="space-y-4 p-5 sm:p-8 md:space-y-6">
+        <script>
+            function togglePassword(id) {
+                const input = document.getElementById(id);
+                const icon = document.getElementById('icon-' + id);
 
-                        {{ $slot }}
-
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+                if (input.type === "password") {
+                    input.type = "text";
+                    icon.classList.remove("ri-eye-off-line");
+                    icon.classList.add("ri-eye-line");
+                } else {
+                    input.type = "password";
+                    icon.classList.remove("ri-eye-line");
+                    icon.classList.add("ri-eye-off-line");
+                }
+            }
+        </script>
         @stack('javascript')
+        {{ $javascript ?? '' }}
     </body>
 
 </html>

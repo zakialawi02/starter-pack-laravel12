@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RoleCheck
 {
-
     /**
      * Handle an incoming request and check if the authenticated user's role is authorized.
      *
@@ -20,7 +19,6 @@ class RoleCheck
      *
      * @throws \Symfony\Component\HttpFoundation\Response
      */
-
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
         foreach ($roles as $role) {

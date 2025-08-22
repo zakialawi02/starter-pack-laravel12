@@ -1,10 +1,10 @@
 <section class="mb-10">
     <header>
-        <h2 class="text-lg font-medium">
+        <h2 class="text-base-content text-lg font-medium">
             {{ __('Profile Photo') }}
         </h2>
 
-        <p class="text-muted dark:text-light/70 mt-1 text-sm">
+        <p class="text-base-content-muted mt-1 text-sm">
             {{ __("Update your account's photo profile.") }}
         </p>
     </header>
@@ -15,16 +15,16 @@
 
         <div class="flex flex-col items-center space-y-5 sm:flex-row sm:space-y-0">
             <!-- Display the current photo profile here -->
-            <img class="h-30 w-30 rounded-full object-cover p-1 ring-2 ring-indigo-300 dark:ring-indigo-500" id="current-photo" src={{ Auth::user()->profile_photo_path }} alt="Current Photo Profile" onerror="this.src='https://placehold.co/100x100'">
+            <img class="h-30 w-30 ring-primary rounded-full object-cover p-1 ring-2" id="current-photo" src={{ Auth::user()->profile_photo_path }} alt="Current Photo Profile" onerror="this.src='https://placehold.co/100x100'">
 
             <div class="flex flex-col space-y-5 sm:ml-8">
                 <input class="hidden" id="photo_profile" name="photo_profile" type="file" accept="image/*">
-                <x-dashboard.primary-button type="button" :size="'small'" onclick="document.getElementById('photo_profile').click()">
+                <x-button-primary type="button" :size="'small'" onclick="document.getElementById('photo_profile').click()">
                     Change picture
-                </x-dashboard.primary-button>
-                <x-dashboard.secondary-button id="delete_photo" type="button" disabled :size="'small'">
+                </x-button-primary>
+                <x-button-secondary id="delete_photo" type="button" disabled :size="'small'">
                     Delete picture
-                </x-dashboard.secondary-button>
+                </x-button-secondary>
             </div>
 
         </div>
@@ -37,7 +37,7 @@
         @enderror
 
         <div class="mt-4 flex items-center gap-4">
-            <x-dashboard.primary-button>{{ __('Save') }}</x-dashboard.primary-button>
+            <x-button-primary>{{ __('Save') }}</x-button-primary>
 
             @if (session('status') === 'profile-updated')
                 <p class="text-sm text-gray-600" x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 5000)">{{ __('Saved.') }}</p>
@@ -48,11 +48,11 @@
 
 <section>
     <header>
-        <h2 class="text-lg font-medium">
+        <h2 class="text-base-content text-lg font-medium">
             {{ __('Profile Information') }}
         </h2>
 
-        <p class="text-muted dark:text-light/70 mt-1 text-sm">
+        <p class="text-base-content-muted mt-1 text-sm">
             {{ __("Update your account's profile information and email address.") }}
         </p>
     </header>
@@ -96,7 +96,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-dashboard.primary-button>{{ __('Save') }}</x-dashboard.primary-button>
+            <x-button-primary type="submit">{{ __('Save') }}</x-button-primary>
 
             @if (session('status') === 'profile-updated')
                 <p class="text-sm text-gray-600" x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 5000)">{{ __('Saved.') }}</p>

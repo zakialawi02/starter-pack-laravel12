@@ -35,8 +35,8 @@ class Users extends Seeder
                 'password' => Hash::make('admin'),
                 'role' => 'admin',
                 'profile_photo_path' => '/assets/img/profile/admin.png',
-                'created_at' => now(),
                 'email_verified_at' => now(),
+                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [

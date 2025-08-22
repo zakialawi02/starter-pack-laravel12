@@ -27,11 +27,11 @@ Route::prefix('auth')->as('api.auth.')->group(function () {
             'success' => false,
             'message' => 'Please Verify Email [POST] /api/auth/verify-email'
         ], 401);
-    })->middleware(['auth:sanctum', 'throttle:6,1'])->name('verification.notice');
+    })->middleware(['throttle:6,1'])->name('verification.notice');
     Route::post('/email/verification-notification', [AuthController::class, 'emailVerificationNotification'])->middleware(['auth:sanctum', 'throttle:6,1'])->name('verification.send');
-    Route::get('/verify-email/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware(['auth:sanctum', 'throttle:6,1'])->name('verification.verify');
+    Route::get('/verify-email/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware(['auth:sanctum', 'signed', 'throttle:6,1'])->name('verification.verify');
+})->middleware('guest');
 
-    Route::middleware('auth:sanctum')->group(function () {
-        Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
-    });
+Route::prefix('auth')->as('api.auth.')->middleware('auth:sanctum')->group(function () {
+    Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
 });

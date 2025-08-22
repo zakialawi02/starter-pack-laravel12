@@ -1,10 +1,10 @@
 <section>
     <header>
-        <h2 class="text-lg font-medium">
+        <h2 class="text-base-content text-lg font-medium">
             {{ __('Update Password') }}
         </h2>
 
-        <p class="text-muted dark:text-light/70 mt-1 text-sm">
+        <p class="text-base-content-muted mt-1 text-sm">
             {{ __('Ensure your account is using a long, random password to stay secure.') }}
         </p>
     </header>
@@ -32,7 +32,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-dashboard.primary-button>{{ __('Save') }}</x-dashboard.primary-button>
+            <x-button-primary type="submit">{{ __('Save') }}</x-button-primary>
 
             @if (session('status') === 'password-updated')
                 <p class="text-sm text-gray-600" x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 5000)">{{ __('Saved.') }}</p>

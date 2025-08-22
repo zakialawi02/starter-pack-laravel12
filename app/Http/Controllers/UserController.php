@@ -27,8 +27,8 @@ class UserController extends Controller
             return DataTables::of($query)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
-                    return '<button href="#" class="btn bg-primary editUser" data-id="' . $data->id . ' "><span class="ri-edit-box-line"></span></button>
-                <button type="submit" class="btn bg-error deleteUser" data-id="' . $data->id . ' "><span class="ri-delete-bin-line"></span></button>';
+                    return '<button href="#" class="btn bg-primary editUser" data-id="' . $data->id . ' "><span class="ri-edit-box-line" title="Edit"></span></button>
+                <button type="submit" class="btn bg-error deleteUser" data-id="' . $data->id . ' "><span class="ri-delete-bin-line" title="Delete"></span></button>';
                 })
                 ->addColumn('photo', function ($data) {
                     return '<img src="' . asset($data->profile_photo_path) . '" width="30">';
@@ -151,7 +151,6 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $admin = User::where('username', 'admin')->first();
-        $adminId = $admin->id;
 
         User::where('id', $user->id)->delete();
 

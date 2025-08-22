@@ -50,22 +50,22 @@
             <main class="flex w-full max-w-[335px] flex-col lg:max-w-6xl">
 
                 <div class="py-4">
-                    <x-dashboard.primary-button type="button">
+                    <x-button-primary type="button">
                         <i class="ri-refresh-line"></i>
                         primary
-                    </x-dashboard.primary-button>
-                    <x-dashboard.secondary-button type="button">
+                    </x-button-primary>
+                    <x-button-secondary type="button">
                         <i class="ri-refresh-line"> </i>
                         secondary
-                    </x-dashboard.secondary-button>
-                    <x-dashboard.light-button type="button">
+                    </x-button-secondary>
+                    <x-button-light type="button">
                         <i class="ri-refresh-line"></i>
                         light
-                    </x-dashboard.light-button>
-                    <x-dashboard.danger-button type="button">
+                    </x-button-light>
+                    <x-button-danger type="button">
                         <i class="ri-refresh-line"></i>
                         error
-                    </x-dashboard.danger-button>
+                    </x-button-danger>
                 </div>
 
                 <div className="my-5 description">

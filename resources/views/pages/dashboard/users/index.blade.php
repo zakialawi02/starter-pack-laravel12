@@ -2,13 +2,13 @@
 @section('meta_description', '')
 
 <x-app-layout>
-    <section class="p-4">
-        <div class="dark:bg-dark-base-100 w-full rounded-md border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700">
+    <section class="p-1 md:p-4">
+        <x-card>
             <div class="mb-3 flex items-center justify-end px-2 align-middle">
-                <x-dashboard.primary-button id="createNewUser" data-modal-target="userModal" data-modal-toggle="userModal" type="button">
+                <x-button-primary id="createNewUser" data-modal-target="userModal" data-modal-toggle="userModal" type="button">
                     <i class="ri-user-add-line"></i>
                     <span>Add User</span>
-                </x-dashboard.primary-button>
+                </x-button-primary>
             </div>
 
             <div class="table-container">
@@ -31,20 +31,20 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </x-card>
     </section>
 
     <!-- Main modal -->
     <div class="z-60 fixed left-0 right-0 top-0 hidden h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0" id="userModal" aria-hidden="true" tabindex="-1">
         <div class="relative max-h-full w-full max-w-2xl p-4">
             <!-- Modal content -->
-            <div class="dark:bg-dark-base-100 relative rounded-lg bg-white shadow-sm">
+            <div class="bg-background border-border relative rounded-lg border shadow-sm">
                 <!-- Modal header -->
-                <div class="flex items-center justify-between rounded-t border-b border-gray-200 p-2 md:p-3 dark:border-gray-600">
-                    <h3 class="modal-title text-xl font-semibold text-gray-900 dark:text-white">
+                <div class="border-foreground/30 flex items-center justify-between rounded-t border-b p-2 md:p-3">
+                    <h3 class="modal-title text-foreground text-xl font-semibold">
                         Add User
                     </h3>
-                    <button class="ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="userModal" type="button">
+                    <button class="text-foreground/70 hover:bg-background hover:text-foreground ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm" data-modal-hide="userModal" type="button">
                         <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                         </svg>
@@ -56,8 +56,8 @@
                     <div id="error-messages"></div>
 
                     <div class="modal-loader-data hidden animate-pulse" role="status">
-                        <div class="mx-auto mb-4 h-2.5 w-60 rounded-full bg-gray-200 dark:bg-gray-700"></div>
-                        <div class="w-50 mx-auto mb-4 h-2.5 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+                        <div class="bg-base-content-muted mx-auto mb-4 h-2.5 w-60 rounded-full"></div>
+                        <div class="w-50 bg-base-content-muted mx-auto mb-4 h-2.5 rounded-full"></div>
                         <span class="sr-only">Loading...</span>
                     </div>
 
@@ -74,15 +74,15 @@
 
                             <div class="flex w-full flex-col items-center justify-between gap-2 md:flex-row">
                                 <!-- Username -->
-                                <div class="w-1/2">
+                                <div class="w-full md:w-1/2">
                                     <x-input-label for="username" :value="__('Username')" />
                                     <x-text-input class="px-1! py-1.5! block w-full" id="username" name="username" type="text" :value="old('username')" required autocomplete="username" placeholder="johndoe" />
                                 </div>
 
                                 <!-- role -->
-                                <div class="w-1/2">
-                                    <x-input-label for="username" :value="__('Username')" />
-                                    <select class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500" id="role" name="role">
+                                <div class="w-full md:w-1/2">
+                                    <x-input-label for="role" :value="__('Role')" />
+                                    <select class="focus:ring-primary focus:border-primary border-ring bg-input/50 text-foreground block w-full rounded-lg border p-2" id="role" name="role">
                                         @foreach ($roles as $role)
                                             <option value="{{ $role }}">{{ ucfirst($role) }}</option>
                                         @endforeach
@@ -93,14 +93,14 @@
                             <div class="mt-4 flex w-full flex-col items-center justify-between gap-2 md:flex-row">
 
                                 <!-- Email Address -->
-                                <div class="w-1/2">
+                                <div class="w-full md:w-1/2">
                                     <x-input-label for="email" :value="__('Email')" />
                                     <x-text-input class="px-1! py-1.5! mt-1 block w-full" id="email" name="email" type="email" :value="old('email')" required autocomplete="email" placeholder="name@mail.com" />
                                 </div>
 
-                                <div class="w-1/2">
+                                <div class="w-full md:w-1/2">
                                     <x-input-label for="verified" :value="__('Verified Status')" />
-                                    <select class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500" id="email_verified_at" name="email_verified_at">
+                                    <select class="focus:ring-primary focus:border-primary border-ring bg-input/50 text-foreground block w-full rounded-lg border p-2" id="email_verified_at" name="email_verified_at">
                                         <option value="1">Yes</option>
                                         <option value="0">No</option>
                                     </select>
@@ -111,19 +111,19 @@
                             <div class="mt-4">
                                 <x-input-label for="password" :value="__('Password')" />
                                 <x-text-input class="px-1! py-1.5! mt-1 block w-full" id="password" name="password" type="password" required autocomplete="new-password" />
-                                <span class="text-muted text-sm" id="passwordHelpBlock"></span>
+                                <span class="text-back-muted" id="passwordHelpBlock"></span>
                             </div>
                         </div>
                     </form>
                 </div>
                 <!-- Modal footer -->
-                <div class="flex flex-row-reverse items-center gap-2 rounded-b border-t border-gray-200 p-2 md:p-3 dark:border-gray-600">
-                    <x-dashboard.primary-button id="saveBtn" type="submit">
+                <div class="border-foreground/30 flex flex-row-reverse items-center gap-2 rounded-b border-t p-2 md:p-3">
+                    <x-button-primary id="saveBtn" type="submit">
                         Save
-                    </x-dashboard.primary-button>
-                    <x-dashboard.light-button data-modal-hide="userModal" type="button">
+                    </x-button-primary>
+                    <x-button-light data-modal-hide="userModal" type="button">
                         Close
-                    </x-dashboard.light-button>
+                    </x-button-light>
                 </div>
             </div>
         </div>
@@ -140,6 +140,8 @@
                 let limitParam = parseInt(urlParams.get('limit')) || 10;
 
                 let table = new DataTable('#myTable', {
+                    responsive: true,
+                    scrollX: true,
                     processing: true,
                     serverSide: true,
                     displayStart: (pageParam - 1) * limitParam, // Atur posisi awal paging
@@ -211,7 +213,7 @@
                     ],
                 });
 
-                const cardErrorMessages = `<div id="body-messages" class="mb-3 rounded-md bg-red-50 p-4 text-sm text-red-900 dark:bg-gray-800 dark:text-red-500" role="alert"></div>`;
+                const cardErrorMessages = `<div id="body-messages" class="mb-3 rounded-md bg-error/30 p-4 text-sm text-error" role="alert"></div>`;
 
                 const modal = new Modal(document.getElementById('userModal'), {
                     onHide: () => {
@@ -284,9 +286,7 @@
                     const userId = $(this).data('id');
                     // Tampilkan ID User di URL tanpa reload halaman
                     let newUrl = window.location.pathname + "?user_id=" + userId;
-                    window.history.pushState({
-                        path: newUrl
-                    }, "", newUrl);
+                    window.history.replaceState({}, '', newUrl);
                     modal.show();
                     getUserData(userId);
                 });

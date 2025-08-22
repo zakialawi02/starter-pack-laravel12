@@ -14,6 +14,7 @@ use App\Http\Requests\ProfileUpdateRequest;
 use App\Http\Requests\Api\UpdateUserRequest;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -70,7 +71,7 @@ class UserController extends Controller
     public function store(StoreUserRequest $request): JsonResponse
     {
         try {
-            $user = User::create($request->all());
+            $user = User::create($request->validated());
             return response()->json([
                 'success' => true,
                 'message' => 'User created successfully.',
@@ -94,14 +95,9 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, $id): JsonResponse
     {
         try {
-            if (empty($request['password'])) {
-                unset($request['password']);
-            } else {
-                $request['password'] = bcrypt($request['password']);
-            }
             $user = User::findOrFail($id);
             // Cek jika username adalah admin atau superadmin dan mencoba mengubah role
-            if (in_array($user->username, ['admin', 'superadmin']) && $request->has('role') && $request->role !== $user->role) {
+            if (in_array($user->username, ['admin', 'superadmin']) && isset($request['role']) && $request['role'] !== $user->role) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Forbidden: Role cannot be changed.',
@@ -116,16 +112,28 @@ class UserController extends Controller
                     'errors' => 'Email verification status cannot be changed for admin or superadmin users unless setting to verified.',
                 ], 403);
             }
-            if ($request['email_verified_at'] == "1") {
-                if (is_null($user->email_verified_at)) {
-                    $request['email_verified_at'] = now();
+
+            $dataValidated = $request->validated();
+            // Handle email verification status
+            if (isset($dataValidated['email_verified_at'])) {
+                if ($dataValidated['email_verified_at'] == 1) {
+                    // Only update if user is not already verified
+                    $dataValidated['email_verified_at'] = is_null($user->email_verified_at) ? now() : $user->email_verified_at;
+                } elseif ($dataValidated['email_verified_at'] == 0) {
+                    $dataValidated['email_verified_at'] = null;
                 } else {
-                    unset($request['email_verified_at']);
+                    // Remove invalid values
+                    unset($dataValidated['email_verified_at']);
                 }
-            } elseif ($request['email_verified_at'] == "0") {
-                $request['email_verified_at'] = null;
             }
-            $user->update($request->all());
+            // Handle password
+            if (empty($dataValidated['password'])) {
+                unset($dataValidated['password']);
+            } else {
+                $dataValidated['password'] = bcrypt($dataValidated['password']);
+            }
+
+            $user->update($dataValidated);
             return response()->json([
                 'success' => true,
                 'message' => 'User updated successfully.',
@@ -185,7 +193,7 @@ class UserController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'User details/My profile',
-                'data' => new UserResource($request->user()),
+                'data' => new UserResource(Auth::user()),
             ], Response::HTTP_OK);
         } catch (\Throwable $th) {
             return response()->json([
@@ -198,11 +206,11 @@ class UserController extends Controller
     public function updateMyProfile(ProfileUpdateRequest $request): JsonResponse
     {
         try {
-            $request->user()->fill($request->validated());
-            if ($request->user()->isDirty('email')) {
-                $request->user()->email_verified_at = null;
+            Auth::user()->fill($request->validated());
+            if (Auth::user()->isDirty('email')) {
+                Auth::user()->email_verified_at = null;
             }
-            $request->user()->save();
+            Auth::user()->save();
             return response()->json([
                 'success' => true,
                 'message' => [
@@ -210,7 +218,7 @@ class UserController extends Controller
                     'text' => 'Profile updated successfully.',
                     'message' => 'Please verify your email address.',
                 ],
-                'data' => new UserResource($request->user()),
+                'data' => new UserResource(Auth::user()),
             ], Response::HTTP_OK);
         } catch (ValidationException $e) {
             return response()->json([
@@ -241,7 +249,7 @@ class UserController extends Controller
             $newFileName = $timestamp . '_' . $randomString . '.' . $extension;
 
             // Cek jika pengguna sudah memiliki foto profil yang lama
-            $user = $request->user();
+            $user = Auth::user();
             if ($user->profile_photo_path && $user->profile_photo_path != '/assets/img/profile/user.png' && $user->profile_photo_path != '/assets/img/profile/admin.png') {
                 // Cek apakah file foto lama ada di direktori penyimpanan publik dan hapus
                 $oldPhotoPath = public_path($user->profile_photo_path);
@@ -283,9 +291,13 @@ class UserController extends Controller
                 'password' => ['required', 'current_password'],
             ]);
 
-            $id = $request->user()->id;
+            $id = Auth::id();
             $user = User::findOrFail($id);
-            $request->user()->currentAccessToken()->delete();
+            // Delete the current access token (Laravel Sanctum)
+            $currentToken = $request->user()->currentAccessToken();
+            if ($currentToken) {
+                $request->user()->tokens()->where('id', $currentToken->id)->delete();
+            }
             $user->delete();
             return response()->json([
                 'success' => true,
