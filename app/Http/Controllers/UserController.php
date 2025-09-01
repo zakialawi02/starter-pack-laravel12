@@ -33,12 +33,6 @@ class UserController extends Controller
                 ->addColumn('photo', function ($data) {
                     return '<img src="' . asset($data->profile_photo_path) . '" width="30">';
                 })
-                ->editColumn('created_at', function ($data) {
-                    return $data->created_at ? $data->created_at->format("d M Y") : '-';
-                })
-                ->editColumn('email_verified_at', function ($data) {
-                    return $data->email_verified_at ? $data->email_verified_at->format("d M Y") : '-';
-                })
                 ->editColumn('role', function ($data) {
                     return '<span class="badge bg-' .
                         ($data->role === 'superadmin' ? 'success' : ($data->role === 'admin' ? 'primary' : 'secondary'))
