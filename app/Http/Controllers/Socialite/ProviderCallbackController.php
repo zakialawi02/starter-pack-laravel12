@@ -16,32 +16,37 @@ class ProviderCallbackController extends Controller
             return redirect()->route('login')->withErrors(['provider' => 'Invalid provider']);
         }
 
-        $socialUser = Socialite::driver($provider)->user();
+        try {
+            $socialUser = Socialite::driver($provider)->user();
 
-        // Generate username from provider or fallback to name/email
-        $username = $this->generateUsername($socialUser, $provider);
+            // Generate username from provider or fallback to name/email
+            $username = $this->generateUsername($socialUser, $provider);
 
-        $user = User::updateOrCreate([
-            'provider_id' => $socialUser->id,
-            'provider_name' => $provider,
-        ], [
-            'name' => $socialUser->name,
-            'email' => $socialUser->email,
-            'email_verified_at' => now(),
-            'username' => $username,
-            'provider_token' => $socialUser->token,
-            'provider_refresh_token' => $socialUser->refreshToken,
-        ]);
+            $user = User::updateOrCreate([
+                'provider_id' => $socialUser->id,
+                'provider_name' => $provider,
+            ], [
+                'name' => $socialUser->name,
+                'email' => $socialUser->email,
+                'email_verified_at' => now(),
+                'username' => $username,
+                'provider_token' => $socialUser->token,
+                'provider_refresh_token' => $socialUser->refreshToken,
+            ]);
 
-        Auth::login($user);
+            Auth::login($user);
 
-        // Check if there's a stored redirect URL from OAuth flow
-        $redirectUrl = session()->pull('oauth_redirect');
-        if ($redirectUrl && $redirectUrl !== '/') {
-            return redirect($redirectUrl);
+            // Check if there's a stored redirect URL from OAuth flow
+            $redirectUrl = session()->pull('oauth_redirect');
+            if ($redirectUrl && $redirectUrl !== '/') {
+                return redirect($redirectUrl);
+            }
+
+            return redirect('/dashboard');
+        } catch (\Exception $e) {
+
+            return redirect()->route('login')->withErrors(['provider' => 'Unable to login using ' . ucfirst($provider) . '. Please try again.']);
         }
-
-        return redirect('/dashboard');
     }
 
     private function generateUsername($socialUser, $provider)
