@@ -12,7 +12,7 @@ class ProviderCallbackController extends Controller
 {
     public function __invoke(string $provider)
     {
-        if (!in_array($provider, ['github', 'google', 'facebook'])) {
+        if (!config("services.{$provider}")) {
             return redirect()->route('login')->withErrors(['provider' => 'Invalid provider']);
         }
 

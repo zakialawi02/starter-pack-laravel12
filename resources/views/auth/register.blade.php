@@ -2,9 +2,9 @@
 @section('meta_description', '')
 
 <x-guest-layout>
-    <div class="mx-auto flex min-h-screen w-full flex-col overflow-hidden bg-white p-2 md:flex-row">
+    <div class="mx-auto flex h-screen w-full flex-col overflow-hidden bg-white p-2 md:flex-row">
         <!-- Left Side - Image and Quote -->
-        <div class="relative hidden h-screen w-full md:block md:w-1/2">
+        <div class="relative hidden md:block md:w-1/2">
             <div class="absolute inset-0 rounded-3xl bg-gradient-to-bl from-[#84cc16] via-[#16a34a] to-[#0f766e] opacity-80"></div>
             <img class="h-full w-full rounded-3xl object-cover" src="https://placehold.co/600x800/1a1a1a/ffffff?text=Abstract+Design" alt="Background">
 
@@ -26,8 +26,8 @@
         </div>
 
         <!-- Right Side - Login Form -->
-        <div class="flex flex-col justify-center p-8 md:w-1/2 md:px-12 md:py-6">
-            <div class="mb-6 flex items-center text-xl">
+        <div class="flex flex-col overflow-y-auto p-8 md:w-1/2 md:px-12 md:py-6">
+            <div class="mb-10 flex items-center text-xl">
                 <a class="flex items-end space-x-2" href="/">
                     <x-application-logo class="h-12 w-12 fill-current text-gray-500" />
                     <span class="text-primary text-2xl font-semibold">{{ config('app.name') }}</span>

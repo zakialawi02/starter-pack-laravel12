@@ -26,7 +26,7 @@
         </div>
 
         <!-- Right Side - Login Form -->
-        <div class="flex flex-col justify-center p-8 md:w-1/2 md:p-12">
+        <div class="flex flex-col overflow-y-auto p-8 md:w-1/2 md:px-12 md:py-6">
             <div class="mb-10 flex items-center text-xl">
                 <a class="flex items-end space-x-2" href="/">
                     <x-application-logo class="h-12 w-12 fill-current text-gray-500" />
