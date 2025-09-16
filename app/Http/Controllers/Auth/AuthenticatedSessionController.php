@@ -21,7 +21,7 @@ class AuthenticatedSessionController extends Controller
         // Cek apakah belum ada ?redirect di URL dan previous bukan root/login
         if (!$request->has('redirect') && !in_array($previous, [url('/'), route('login')])) {
             $loginUrl = route('login', ['redirect' => $previous]);
-            return redirect($loginUrl);
+            return redirect($loginUrl)->withInput($request->all())->with($request->session()->all());
         }
 
         return view('auth.login');

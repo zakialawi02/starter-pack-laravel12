@@ -10,6 +10,9 @@ use Laravel\Socialite\Facades\Socialite;
 
 class ProviderCallbackController extends Controller
 {
+    /**
+     * Handle the incoming request.
+     */
     public function __invoke(string $provider)
     {
         if (!config("services.{$provider}")) {

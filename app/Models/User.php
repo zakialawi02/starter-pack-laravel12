@@ -19,7 +19,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * The attributes that are mass assignable.
      *
-     * @var list<string>
+     * @var array<int, string>
      */
     protected $fillable = [
         'name',
@@ -38,7 +38,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var list<string>
+     * @var array<int, string>
      */
     protected $hidden = [
         'password',
@@ -62,23 +62,23 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public static function getRoleOptions()
     {
-        // Cek jenis database yang digunakan
+        // Check the type of database being used
         $driver = DB::getDriverName();
 
         if ($driver === 'mysql') {
-            // Ambil deskripsi kolom dari tabel users
+            // Retrieve column description from the users table
             $column = DB::select("SHOW COLUMNS FROM users WHERE Field = 'role'");
-            // Ekstrak tipe data dari hasil query
+            // Extract data type from query result
             $type = $column[0]->Type;
-            // Ambil nilai enum menggunakan regex
+            // Extract enum values using regex
             preg_match('/enum\((.*)\)/', $type, $matches);
-            // Kembalikan nilai enum sebagai array
+            // Return enum values as an array
             return str_getcsv($matches[1], ',', "'");
         } elseif ($driver === 'sqlite') {
-            // Jika menggunakan SQLite, ENUM tidak didukung, harus dibuat solusi alternatif
-            return ['superadmin', 'user']; // Sesuaikan dengan nilai yang diharapkan
+            // If using SQLite, ENUM is not supported, an alternative solution must be created.
+            return ['superadmin', 'user']; // Adjust according to expected values
         }
 
-        return []; // Return kosong jika driver tidak dikenali
+        return []; // Return empty if the driver is not recognized
     }
 }

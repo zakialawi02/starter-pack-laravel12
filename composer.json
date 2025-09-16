@@ -10,11 +10,15 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "intervention/image": "^3.8",
+        "ipinfo/ipinfo": "^3.1",
+        "jenssegers/agent": "^2.6",
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.23",
         "laravel/tinker": "^2.10.1",
         "propaganistas/laravel-disposable-email": "^2.4",
+        "sentry/sentry-laravel": "*",
         "yajra/laravel-datatables": "12.0",
         "yajra/laravel-datatables-oracle": "12.0"
     },

@@ -72,9 +72,22 @@
         </div>
 
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input class="mt-1 block w-full" id="email" name="email" type="email" :value="old('email', $user->email)" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
+            @if (Auth::user()->provider)
+                <div>
+                    <x-input-label for="email" :value="__('Email')" />
+                    <x-text-input class="mt-1 block w-full" id="email" name="email" type="email" :value="old('email', $user->email)" required autocomplete="username" readonly />
+                    <x-input-error class="mt-2" :messages="$errors->get('email')" />
+                </div>
+                <div class="mb-4 text-sm text-gray-600">
+                    {{ __('You are currently logged in using :provider.', ['provider' => ucfirst(Auth::user()->provider_name)]) }}
+                </div>
+            @else
+                <div>
+                    <x-input-label for="email" :value="__('Email')" />
+                    <x-text-input class="mt-1 block w-full" id="email" name="email" type="email" :value="old('email', $user->email)" required autocomplete="username" />
+                    <x-input-error class="mt-2" :messages="$errors->get('email')" />
+                </div>
+            @endif
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
                 <div>

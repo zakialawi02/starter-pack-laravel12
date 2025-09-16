@@ -296,6 +296,7 @@
 
                 // Edit user
                 $('body').on('click', '.editUser', function() {
+                    $('#userForm').trigger("reset");
                     $(".modal-loader-data").show();
                     $("#userForm").hide();
                     $('#saveBtn').prop('disabled', true);
