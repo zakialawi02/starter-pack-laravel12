@@ -1,36 +1,21 @@
-<li class="after:bg-foreground/30 text-foreground/70 relative inline-flex items-center gap-1.5 pe-3 after:absolute after:end-0 after:top-1/2 after:inline-block after:h-3.5 after:w-px after:-translate-y-1/2 after:rotate-12 after:rounded-full last:pe-0 last:after:hidden">
-    <div class="h-8">
-        <!-- Account Dropdown -->
-        <div class="hs-dropdown relative inline-flex text-start [--auto-close:inside] [--placement:bottom-right] [--strategy:absolute]">
-            <button class="focus:outline-hidden hover:bg-foreground/25 focus:bg-foreground/25 inline-flex shrink-0 items-center gap-x-3 rounded-full p-0.5 text-start" id="hs-dnad" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-                <img class="size-7 shrink-0 rounded-full" src="{{ Auth::user()->profile_photo_path }}" alt="Avatar">
-            </button>
+<div {{ $attributes->merge(['class' => 'hs-dropdown relative inline-flex [--placement:bottom-right]']) }}>
+    <button class="focus:outline-hidden text-foreground/80 inline-flex size-8 items-center justify-center gap-x-2 rounded-full border border-transparent text-sm font-semibold disabled:pointer-events-none disabled:opacity-50" id="hs-dropdown-account" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+        <img class="size-8 shrink-0 rounded-full" src="{{ Auth::user()->profile_photo_path }}" alt="Avatar">
+    </button>
 
-            <!-- Account Dropdown -->
-            <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 duration border-foreground/25 bg-neutral z-20 hidden w-60 rounded-xl border opacity-0 shadow-xl transition-[opacity,margin]" role="menu" aria-orientation="vertical" aria-labelledby="hs-dnad">
-                <div class="px-3.5 py-2">
-                    <span class="text-foreground font-medium">
-                        {{ Auth::user()->name }}
-                    </span>
-                    <p class="text-foreground/70 text-sm">
-                        {{ Auth::user()->email }}
-                    </p>
-                </div>
-                <div class="border-foreground/25 border-t px-4 py-2">
-                    <x-dashboard.theme-toggle />
-                </div>
-                <div class="border-foreground/25 border-t p-1">
-                    <x-dashboard.dropdown-link href="#" icon="ri-user-line">
-                        Profile
-                    </x-dashboard.dropdown-link>
-                    <x-dashboard.dropdown-link href="#" icon="ri-settings-line">
-                        Settings
-                    </x-dashboard.dropdown-link>
-                    <x-dashboard.logout-form />
-                </div>
-            </div>
-            <!-- End Account Dropdown -->
+    <div class="hs-dropdown-menu duration hs-dropdown-open:opacity-100 bg-neutral mt-2 hidden min-w-60 rounded-lg opacity-0 shadow-md transition-[opacity,margin] before:absolute before:-top-4 before:start-0 before:h-4 before:w-full after:absolute after:-bottom-4 after:start-0 after:h-4 after:w-full" role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-account">
+        <div class="bg-foreground/15 rounded-t-lg px-5 py-3">
+            <p class="text-foreground/55 text-sm">Signed in as</p>
+            <p class="text-foreground/80 text-sm font-medium">{{ Auth::user()->email }}</p>
         </div>
-        <!-- End Account Dropdown -->
+        <div class="space-y-0.5 p-1.5">
+            <x-dashboard.dropdown-link href="{{ route('admin.profile.edit') }}" icon="ri-user-line">
+                Profile
+            </x-dashboard.dropdown-link>
+            <x-dashboard.dropdown-link href="#" icon="ri-settings-line">
+                Settings
+            </x-dashboard.dropdown-link>
+            <x-dashboard.logout-form />
+        </div>
     </div>
-</li>
+</div>

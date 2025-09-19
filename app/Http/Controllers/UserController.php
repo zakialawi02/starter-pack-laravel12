@@ -27,18 +27,13 @@ class UserController extends Controller
             return DataTables::of($query)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
-                    return '<button href="#" class="btn bg-primary editUser" data-id="' . $data->id . ' "><span class="ri-edit-box-line" title="Edit"></span></button>
-                <button type="submit" class="btn bg-error deleteUser" data-id="' . $data->id . ' "><span class="ri-delete-bin-line" title="Delete"></span></button>';
+                    return '<button href="#" class="btn bg-primary edit-user" data-id="' . $data->id . ' "><span class="ri-edit-box-line" title="Edit"></span></button>
+                <button type="submit" class="btn bg-error delete-user" data-id="' . $data->id . ' "><span class="ri-delete-bin-line" title="Delete"></span></button>';
                 })
                 ->addColumn('photo', function ($data) {
                     return '<img src="' . asset($data->profile_photo_path) . '" width="30">';
                 })
-                ->editColumn('role', function ($data) {
-                    return '<span class="badge bg-' .
-                        ($data->role === 'superadmin' ? 'success' : ($data->role === 'admin' ? 'primary' : 'secondary'))
-                        . '">' . $data->role . '</span>';
-                })
-                ->rawColumns(['role', 'photo', 'action'])
+                ->rawColumns(['photo', 'action'])
                 ->removeColumn(['profile_photo_path', 'updated_at', 'id'])
                 ->make(true);
         }

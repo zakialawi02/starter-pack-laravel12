@@ -41,28 +41,41 @@
     </head>
 
     <body class="text-foreground bg-background font-sans antialiased">
-        <!-- ========== MAIN HEADER ========== -->
-        <x-dashboard.app-header />
-        <!-- ========== END MAIN HEADER ========== -->
+        <div class="sticky inset-x-0 top-0 z-20">
+            <!-- ========== HEADER ========== -->
+            <x-dashboard.app-header />
 
-        <!-- ========== MAIN SIDEBAR ========== -->
-        <x-dashboard.app-sidebar />
-        <!-- ========== END MAIN SIDEBAR ========== -->
+            <div class="-mt-px">
+                <!-- Breadcrumb Section -->
+                <div class="border-foreground/20 bg-neutral inset-x-0 top-0 z-20 border-y px-4 sm:px-6 lg:hidden lg:px-8">
+                    <div class="flex items-center py-2">
+                        <!-- Navigation Toggle -->
+                        <button class="focus:outline-hidden border-foreground/20 text-foreground/80 hover:text-foregrounnd/55 focus:text-foregrounnd/55 flex size-8 items-center justify-center gap-x-2 rounded-lg border disabled:pointer-events-none disabled:opacity-50" data-hs-overlay="#hs-application-sidebar" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-application-sidebar" aria-label="Toggle navigation">
+                            <span class="sr-only">Toggle Navigation</span>
+                            <i class="ri-sidebar-unfold-line text-xl"></i>
+                        </button>
+                        <!-- End Navigation Toggle -->
 
-        <!-- ========== MAIN CONTENT ========== -->
-        <main class="lg:hs-overlay-layout-open:ps-60 bg-background pt-15 px-3 pb-3 transition-all duration-300 lg:fixed lg:inset-0">
-            <div class="shadow-xs border-foreground/25 bg-neutral flex h-[calc(100dvh-62px)] flex-col overflow-hidden rounded-lg border lg:h-full">
-                <!-- Body -->
-                <div class="flex flex-1 flex-col overflow-y-auto [&::-webkit-scrollbar]:w-0">
-                    <div class="flex flex-1 flex-col lg:flex-row">
-                        <div class="border-foreground/25 flex min-w-0 flex-1 flex-col border-e p-3">
-                            {{ $slot }}
-                        </div>
+                        <!-- Breadcrumb -->
+                        <x-dashboard.breadcrumb :items="generate_breadcrumbs()" />
                     </div>
                 </div>
-                <!-- End Body -->
             </div>
-        </main>
+        </div>
+        <!-- ========== END HEADER ========== -->
+
+        <!-- SIDEBAR -->
+        <x-dashboard.app-sidebar />
+        <!-- End SIDEBAR -->
+
+        <!-- ========== MAIN CONTENT ========== -->
+        <!-- CONTENT -->
+        <div class="w-full lg:ps-64">
+            <div class="space-y-2 p-1 sm:space-y-6 sm:p-3">
+                {{ $slot }}
+            </div>
+        </div>
+        <!-- End CONTENT -->
         <!-- ========== END MAIN CONTENT ========== -->
 
 

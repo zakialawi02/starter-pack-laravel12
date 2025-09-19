@@ -5,7 +5,7 @@
     <section class="p-1 md:p-4">
         <x-card>
             <div class="mb-3 flex items-center justify-end px-2 align-middle">
-                <x-button-primary id="createNewUser" data-modal-target="user-modal" data-modal-toggle="user-modal" type="button">
+                <x-button-primary data-hs-overlay="#user-modal" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="user-modal">
                     <i class="ri-user-add-line"></i>
                     <span>Add User</span>
                 </x-button-primary>
@@ -35,30 +35,31 @@
         </x-card>
     </section>
 
-    <!-- Main modal -->
-    <div class="z-60 fixed left-0 right-0 top-0 hidden h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0" id="user-modal" aria-hidden="true" tabindex="-1">
-        <div class="relative max-h-full w-full max-w-2xl p-4">
-            <!-- Modal content -->
-            <div class="bg-background border-border relative rounded-lg border shadow-sm">
-                <!-- Modal header -->
-                <div class="border-foreground/30 flex items-center justify-between rounded-t border-b p-2 md:p-3">
-                    <h3 class="modal-title text-foreground text-xl font-semibold">
+
+    <div class="hs-overlay z-80 pointer-events-none fixed start-0 top-0 hidden size-full overflow-y-auto overflow-x-hidden" id="user-modal" role="dialog" aria-labelledby="user-modal-label" tabindex="-1">
+        <div class="hs-overlay-animation-target hs-overlay-open:scale-100 hs-overlay-open:opacity-100 m-3 flex min-h-[calc(100%-56px)] scale-95 items-center opacity-0 transition-all duration-200 ease-in-out sm:mx-auto sm:w-full sm:max-w-lg">
+            <div class="shadow-2xs border-foreground/20 bg-neutral pointer-events-auto flex w-full flex-col rounded-xl border">
+                <div class="border-foreground/20 flex items-center justify-between border-b px-4 py-3">
+                    <h3 class="modal-title text-foreground font-semibold">
                         Add User
                     </h3>
-                    <button class="text-foreground/70 hover:bg-background hover:text-foreground ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm" data-modal-hide="user-modal" type="button">
-                        <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    <button class="focus:outline-hidden hover:bg-foreground/20 focus:bg-foreground/20 bg-foreground/15 text-foreground/80 inline-flex size-8 items-center justify-center gap-x-2 rounded-full border border-transparent disabled:pointer-events-none disabled:opacity-50" data-hs-overlay="#user-modal" type="button" aria-label="Close">
+                        <span class="sr-only">Close</span>
+                        <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 6 6 18"></path>
+                            <path d="m6 6 12 12"></path>
                         </svg>
-                        <span class="sr-only">Close modal</span>
                     </button>
                 </div>
-                <!-- Modal body -->
-                <div class="modal-body space-y-2 p-2 md:p-3">
+                <div class="modal-body overflow-y-auto p-4">
                     <div id="error-messages"></div>
 
-                    <div class="modal-loader-data hidden animate-pulse" role="status">
-                        <div class="bg-base-content-muted mx-auto mb-4 h-2.5 w-60 rounded-full"></div>
-                        <div class="w-50 bg-base-content-muted mx-auto mb-4 h-2.5 rounded-full"></div>
+                    <div class="modal-loader-data hidden" role="status">
+                        <div class="flex animate-pulse flex-col gap-4">
+                            <div class="bg-muted h-4 w-3/4 rounded-full"></div>
+                            <div class="bg-muted h-4 rounded-full"></div>
+                            <div class="bg-muted h-4 w-5/6 rounded-full"></div>
+                        </div>
                         <span class="sr-only">Loading...</span>
                     </div>
 
@@ -66,65 +67,63 @@
                         @csrf
                         <input id="_method" name="_method" type="hidden">
 
-                        <div class="space-y-2.5">
+                        <div class="space-y-4">
                             <!-- Name -->
                             <div>
                                 <x-input-label for="name" :value="__('Name')" />
                                 <x-text-input class="px-1! py-1.5! mt-1 block w-full" id="name" name="name" type="text" :value="old('name')" required autofocus autocomplete="name" placeholder="John Doe" />
                             </div>
 
-                            <div class="flex w-full flex-col items-center justify-between gap-2 md:flex-row">
+                            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                                 <!-- Username -->
-                                <div class="w-full md:w-1/2">
+                                <div>
                                     <x-input-label for="username" :value="__('Username')" />
                                     <x-text-input class="px-1! py-1.5! block w-full" id="username" name="username" type="text" :value="old('username')" required autocomplete="username" placeholder="johndoe" />
                                 </div>
 
                                 <!-- role -->
-                                <div class="w-full md:w-1/2">
+                                <div>
                                     <x-input-label for="role" :value="__('Role')" />
-                                    <select class="focus:ring-primary focus:border-primary border-ring bg-input/50 text-foreground block w-full rounded-lg border p-2" id="role" name="role">
+                                    <x-select-input id="role" name="role">
                                         @foreach ($roles as $role)
                                             <option value="{{ $role }}">{{ ucfirst($role) }}</option>
                                         @endforeach
-                                    </select>
+                                    </x-select-input>
                                 </div>
                             </div>
 
-                            <div class="mt-4 flex w-full flex-col items-center justify-between gap-2 md:flex-row">
-
+                            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                                 <!-- Email Address -->
-                                <div class="w-full md:w-1/2">
+                                <div>
                                     <x-input-label for="email" :value="__('Email')" />
                                     <x-text-input class="px-1! py-1.5! mt-1 block w-full" id="email" name="email" type="email" :value="old('email')" required autocomplete="email" placeholder="name@mail.com" />
                                 </div>
 
-                                <div class="w-full md:w-1/2">
+                                <div>
                                     <x-input-label for="verified" :value="__('Verified Status')" />
-                                    <select class="focus:ring-primary focus:border-primary border-ring bg-input/50 text-foreground block w-full rounded-lg border p-2" id="email_verified_at" name="email_verified_at">
+                                    <x-select-input id="email_verified_at" name="email_verified_at">
                                         <option value="1">Yes</option>
                                         <option value="0">No</option>
-                                    </select>
+                                    </x-select-input>
                                 </div>
                             </div>
 
                             <!-- Password -->
-                            <div class="mt-4">
+                            <div>
                                 <x-input-label for="password" :value="__('Password')" />
                                 <x-text-input class="px-1! py-1.5! mt-1 block w-full" id="password" name="password" type="password" required autocomplete="new-password" />
-                                <span class="text-back-muted" id="passwordHelpBlock"></span>
+                                <p class="text-muted mt-2 text-sm" id="passwordHelpBlock">Minimum 8 characters</p>
                             </div>
                         </div>
                     </form>
                 </div>
-                <!-- Modal footer -->
-                <div class="border-foreground/30 flex flex-row-reverse items-center gap-2 rounded-b border-t p-2 md:p-3">
+                <div class="border-foreground/20 flex items-center justify-end gap-x-2 border-t px-4 py-3">
+                    <x-button-light class="border-border bg-background text-foreground hover:bg-muted focus:bg-muted inline-flex items-center gap-x-2 rounded-lg border px-3 py-2 text-sm font-medium focus:outline-none disabled:pointer-events-none disabled:opacity-50" data-hs-overlay="#user-modal" type="button">
+                        Close
+                    </x-button-light>
                     <x-button-primary id="saveBtn" type="submit">
                         Save
                     </x-button-primary>
-                    <x-button-light data-modal-hide="user-modal" type="button">
-                        Close
-                    </x-button-light>
                 </div>
             </div>
         </div>
@@ -196,10 +195,15 @@
                         {
                             data: 'role',
                             name: 'role',
+
                             render: function(data, type, row) {
-                                return '<span class="badge bg-' +
-                                    (data === 'superadmin' ? 'warning' : (data === 'admin' ? 'primary' : 'secondary')) +
-                                    '">' + data + '</span>';
+                                let badgeClass = 'secondary';
+                                if (data === 'superadmin') {
+                                    badgeClass = 'error';
+                                } else if (data === 'admin') {
+                                    badgeClass = 'primary';
+                                }
+                                return '<span class="badge bg-' + badgeClass + '">' + data + '</span>';
                             }
                         },
                         {
@@ -245,23 +249,13 @@
                     window.history.replaceState({}, '', newUrl);
                 });
 
+                const modalElement = new HSOverlay(document.querySelector('#user-modal'));
+
+
                 const cardErrorMessages = `<div id="body-messages" class="mb-3 rounded-md bg-error/30 p-4 text-sm text-error" role="alert"></div>`;
 
-                const modal = new Modal(document.getElementById('user-modal'), {
-                    onHide: () => {
-                        // Remove user_id parameter from URL when modal is closed
-                        let newUrl = new URL(window.location);
-                        newUrl.searchParams.delete('user_id');
-                        window.history.pushState({}, "", newUrl);
-                    },
-                });
-                $(document).on('click', '[data-modal-hide="user-modal"]', function() {
-                    modal.hide();
-                });
-
-
                 // Open modal for creating new user
-                $('#createNewUser').click(function() {
+                $('#create-new-user').click(function() {
                     $(".modal-loader-data").hide()
                     $("#userForm").show();
                     $('#user-modal').find('.modal-title').text('Add User');
@@ -290,7 +284,7 @@
                             $('#saveBtn').prop('disabled', true);
                         },
                         success: function(response) {
-                            modal.hide();
+                            modalElement.close();
                             $('#myTable').DataTable().ajax.reload();
                             MyZkToast.success(response.message);
                         },
@@ -305,7 +299,7 @@
                 });
 
                 // Edit user
-                $('body').on('click', '.editUser', function() {
+                $('body').on('click', '.edit-user', function() {
                     $('#userForm').trigger("reset");
                     $(".modal-loader-data").show();
                     $("#userForm").hide();
@@ -318,12 +312,12 @@
                     let newUrl = new URL(window.location);
                     newUrl.searchParams.set('user_id', userId);
                     window.history.pushState({}, '', newUrl);
-                    modal.show();
+                    modalElement.open();
                     getUserData(userId);
                 });
 
                 // Delete user
-                $('body').on('click', '.deleteUser', function(e) {
+                $('body').on('click', '.delete-user', function(e) {
                     e.preventDefault();
                     const userId = $(this).data('id');
                     const url = `{{ route('admin.users.destroy', ':userId') }}`.replace(':userId', userId);
@@ -364,7 +358,7 @@
                     $("#error-messages").html("");
                     $("#passwordHelpBlock").html("blank if you don't want to change");
                     setTimeout(() => {
-                        modal.show();
+                        modalElement.open();
                     }, 800);
                     getUserData(userId);
                 }
