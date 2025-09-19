@@ -1,4 +1,5 @@
 import "./bootstrap";
+import "./preline-helpers";
 
 $.ajaxSetup({
     headers: {

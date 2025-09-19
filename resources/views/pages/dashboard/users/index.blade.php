@@ -38,7 +38,7 @@
 
     <div class="hs-overlay z-80 pointer-events-none fixed start-0 top-0 hidden size-full overflow-y-auto overflow-x-hidden" id="user-modal" role="dialog" aria-labelledby="user-modal-label" tabindex="-1">
         <div class="hs-overlay-animation-target hs-overlay-open:scale-100 hs-overlay-open:opacity-100 m-3 flex min-h-[calc(100%-56px)] scale-95 items-center opacity-0 transition-all duration-200 ease-in-out sm:mx-auto sm:w-full sm:max-w-lg">
-            <div class="shadow-2xs border-foreground/20 bg-neutral pointer-events-auto flex w-full flex-col rounded-xl border">
+            <div class="shadow-2xs border-foreground/20 bg-background pointer-events-auto flex w-full flex-col rounded-xl border">
                 <div class="border-foreground/20 flex items-center justify-between border-b px-4 py-3">
                     <h3 class="modal-title text-foreground font-semibold">
                         Add User
@@ -249,8 +249,6 @@
                     window.history.replaceState({}, '', newUrl);
                 });
 
-                const modalElement = new HSOverlay(document.querySelector('#user-modal'));
-
 
                 const cardErrorMessages = `<div id="body-messages" class="mb-3 rounded-md bg-error/30 p-4 text-sm text-error" role="alert"></div>`;
 
@@ -284,7 +282,7 @@
                             $('#saveBtn').prop('disabled', true);
                         },
                         success: function(response) {
-                            modalElement.close();
+                            closeModal('#user-modal');
                             $('#myTable').DataTable().ajax.reload();
                             MyZkToast.success(response.message);
                         },
@@ -312,7 +310,7 @@
                     let newUrl = new URL(window.location);
                     newUrl.searchParams.set('user_id', userId);
                     window.history.pushState({}, '', newUrl);
-                    modalElement.open();
+                    openModal('#user-modal');
                     getUserData(userId);
                 });
 
@@ -358,7 +356,7 @@
                     $("#error-messages").html("");
                     $("#passwordHelpBlock").html("blank if you don't want to change");
                     setTimeout(() => {
-                        modalElement.open();
+                        openModal('#user-modal');
                     }, 800);
                     getUserData(userId);
                 }
