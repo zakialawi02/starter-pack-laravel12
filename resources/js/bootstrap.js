@@ -1,3 +1,4 @@
+import "preline";
 import axios from "axios";
 import Alpine from "alpinejs";
 

@@ -1,16 +1,41 @@
-@props(['route' => false, 'icon' => '', 'text' => '...', 'badge' => false, 'active' => '', 'class' => ''])
+@props([
+    'route' => false,
+    'href' => false,
+    'icon' => '',
+    'text' => '...',
+    'badge' => false,
+    'active' => '',
+    'class' => '',
+    'target' => null,
+    'disabled' => false,
+])
 
 @php
-    // Tentukan apakah route adalah named route atau URL biasa
-    $isNamedRoute = $route && Route::has($route);
+    // Determine the correct URL to use
+    if ($route) {
+        // Check if it's a named route
+    $isNamedRoute = Route::has($route);
     $isActive = $isNamedRoute && Request::routeIs($route) ? 'active' : '';
+    $url = $isNamedRoute ? route($route) : url($route);
+} elseif ($href) {
+    $url = $href;
+    // For href, we can't easily determine active state, so we'll use a simple URL comparison
+    $currentUrl = url()->current();
+    $isActive = $href !== '#' && $currentUrl === rtrim(url($href), '/') ? 'active' : '';
+} else {
+    $url = '#';
+    $isActive = '';
+}
 
-    // Gunakan named route jika tersedia, jika tidak gunakan URL langsung
-    $href = $isNamedRoute ? route($route) : ($route ? url($route) : '#');
+// Handle disabled state
+$disabledClass = $disabled ? 'opacity-50 pointer-events-none' : '';
+
+// Merge classes
+$mergedClass = "group flex items-center rounded-lg px-2 py-1.5 text-foreground hover:bg-foreground/20 $class $disabledClass " . ($isActive ? 'bg-foreground/20 ' : '');
 @endphp
 
 <li class="{{ $isActive }} {{ $active }} group">
-    <a href="{{ $href }}" {{ $attributes->merge(['class' => "$class group flex items-center rounded-lg px-2 py-1.5 text-foreground hover:bg-secondary hover:text-secondary-foreground " . ($isActive ? 'bg-primary text-primary-foreground' : '')]) }}>
+    <a href="{{ $url }}" {{ $attributes->merge(['class' => $mergedClass]) }} @if ($target) target="{{ $target }}" @endif @if ($disabled) aria-disabled="true" @endif>
         @if ($icon)
             <i class="{{ $icon }}"></i>
         @endif

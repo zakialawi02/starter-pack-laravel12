@@ -31,7 +31,7 @@
         <!-- Scripts -->
         <script>
             (function() {
-                if (localStorage.getItem("theme") === "dark") {
+                if (localStorage.getItem("hs_theme") === "dark") {
                     document.documentElement.classList.add("dark");
                 }
             })();
@@ -41,55 +41,36 @@
     </head>
 
     <body class="text-foreground bg-background font-sans antialiased">
-        <div class="sticky inset-x-0 top-0 z-20">
-            <!-- ========== HEADER ========== -->
-            <x-dashboard.app-header />
-            <!-- ========== END HEADER ========== -->
+        <!-- ========== MAIN HEADER ========== -->
+        <x-dashboard.app-header />
+        <!-- ========== END MAIN HEADER ========== -->
 
-            <!-- Breadcrumb Section -->
-            <div class="relative -mt-px">
-                <div class="border-foreground/30 bg-neutral z-20 border-y px-4 sm:px-6 lg:hidden lg:px-8">
-                    <div class="flex items-center py-2">
-                        <!-- Navigation Toggle -->
-                        <button class="focus:outline-hidden border-foreground/70 text-foreground hover:text-foreground/70 focus:text-foreground/70 flex size-8 items-center justify-center gap-x-2 rounded-md border" data-drawer-target="sidebar-multi-level-sidebar" data-drawer-toggle="sidebar-multi-level-sidebar" aria-controls="sidebar-multi-level-sidebar" aria-expanded="false">
-                            <span class="sr-only">Toggle Navigation</span>
-                            <i class="ri-sidebar-unfold-line text-xl"></i>
-                        </button>
-                        <!-- End Navigation Toggle -->
-
-                        <!-- Breadcrumb -->
-                        <x-dashboard.breadcrumb :items="generate_breadcrumbs()" />
-
-                        <!-- End Breadcrumb -->
-                    </div>
-                </div>
-            </div>
-            <!-- End Breadcrumb Section -->
-        </div>
-
-        <!-- Sidebar -->
+        <!-- ========== MAIN SIDEBAR ========== -->
         <x-dashboard.app-sidebar />
-        <!-- End Sidebar -->
+        <!-- ========== END MAIN SIDEBAR ========== -->
 
         <!-- ========== MAIN CONTENT ========== -->
-        <!-- Content -->
-        <main class="relative min-h-screen w-full lg:ps-64">
-            <div class="space-y-1 p-2 sm:p-1">
-                <!-- your content goes here ... -->
-
-                {{ $slot }}
-
+        <main class="lg:hs-overlay-layout-open:ps-60 bg-background pt-15 px-3 pb-3 transition-all duration-300 lg:fixed lg:inset-0">
+            <div class="shadow-xs border-foreground/25 bg-neutral flex h-[calc(100dvh-62px)] flex-col overflow-hidden rounded-lg border lg:h-full">
+                <!-- Body -->
+                <div class="flex flex-1 flex-col overflow-y-auto [&::-webkit-scrollbar]:w-0">
+                    <div class="flex flex-1 flex-col lg:flex-row">
+                        <div class="border-foreground/25 flex min-w-0 flex-1 flex-col border-e p-3">
+                            {{ $slot }}
+                        </div>
+                    </div>
+                </div>
+                <!-- End Body -->
             </div>
         </main>
-        <!-- End Content -->
         <!-- ========== END MAIN CONTENT ========== -->
+
 
         <!-- Supporting Components -->
         <x-toast />
         <x-alert-modal />
         <x-dependencies._messageAlert />
 
-        <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 
         <script>
             $(document).on("click", ".zk-delete-data", function(e) {

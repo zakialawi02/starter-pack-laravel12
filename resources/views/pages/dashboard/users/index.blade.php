@@ -5,7 +5,7 @@
     <section class="p-1 md:p-4">
         <x-card>
             <div class="mb-3 flex items-center justify-end px-2 align-middle">
-                <x-button-primary id="createNewUser" data-modal-target="userModal" data-modal-toggle="userModal" type="button">
+                <x-button-primary id="createNewUser" data-modal-target="user-modal" data-modal-toggle="user-modal" type="button">
                     <i class="ri-user-add-line"></i>
                     <span>Add User</span>
                 </x-button-primary>
@@ -23,6 +23,7 @@
                             <th scope="col">Role</th>
                             <th scope="col">Registered</th>
                             <th scope="col">Verified</th>
+                            <th scope="col">Social Login</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -35,7 +36,7 @@
     </section>
 
     <!-- Main modal -->
-    <div class="z-60 fixed left-0 right-0 top-0 hidden h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0" id="userModal" aria-hidden="true" tabindex="-1">
+    <div class="z-60 fixed left-0 right-0 top-0 hidden h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0" id="user-modal" aria-hidden="true" tabindex="-1">
         <div class="relative max-h-full w-full max-w-2xl p-4">
             <!-- Modal content -->
             <div class="bg-background border-border relative rounded-lg border shadow-sm">
@@ -44,7 +45,7 @@
                     <h3 class="modal-title text-foreground text-xl font-semibold">
                         Add User
                     </h3>
-                    <button class="text-foreground/70 hover:bg-background hover:text-foreground ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm" data-modal-hide="userModal" type="button">
+                    <button class="text-foreground/70 hover:bg-background hover:text-foreground ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm" data-modal-hide="user-modal" type="button">
                         <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                         </svg>
@@ -121,7 +122,7 @@
                     <x-button-primary id="saveBtn" type="submit">
                         Save
                     </x-button-primary>
-                    <x-button-light data-modal-hide="userModal" type="button">
+                    <x-button-light data-modal-hide="user-modal" type="button">
                         Close
                     </x-button-light>
                 </div>
@@ -194,7 +195,12 @@
                         },
                         {
                             data: 'role',
-                            name: 'role'
+                            name: 'role',
+                            render: function(data, type, row) {
+                                return '<span class="badge bg-' +
+                                    (data === 'superadmin' ? 'warning' : (data === 'admin' ? 'primary' : 'secondary')) +
+                                    '">' + data + '</span>';
+                            }
                         },
                         {
                             data: 'created_at',
@@ -208,6 +214,13 @@
                             name: 'email_verified_at',
                             render: function(data) {
                                 return formatCustomDate(data);
+                            }
+                        },
+                        {
+                            data: 'provider_name',
+                            name: 'provider_name',
+                            render: function(data) {
+                                return data ? '<i class="ri-checkbox-circle-line"></i>' : ''
                             }
                         },
                         {
@@ -234,19 +247,16 @@
 
                 const cardErrorMessages = `<div id="body-messages" class="mb-3 rounded-md bg-error/30 p-4 text-sm text-error" role="alert"></div>`;
 
-                const modal = new Modal(document.getElementById('userModal'), {
+                const modal = new Modal(document.getElementById('user-modal'), {
                     onHide: () => {
-                        // Hapus parameter user_id dari URL
-                        let newUrl = window.location.pathname;
-                        window.history.pushState({
-                            path: newUrl
-                        }, "", newUrl);
+                        // Remove user_id parameter from URL when modal is closed
+                        let newUrl = new URL(window.location);
+                        newUrl.searchParams.delete('user_id');
+                        window.history.pushState({}, "", newUrl);
                     },
                 });
-                document.querySelectorAll("[data-modal-hide]").forEach((button) => {
-                    button.addEventListener("click", function() {
-                        modal.hide();
-                    });
+                $(document).on('click', '[data-modal-hide="user-modal"]', function() {
+                    modal.hide();
                 });
 
 
@@ -254,7 +264,7 @@
                 $('#createNewUser').click(function() {
                     $(".modal-loader-data").hide()
                     $("#userForm").show();
-                    $('#userModal').find('.modal-title').text('Add User');
+                    $('#user-modal').find('.modal-title').text('Add User');
                     $('#userForm').attr('method', 'POST');
                     $('#_method').val('POST');
                     $('#userForm').trigger("reset");
@@ -300,13 +310,14 @@
                     $(".modal-loader-data").show();
                     $("#userForm").hide();
                     $('#saveBtn').prop('disabled', true);
-                    $('#userModal').find('.modal-title').text('Edit User');
+                    $('#user-modal').find('.modal-title').text('Edit User');
                     $("#error-messages").html("");
                     $("#passwordHelpBlock").html("blank if you don't want to change");
                     const userId = $(this).data('id');
                     // Tampilkan ID User di URL tanpa reload halaman
-                    let newUrl = window.location.pathname + "?user_id=" + userId;
-                    window.history.replaceState({}, '', newUrl);
+                    let newUrl = new URL(window.location);
+                    newUrl.searchParams.set('user_id', userId);
+                    window.history.pushState({}, '', newUrl);
                     modal.show();
                     getUserData(userId);
                 });
@@ -349,7 +360,7 @@
                     $(".modal-loader-data").show();
                     $("#userForm").hide();
                     $('#saveBtn').prop('disabled', true);
-                    $('#userModal').find('.modal-title').text('Edit User');
+                    $('#user-modal').find('.modal-title').text('Edit User');
                     $("#error-messages").html("");
                     $("#passwordHelpBlock").html("blank if you don't want to change");
                     setTimeout(() => {
