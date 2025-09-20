@@ -2,7 +2,7 @@
 
 Welcome to the Laravel 12 Starter Pack! This repository provides a solid foundation for building robust and scalable web applications using Laravel 12.
 
-A comprehensive Laravel starter template with essential features and best practices built-in (Laravel 12 + blade + tailwindcss + Basic Auth).
+A comprehensive Laravel starter template with essential features and best practices built-in (Laravel 12 + blade + tailwindcss (with preline ui) + Basic Auth).
 
 ## Table of Contents
 
@@ -26,7 +26,7 @@ A comprehensive Laravel starter template with essential features and best practi
 -   **Authorization**: Role-based access control (RBAC)
 -   **Database**: Pre-configured database migrations and seeders
 -   **API Support**: RESTful API endpoints with proper documentation
--   **Frontend**: Modern frontend setup with Tailwind CSS
+-   **Frontend**: Modern frontend setup with Tailwind CSS (with preline ui)
 -   **Testing**: Comprehensive test suite with Pest
 -   **Code Quality**: ESLint, Prettier, and PHP CS Fixer configurations
 
@@ -130,10 +130,10 @@ After running the seeders, you can login with:
 
 -   **Email**: superadmin@mail.com
 -   **Password**: superadmin
-    OR
+
 -   **Email**: admin@mail.com
 -   **Password**: admin
-    OR
+
 -   **Email**: user@mail.com
 -   **Password**: user
 

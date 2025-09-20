@@ -71,7 +71,7 @@
         <!-- ========== MAIN CONTENT ========== -->
         <!-- CONTENT -->
         <div class="w-full lg:ps-64">
-            <div class="space-y-2 p-1 sm:space-y-6 sm:p-3">
+            <div class="space-y-2 p-2 sm:p-3">
                 {{ $slot }}
             </div>
         </div>

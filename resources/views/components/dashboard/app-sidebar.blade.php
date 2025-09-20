@@ -16,7 +16,7 @@
          </div>
 
          <!-- Content -->
-         <div class="h-full flex-grow overflow-y-auto [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar]:w-2">
+         <div class="[&::-webkit-scrollbar-thumb]:bg-foreground/30 [&::-webkit-scrollbar-track]:bg-foreground/15 h-full flex-grow overflow-y-auto [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar]:w-2">
              <!-- Nav Sidebar -->
              <x-dashboard.sidebar-nav />
          </div>

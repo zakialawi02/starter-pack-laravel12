@@ -3,9 +3,9 @@
         <x-dashboard.nav-item route="/" icon="ri-home-4-line" text="Home" />
         <x-dashboard.nav-item route="admin.dashboard" icon="ri-dashboard-line" text="Dashboard" />
 
-        <x-dashboard.nav-accordion id="account-accordion" icon="ri-user-settings-line" text="Account">
-            <x-dashboard.nav-item href="/dashboard" text="Link 1" />
-            <x-dashboard.nav-item href="/dashboard/users" text="Link 2" />
+        <x-dashboard.nav-accordion id="template-accordion" icon="ri-pages-line" text="Templates">
+            <x-dashboard.nav-item href="/dashboard" text="dashboard" />
+            <x-dashboard.nav-item href="{{ route('admin.dashboard.empty') }}" text="Dashboard Template" />
             <x-dashboard.nav-item href="#" text="Link 3" />
         </x-dashboard.nav-accordion>
 

@@ -10,4 +10,9 @@ class DashboardController extends Controller
     {
         return view('pages.dashboard.dashboard');
     }
+
+    public function empty()
+    {
+        return view('pages.dashboard.emptyDashboard');
+    }
 }
