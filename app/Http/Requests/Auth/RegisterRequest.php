@@ -29,7 +29,7 @@ class RegisterRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
         return [
-            'username' => ['required', 'string', 'min:3', 'max:25', 'unique:users,username', 'alpha_num'],
+            'username' => ['required', 'string', 'min:3', 'max:25', 'unique:users,username', 'alpha_num', 'lowercase'],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'indisposable', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],

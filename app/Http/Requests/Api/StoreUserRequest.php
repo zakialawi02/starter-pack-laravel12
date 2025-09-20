@@ -33,9 +33,9 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'username' => 'required|string|min:4|max:25|alpha_dash|unique:users,username',
+            'username' => 'required|string|min:4|max:25|alpha_num|lowercase|unique:users,username',
             'role' => 'required|in:' . $this->roles,
-            'email' => 'required|string|email|max:255|unique:users,email',
+            'email' => 'required|string|email|indisposable|max:255|unique:users,email',
             'password' => 'required|string|min:6',
         ];
     }

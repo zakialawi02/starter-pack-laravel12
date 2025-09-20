@@ -120,6 +120,11 @@
 
 @push('javascript')
     <script>
+        // Pass PHP translations to JavaScript
+        const translations = {
+            fileSizeError: "{{ __('messages.file_size_error') }}"
+        };
+
         let inputPhoto;
         document.getElementById('photo_profile').addEventListener('change', function(event) {
             const fileInput = event.target;
@@ -134,7 +139,7 @@
 
             if (file) {
                 if (file.size > 1024 * 1024) {
-                    errorMsg.textContent = 'File size must be less than 1MB';
+                    errorMsg.textContent = translations.fileSizeError;
                     preview.src = preview.dataset.originalSrc;
                     fileInput.value = '';
                     inputPhoto = false;

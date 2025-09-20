@@ -158,6 +158,16 @@ class UserController extends Controller
     {
         try {
             $user = User::findOrFail($id);
+
+            // Check if the user is admin or superadmin
+            if (in_array($user->username, ['admin', 'superadmin'])) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Admin or Superadmin username cannot be deleted.',
+                    'errors' => 'Forbidden: Admin or Superadmin username cannot be deleted.',
+                ], 403);
+            }
+
             $user->delete();
             return response()->json([
                 'success' => true,

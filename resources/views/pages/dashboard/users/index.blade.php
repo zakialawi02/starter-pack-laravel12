@@ -1,4 +1,4 @@
-@section('title', $data['title'] ?? '')
+@section('title', $data['title'] ?? __('Users'))
 @section('meta_description', '')
 
 <x-app-layout>
@@ -7,7 +7,7 @@
             <div class="mb-3 flex items-center justify-end px-2 align-middle">
                 <x-button-primary id="create-new-user" data-hs-overlay="#user-modal" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="user-modal">
                     <i class="ri-user-add-line"></i>
-                    <span>Add User</span>
+                    <span>{{ __('Add User') }}</span>
                 </x-button-primary>
             </div>
 
@@ -15,16 +15,16 @@
                 <table class="display table" id="myTable">
                     <thead>
                         <tr>
-                            <th scope="col">No.</th>
-                            <th scope="col">Photo</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Username</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Role</th>
-                            <th scope="col">Registered</th>
-                            <th scope="col">Verified</th>
-                            <th scope="col">Social Login</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">{{ __('No.') }}</th>
+                            <th scope="col">{{ __('Photo') }}</th>
+                            <th scope="col">{{ __('Name') }}</th>
+                            <th scope="col">{{ __('Username') }}</th>
+                            <th scope="col">{{ __('Email') }}</th>
+                            <th scope="col">{{ __('Role') }}</th>
+                            <th scope="col">{{ __('Registered') }}</th>
+                            <th scope="col">{{ __('Verified') }}</th>
+                            <th scope="col">{{ __('Social Login') }}</th>
+                            <th scope="col">{{ __('Action') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,10 +41,10 @@
             <div class="shadow-2xs border-foreground/20 bg-background pointer-events-auto flex w-full flex-col rounded-xl border">
                 <div class="border-foreground/20 flex items-center justify-between border-b px-4 py-3">
                     <h3 class="modal-title text-foreground font-semibold">
-                        Add User
+                        {{ __('Add User') }}
                     </h3>
                     <button class="focus:outline-hidden hover:bg-foreground/20 focus:bg-foreground/20 bg-foreground/15 text-foreground/80 inline-flex size-8 items-center justify-center gap-x-2 rounded-full border border-transparent disabled:pointer-events-none disabled:opacity-50" data-hs-overlay="#user-modal" type="button" aria-label="Close">
-                        <span class="sr-only">Close</span>
+                        <span class="sr-only">{{ __('Close') }}</span>
                         <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M18 6 6 18"></path>
                             <path d="m6 6 12 12"></path>
@@ -60,7 +60,7 @@
                             <div class="bg-muted h-4 rounded-full"></div>
                             <div class="bg-muted h-4 w-5/6 rounded-full"></div>
                         </div>
-                        <span class="sr-only">Loading...</span>
+                        <span class="sr-only">{{ __('Loading...') }}</span>
                     </div>
 
                     <form class="" id="userForm" method="post" action="">
@@ -102,8 +102,8 @@
                                 <div>
                                     <x-input-label for="verified" :value="__('Verified Status')" />
                                     <x-select-input id="email_verified_at" name="email_verified_at">
-                                        <option value="1">Yes</option>
-                                        <option value="0">No</option>
+                                        <option value="1">{{ __('Yes') }}</option>
+                                        <option value="0">{{ __('No') }}</option>
                                     </x-select-input>
                                 </div>
                             </div>
@@ -112,17 +112,17 @@
                             <div>
                                 <x-input-label for="password" :value="__('Password')" />
                                 <x-text-input class="px-1! py-1.5! mt-1 block w-full" id="password" name="password" type="password" required autocomplete="new-password" />
-                                <p class="text-muted mt-2 text-sm" id="passwordHelpBlock">Minimum 8 characters</p>
+                                <p class="text-muted mt-2 text-sm" id="passwordHelpBlock">{{ __('Minimum 8 characters') }}</p>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="border-foreground/20 flex items-center justify-end gap-x-2 border-t px-4 py-3">
                     <x-button-light class="border-border bg-background text-foreground hover:bg-muted focus:bg-muted inline-flex items-center gap-x-2 rounded-lg border px-3 py-2 text-sm font-medium focus:outline-none disabled:pointer-events-none disabled:opacity-50" data-hs-overlay="#user-modal" type="button">
-                        Close
+                        {{ __('Close') }}
                     </x-button-light>
                     <x-button-primary id="saveBtn" type="submit">
-                        Save
+                        {{ __('Save') }}
                     </x-button-primary>
                 </div>
             </div>
@@ -134,9 +134,47 @@
 
     @push('javascript')
         <script>
+            // Pass translations to JavaScript
+            const translations = {
+                addUser: "{{ __('Add User') }}",
+                editUser: "{{ __('Edit User') }}",
+                create: "{{ __('Create') }}",
+                update: "{{ __('Update') }}",
+                close: "{{ __('Close') }}",
+                loading: "{{ __('Loading...') }}",
+                blankIfYouDontWantToChange: "{{ __("blank if you don't want to change") }}",
+                areYouSureYouWantToDeleteThisUser: "{{ __('Are you sure you want to delete this user?') }}",
+                yesDeleteIt: "{{ __('Yes, delete it') }}",
+                noCancel: "{{ __('No, cancel') }}",
+                errorFetchingUserData: "{{ __('Error fetching user data:') }}",
+                // DataTable translations
+                dataTable: {
+                    processing: "{{ __('Processing...') }}",
+                    search: "{{ __('Search:') }}",
+                    lengthMenu: "{{ __('Show _MENU_ entries') }}",
+                    info: "{{ __('Showing _START_ to _END_ of _TOTAL_ entries') }}",
+                    infoEmpty: "{{ __('Showing 0 to 0 of 0 entries') }}",
+                    infoFiltered: "{{ __('(filtered from _MAX_ total entries)') }}",
+                    infoPostFix: "",
+                    loadingRecords: "{{ __('Loading...') }}",
+                    zeroRecords: "{{ __('No matching records found') }}",
+                    emptyTable: "{{ __('No data available in table') }}",
+                    paginate: {
+                        first: "{{ __('First') }}",
+                        previous: "{{ __('Previous') }}",
+                        next: "{{ __('Next') }}",
+                        last: "{{ __('Last') }}"
+                    },
+                    aria: {
+                        sortAscending: "{{ __(': activate to sort column ascending') }}",
+                        sortDescending: "{{ __(': activate to sort column descending') }}"
+                    }
+                }
+            };
+
             $(document).ready(function() {
                 let urlParams = new URLSearchParams(window.location.search);
-                let pageParam = parseInt(urlParams.get('page')) || 1; // Ambil halaman dari URL
+                let pageParam = parseInt(urlParams.get('page')) || 1; // Get page from URL
                 let limitParam = parseInt(urlParams.get('limit')) || 10;
 
                 let table = new DataTable('#myTable', {
@@ -144,7 +182,7 @@
                     scrollX: true,
                     processing: true,
                     serverSide: true,
-                    displayStart: (pageParam - 1) * limitParam, // Atur posisi awal paging
+                    displayStart: (pageParam - 1) * limitParam, // Set initial paging position
                     pageLength: limitParam,
                     ajax: {
                         url: "{{ url()->full() }}",
@@ -157,12 +195,22 @@
                     },
                     lengthMenu: [
                         [10, 15, 25, 50, -1],
-                        [10, 15, 25, 50, "All"]
+                        [10, 15, 25, 50, "{{ __('All') }}"]
                     ],
                     language: {
-                        paginate: {
-                            previous: '<i class="ri-arrow-left-s-line"></i>',
-                            next: '<i class="ri-arrow-right-s-line"></i>'
+                        processing: translations.dataTable.processing,
+                        search: translations.dataTable.search,
+                        lengthMenu: translations.dataTable.lengthMenu,
+                        info: translations.dataTable.info,
+                        infoEmpty: translations.dataTable.infoEmpty,
+                        infoFiltered: translations.dataTable.infoFiltered,
+                        infoPostFix: translations.dataTable.infoPostFix,
+                        loadingRecords: translations.dataTable.loadingRecords,
+                        zeroRecords: translations.dataTable.zeroRecords,
+                        emptyTable: translations.dataTable.emptyTable,
+                        aria: {
+                            sortAscending: translations.dataTable.aria.sortAscending,
+                            sortDescending: translations.dataTable.aria.sortDescending
                         }
                     },
                     order: [
@@ -267,12 +315,12 @@
                 $('#create-new-user').click(function() {
                     $(".modal-loader-data").hide()
                     $("#userForm").show();
-                    $('#user-modal').find('.modal-title').text('Add User');
+                    $('#user-modal').find('.modal-title').text(translations.addUser);
                     $('#userForm').attr('method', 'POST');
                     $('#_method').val('POST');
                     $('#userForm').trigger("reset");
                     $('#userForm').attr('action', '{{ route('admin.users.store') }}');
-                    $('#saveBtn').text('Create');
+                    $('#saveBtn').text(translations.create);
                     $("#error-messages").html("");
                     $("#passwordHelpBlock").html("");
                 });
@@ -313,11 +361,11 @@
                     $(".modal-loader-data").show();
                     $("#userForm").hide();
                     $('#saveBtn').prop('disabled', true);
-                    $('#user-modal').find('.modal-title').text('Edit User');
+                    $('#user-modal').find('.modal-title').text(translations.editUser);
                     $("#error-messages").html("");
-                    $("#passwordHelpBlock").html("blank if you don't want to change");
+                    $("#passwordHelpBlock").html(translations.blankIfYouDontWantToChange);
                     const userId = $(this).data('id');
-                    // Tampilkan ID User di URL tanpa reload halaman
+                    // Show User ID in URL without reloading the page
                     let newUrl = new URL(window.location);
                     newUrl.searchParams.set('user_id', userId);
                     window.history.pushState({}, '', newUrl);
@@ -332,9 +380,9 @@
                     const url = `{{ route('admin.users.destroy', ':userId') }}`.replace(':userId', userId);
 
                     ZkPopAlert.show({
-                        message: "Are you sure you want to delete this user?",
-                        confirmText: "Yes, delete it",
-                        cancelText: "No, cancel",
+                        message: translations.areYouSureYouWantToDeleteThisUser,
+                        confirmText: translations.yesDeleteIt,
+                        cancelText: translations.noCancel,
                         onConfirm: () => {
                             deleteUser(userId);
                         }
@@ -356,16 +404,15 @@
                     });
                 }
 
-                // Cek URL saat halaman dimuat
-                let params = new URLSearchParams(window.location.search);
-                if (params.has("user_id")) {
-                    let userId = params.get("user_id");
+                // Check URL when page loads
+                if (urlParams.has("user_id")) {
+                    let userId = urlParams.get("user_id");
                     $(".modal-loader-data").show();
                     $("#userForm").hide();
                     $('#saveBtn').prop('disabled', true);
-                    $('#user-modal').find('.modal-title').text('Edit User');
+                    $('#user-modal').find('.modal-title').text(translations.editUser);
                     $("#error-messages").html("");
-                    $("#passwordHelpBlock").html("blank if you don't want to change");
+                    $("#passwordHelpBlock").html(translations.blankIfYouDontWantToChange);
                     setTimeout(() => {
                         openModal('#user-modal');
                     }, 800);
@@ -373,14 +420,14 @@
                 }
 
                 function getUserData(userId) {
-                    // Panggil AJAX untuk menampilkan data user_id
+                    // Call AJAX to fetch user data
                     $.get(`{{ route('admin.users.show', ':userId') }}`.replace(':userId', userId))
                         .done(function(data) {
                             $(".modal-loader-data").hide();
                             $("#userForm").show();
                             $('#saveBtn').prop('disabled', false);
                             $('#userForm').attr('action', `{{ route('admin.users.update', ':userId') }}`.replace(':userId', userId));
-                            $('#saveBtn').text('Update');
+                            $('#saveBtn').text(translations.update);
                             $('#_method').val('PUT');
                             $('#name').val(data.name);
                             $('#username').val(data.username);
@@ -389,7 +436,7 @@
                             $('#email_verified_at').val(data.email_verified_at ? 1 : 0);
                         })
                         .fail(function(jqXHR, textStatus, errorThrown) {
-                            console.error("Error fetching user data:", textStatus, errorThrown);
+                            console.error(translations.errorFetchingUserData, textStatus, errorThrown);
                             displayErrors({
                                 general: [`${textStatus}: ${errorThrown}`]
                             });

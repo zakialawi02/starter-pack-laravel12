@@ -1,4 +1,4 @@
-@section('title', $data['title'] ?? 'My Profile')
+@section('title', $data['title'] ?? __('My Profile'))
 @section('meta_description', '')
 
 <x-app-layout>

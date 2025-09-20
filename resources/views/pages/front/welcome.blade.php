@@ -5,7 +5,7 @@
             <!-- Logo -->
             <div class="flex items-center space-x-2">
                 <img class="h-8 w-8 dark:invert" src="{{ asset('/assets/img/logo-crop.png') }}" alt="Logo">
-                <span class="text-primary font-bold">Web Title</span>
+                <span class="text-primary font-bold">{{ __('Web Title') }}</span>
             </div>
 
             <!-- Navbar Links -->
@@ -72,7 +72,7 @@
         <!-- Text -->
         <div>
             <h1 class="text-3xl font-bold leading-tight md:text-4xl">
-                Welcome To <span class="text-primary">Starter Pack Laravel 12</span>
+                {{ __('Welcome To') }} <span class="text-primary">Starter Pack Laravel 12</span>
             </h1>
             <p class="text-foreground mt-4 text-lg">
                 Laravel 12 + blade + tailwindcss + Basic Auth

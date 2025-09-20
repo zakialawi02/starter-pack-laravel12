@@ -44,9 +44,9 @@ class UpdateUserRequest extends FormRequest
         $userId = request()->route('user'); // Ambil ID user dari URL
         return [
             'name' => 'required|string|max:255',
-            'username' => 'required|string|min:4|max:25|alpha_dash|unique:users,username,' . $userId,
+            'username' => 'required|string|min:4|max:25|alpha_num|lowercase|unique:users,username,' . $userId,
             'role' => 'required|in:' . $this->roles,
-            'email' => 'required|string|email|max:255|unique:users,email,' . $userId,
+            'email' => 'required|string|email|indisposable|max:255|unique:users,email,' . $userId,
             'email_verified_at' => 'nullable|boolean',
             'password' => 'nullable|string|min:6', // Password tidak wajib diupdate
         ];

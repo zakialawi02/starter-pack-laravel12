@@ -16,8 +16,11 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $data = [
+            'title' => __('messages.my_profile'),
+        ];
         return view('pages.dashboard.profile.edit', [
-            'title' => "My Profile",
+            'data' => $data,
             'user' => $request->user(),
         ]);
     }
@@ -78,7 +81,7 @@ class ProfileController extends Controller
 
         return Redirect::route('admin.profile.edit')->with([
             'status' => 'profile-updated',
-            'success' => 'Profile updated successfully'
+            'success' => __('messages.profile_updated_success')
         ]);
     }
 

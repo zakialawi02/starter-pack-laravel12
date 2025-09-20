@@ -6,7 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-        <title>@yield('title', config('app.name'))</title>
+        <title>@yield('title') • {{ config('app.name') }}</title>
+
         <meta content="@yield('meta_description', '') name="description">
         <meta name="author" content="@yield('meta_author', 'Ahmad Zaki Alawi')">
 

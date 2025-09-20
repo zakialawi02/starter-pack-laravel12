@@ -1,6 +1,5 @@
 @props([
-    'route' => false,
-    'href' => false,
+    'href' => '#',
     'icon' => '',
     'text' => '...',
     'badge' => false,
@@ -11,31 +10,26 @@
 ])
 
 @php
-    // Determine the correct URL to use
-    if ($route) {
-        // Check if it's a named route
-    $isNamedRoute = Route::has($route);
-    $isActive = $isNamedRoute && Request::routeIs($route) ? 'active' : '';
-    $url = $isNamedRoute ? route($route) : url($route);
-} elseif ($href) {
-    $url = $href;
+    // Determine whether the route is a named route or a regular URL
+    $isNamedRoute = $href && Route::has($href);
+    $isActive = $isNamedRoute && Request::routeIs($href) ? 'active' : '';
+
+    // Use named routes if available, otherwise use direct URLs.
+    $href = $isNamedRoute ? route($href) : ($href ? url($href) : '#');
+
     // For href, we can't easily determine active state, so we'll use a simple URL comparison
     $currentUrl = url()->current();
     $isActive = $href !== '#' && $currentUrl === rtrim(url($href), '/') ? 'active' : '';
-} else {
-    $url = '#';
-    $isActive = '';
-}
 
-// Handle disabled state
-$disabledClass = $disabled ? 'opacity-50 pointer-events-none' : '';
+    // Handle disabled state
+    $disabledClass = $disabled ? 'opacity-50 pointer-events-none' : '';
 
-// Merge classes
-$mergedClass = "group flex items-center rounded-lg px-2 py-1.5 text-foreground hover:bg-foreground/20 $class $disabledClass " . ($isActive ? 'bg-foreground/20 ' : '');
+    // Merge classes
+    $mergedClass = "group flex items-center rounded-lg px-2 py-1.5 text-foreground hover:bg-foreground/20 $class $disabledClass " . ($isActive ? 'bg-foreground/20 ' : '');
 @endphp
 
 <li class="{{ $isActive }} {{ $active }} group">
-    <a href="{{ $url }}" {{ $attributes->merge(['class' => $mergedClass]) }} @if ($target) target="{{ $target }}" @endif @if ($disabled) aria-disabled="true" @endif>
+    <a href="{{ $href }}" {{ $attributes->merge(['class' => $mergedClass]) }} @if ($target) target="{{ $target }}" @endif @if ($disabled) aria-disabled="true" @endif>
         @if ($icon)
             <i class="{{ $icon }}"></i>
         @endif
