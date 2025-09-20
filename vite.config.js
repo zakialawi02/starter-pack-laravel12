@@ -9,6 +9,7 @@ export default defineConfig({
                 "resources/css/app.css",
                 "resources/js/app.js",
                 "resources/js/app-dashboard.js",
+                "resources/js/preline-helpers.js",
             ],
             refresh: true,
         }),

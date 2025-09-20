@@ -80,11 +80,14 @@
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste in nam numquam doloribus beatae tempore quas magni eligendi praesentium molestias vero excepturi obcaecati laudantium, nulla laboriosam nemo dolorum similique a...
             </p>
             <div class="mt-6 flex space-x-4">
-                <a class="bg-accent text-accent-foreground hover:bg-accent/80 rounded-md px-5 py-2 shadow" href="#">
+                <a class="bg-primary text-primary-foreground hover:bg-primary/80 rounded-md px-5 py-2 shadow" href="#">
                     Button 1
                 </a>
-                <a class="border-primary/70 text-primary/70 hover:bg-muted rounded-md border px-5 py-2" href="#">
+                <a class="bg-secondary text-secondary-foreground border-secondary/70 hover:bg-secondary/70 rounded-md border px-5 py-2" href="#">
                     Button 2
+                </a>
+                <a class="border-primary/70 text-primary/70 hover:bg-muted rounded-md border px-5 py-2" href="#">
+                    Button 3
                 </a>
             </div>
         </div>

@@ -1,20 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
 
 @import "tailwindcss";
-@import "flowbite/src/themes/default";
-@plugin "flowbite/plugin";
-@source "../node_modules/flowbite";
+@import "../../node_modules/preline/variants.css";
+@source "../../node_modules/preline/dist/*.js";
 
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
 @plugin '@tailwindcss/aspect-ratio';
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
-
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
     --background: #f9f9fa;
@@ -25,7 +19,7 @@
     --primary-foreground: #ffffff;
     --secondary: #5fb0bb;
     --secondary-foreground: #ffffff;
-    --muted: #b7d9b8;
+    --muted: #7c9a7d;
     --muted-foreground: #27563a;
     --accent: #d5a727;
     --accent-foreground: #f8f5f0;
@@ -74,11 +68,11 @@
     --secondary: #4682b4;
     --secondary-foreground: #e5e5e5;
     --muted: #444444;
-    --muted-foreground: #a3a3a3;
+    --muted-foreground: #8b8b8b;
     --accent: #6495ed;
     --accent-foreground: #e5e5e5;
     --neutral: #2f3436;
-    --neutral-foreground: #e5f0e8;
+    --neutral-foreground: #dbe3dd;
     --info: oklch(72.06% 0.191 231.6);
     --success: oklch(64.8% 0.15 160);
     --warning: oklch(84.71% 0.199 83.87);
@@ -169,6 +163,8 @@
     margin-inline: auto;
     padding-inline: 2rem;
 }
+
+@custom-variant hover (&:hover);
 
 @layer base {
     body {

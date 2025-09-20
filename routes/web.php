@@ -17,12 +17,12 @@ Route::prefix('dashboard')->name('admin.')->group(function () {
     });
 
     Route::middleware(['auth', 'verified', 'role:superadmin,admin'])->group(function () {
-        Route::get('/requestContributor', [UserController::class, 'requestContributor'])->name('requestContributor.index');
-        Route::delete('/requestContributor/{requestContributor:id}', [UserController::class, 'destroyRequestContributor'])->name('requestContributor.destroy');
+        //
     });
 
     Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/empty', [DashboardController::class, 'empty'])->name('dashboard.empty');
 
         // Profile
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
