@@ -36,3 +36,17 @@ function toggleModal(modalId) {
     }
 }
 window.toggleModal = toggleModal;
+
+/**
+ * Gets the instance of a modal dialog by its ID using HSOverlay library
+ *
+ * @param {string} modalId - The ID of the modal element to get instance for
+ * @returns {Object|undefined} - The modal instance or undefined if not found
+ */
+function getModalInstance(modalId) {
+    if (window.HSOverlay && modalId) {
+        return window.HSOverlay.getInstance(modalId, true);
+    }
+    return undefined;
+}
+window.getModalInstance = getModalInstance;

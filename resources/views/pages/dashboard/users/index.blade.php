@@ -5,7 +5,7 @@
     <section class="p-1 md:p-4">
         <x-card>
             <div class="mb-3 flex items-center justify-end px-2 align-middle">
-                <x-button-primary data-hs-overlay="#user-modal" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="user-modal">
+                <x-button-primary id="create-new-user" data-hs-overlay="#user-modal" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="user-modal">
                     <i class="ri-user-add-line"></i>
                     <span>Add User</span>
                 </x-button-primary>
@@ -249,6 +249,18 @@
                     window.history.replaceState({}, '', newUrl);
                 });
 
+                const modalInstance = HSOverlay.getInstance('#user-modal', true);
+                if (modalInstance && modalInstance.element) {
+                    // Listen for the close event
+                    modalInstance.element.on('close', function() {
+                        // Remove user_id parameter from URL if present
+                        let url = new URL(window.location);
+                        if (url.searchParams.has('user_id')) {
+                            url.searchParams.delete('user_id');
+                            window.history.replaceState({}, '', url);
+                        }
+                    });
+                }
 
                 const cardErrorMessages = `<div id="body-messages" class="mb-3 rounded-md bg-error/30 p-4 text-sm text-error" role="alert"></div>`;
 
@@ -340,7 +352,7 @@
                         },
                         error: function(error) {
                             console.log(error);
-                            MyZkToast.error(error.statusText)
+                            MyZkToast.error(error.responseJSON.message)
                         }
                     });
                 }

@@ -139,7 +139,14 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $admin = User::where('username', 'admin')->first();
+        // Check if the user is admin or superadmin
+        if (in_array($user->username, ['admin', 'superadmin'])) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Admin or Superadmin users cannot be deleted.',
+                'errors' => 'Forbidden: Admin or Superadmin users cannot be deleted.',
+            ], 403);
+        }
 
         User::where('id', $user->id)->delete();
 
