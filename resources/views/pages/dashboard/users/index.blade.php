@@ -197,13 +197,12 @@
                             name: 'role',
 
                             render: function(data, type, row) {
-                                let badgeClass = 'secondary';
-                                if (data === 'superadmin') {
-                                    badgeClass = 'error';
-                                } else if (data === 'admin') {
-                                    badgeClass = 'primary';
-                                }
-                                return '<span class="badge bg-' + badgeClass + '">' + data + '</span>';
+                                const badgeMap = {
+                                    'superadmin': 'error',
+                                    'admin': 'primary',
+                                };
+                                const badgeClass = badgeMap[data] || 'secondary';
+                                return `<span class="badge bg-${badgeClass}">${data}</span>`;
                             }
                         },
                         {

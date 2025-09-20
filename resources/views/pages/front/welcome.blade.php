@@ -11,7 +11,8 @@
             <!-- Navbar Links -->
             <nav class="bg-background text-foreground absolute left-0 top-[55px] hidden w-full flex-col items-center space-y-3 px-6 py-4 font-bold shadow-lg md:static md:flex md:w-auto md:flex-row md:space-x-6 md:space-y-0 md:bg-transparent md:p-0 md:shadow-none md:transition-none md:duration-0 md:ease-linear md:will-change-auto" id="navbar">
 
-                <a class="text-accent block font-medium md:inline-block" href="/">Home</a>
+
+                <a class="{{ request()->is('/') ? 'text-primary' : '' }} block font-medium md:inline-block" href="/">Home</a>
                 <a class="hover:text-primary/70 block md:inline-block" href="#">Menu 1</a>
                 <a class="hover:text-primary/70 block md:inline-block" href="#">Menu 2</a>
 

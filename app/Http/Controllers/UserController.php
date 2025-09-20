@@ -148,7 +148,7 @@ class UserController extends Controller
             ], 403);
         }
 
-        User::where('id', $user->id)->delete();
+        $user->delete();
 
         return response()->json(['message' => 'User deleted successfully']);
     }
