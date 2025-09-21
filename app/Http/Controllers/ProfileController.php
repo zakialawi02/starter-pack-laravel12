@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,30 +14,40 @@ class ProfileController extends Controller
 {
     /**
      * Display the user's profile form.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\View\View
      */
     public function edit(Request $request): View
     {
         $data = [
             'title' => __('messages.my_profile'),
         ];
+        /** @var User $user */
+        $user = Auth::user();
         return view('pages.dashboard.profile.edit', [
             'data' => $data,
-            'user' => $request->user(),
+            'user' => $user,
         ]);
     }
 
     /**
      * Update the user's profile information.
+     *
+     * @param  \App\Http\Requests\ProfileUpdateRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        /** @var User $user */
+        $user = Auth::user();
+        $user->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
         }
 
-        $request->user()->save();
+        $user->save();
 
         return Redirect::route('admin.profile.edit')->with('status', 'profile-updated');
     }
@@ -50,7 +61,7 @@ class ProfileController extends Controller
     public function updatePhoto(Request $request): RedirectResponse
     {
         $request->validate([
-            'photo_profile' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo_profile' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1048',
         ]);
 
         // Mengambil file yang diupload
@@ -61,7 +72,8 @@ class ProfileController extends Controller
         $newFileName = $timestamp . '_' . $randomString . '.' . $extension;
 
         // Cek jika pengguna sudah memiliki foto profil yang lama
-        $user = $request->user();
+        /** @var User $user */
+        $user = Auth::user();
         if ($user->profile_photo_path && $user->profile_photo_path != '/assets/img/profile/user.png' && $user->profile_photo_path != '/assets/img/profile/admin.png') {
             // Cek apakah file foto lama ada di direktori penyimpanan publik dan hapus
             $oldPhotoPath = public_path($user->profile_photo_path);
@@ -74,19 +86,21 @@ class ProfileController extends Controller
         $file->storeAs('profile_photos', $newFileName, 'public');
         $path = '/storage/profile_photos/' . $newFileName;
         // Memperbarui foto profil pengguna
-        $user = $request->user();
         $user->update([
             'profile_photo_path' => $path, // Menyimpan path file di database
         ]);
 
         return Redirect::route('admin.profile.edit')->with([
-            'status' => 'profile-updated',
+            'status' => 'photo-profile-updated',
             'success' => __('messages.profile_updated_success')
         ]);
     }
 
     /**
      * Delete the user's account.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Request $request): RedirectResponse
     {
@@ -94,7 +108,8 @@ class ProfileController extends Controller
             'password' => ['required', 'current_password'],
         ]);
 
-        $user = $request->user();
+        /** @var User $user */
+        $user = Auth::user();
 
         Auth::logout();
 

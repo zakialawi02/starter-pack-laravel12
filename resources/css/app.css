@@ -30,7 +30,7 @@
     --warning: oklch(84.71% 0.199 83.87);
     --error: oklch(71.76% 0.221 22.18);
     --border: #d4d4d4;
-    --input: #d4d4d4;
+    --input: #dddddd;
     --ring: #34a85a;
     --chart-1: #4caf50;
     --chart-2: #388e3c;
@@ -208,7 +208,7 @@
     }
     input:is(:read-only, [readonly]) {
         cursor: not-allowed;
-        opacity: 0.8;
+        opacity: 0.7;
     }
 }
 

@@ -15,6 +15,7 @@
     "Name": "Name",
     "Email": "Email",
     "You are currently logged in using :provider.": "You are currently logged in using :provider.",
+    "You are logged in via social login. Please update your password in your social account settings.": "You are logged in via social login. Please update your password in your social account settings.",
     "Your email address is unverified.": "Your email address is unverified.",
     "Click here to re-send the verification email.": "Click here to re-send the verification email.",
     "A new verification link has been sent to your email address.": "A new verification link has been sent to your email address.",

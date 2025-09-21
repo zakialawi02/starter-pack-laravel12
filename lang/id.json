@@ -15,6 +15,7 @@
     "Name": "Nama",
     "Email": "Email",
     "You are currently logged in using :provider.": "Anda saat ini masuk menggunakan :provider.",
+    "You are logged in via social login. Please update your password in your social account settings.": "Anda masuk melalui login sosial. Silakan perbarui kata sandi Anda di pengaturan akun sosial Anda.",
     "Your email address is unverified.": "Alamat email Anda belum diverifikasi.",
     "Click here to re-send the verification email.": "Klik di sini untuk mengirim ulang email verifikasi.",
     "A new verification link has been sent to your email address.": "Tautan verifikasi baru telah dikirim ke alamat email Anda.",

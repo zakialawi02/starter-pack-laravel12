@@ -37,9 +37,9 @@
         @enderror
 
         <div class="mt-4 flex items-center gap-4">
-            <x-button-primary>{{ __('Save') }}</x-button-primary>
+            <x-button-primary type="submit">{{ __('Save') }}</x-button-primary>
 
-            @if (session('status') === 'profile-updated')
+            @if (session('status') === 'photo-profile-updated')
                 <p class="text-sm text-gray-600" x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 5000)">{{ __('Saved.') }}</p>
             @endif
         </div>
@@ -72,7 +72,7 @@
         </div>
 
         <div>
-            @if (Auth::user()->provider)
+            @if (Auth::user()->provider_name)
                 <div>
                     <x-input-label for="email" :value="__('Email')" />
                     <x-text-input class="mt-1 block w-full" id="email" name="email" type="email" :value="old('email', $user->email)" required autocomplete="username" readonly />

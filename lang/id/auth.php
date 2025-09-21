@@ -17,5 +17,6 @@ return [
     'failed' => 'Identitas tersebut tidak cocok dengan data yang ada.',
     'password' => 'Password yang diberikan salah.',
     'throttle' => 'Terlalu banyak upaya masuk. Silakan coba lagi dalam :seconds detik.',
+    'social_login' => 'Akun ini menggunakan login :provider. Silakan gunakan akun :provider Anda untuk masuk/pemperbarui data akun Anda.',
 
 ];

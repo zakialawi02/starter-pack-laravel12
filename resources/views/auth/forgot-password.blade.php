@@ -6,7 +6,7 @@
         <!-- Left Side - Image and Quote -->
         <div class="relative hidden md:block md:w-1/2">
             <div class="absolute inset-0 rounded-3xl bg-gradient-to-bl from-[#84cc16] via-[#16a34a] to-[#0f766e] opacity-80"></div>
-            <img class="h-full w-full rounded-3xl object-cover" src="https://placehold.co/600x800/1a1a1a/ffffff?text=Abstract+Design" alt="Background">
+            <img class="h-full w-full rounded-3xl object-cover" src="{{ asset('assets/img/image-placeholder.png') }}" alt="Background">
 
             <div class="absolute inset-0 flex flex-col justify-between p-8 text-white">
                 <div class="text-sm font-medium uppercase tracking-wider">
