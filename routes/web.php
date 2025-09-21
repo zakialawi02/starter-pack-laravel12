@@ -40,7 +40,10 @@ Route::prefix('dashboard')->name('admin.')->group(function () {
         // Dashboard
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('/empty', [DashboardController::class, 'empty'])->name('dashboard.empty');
+    });
 
+    // Authenticated only
+    Route::middleware(['auth'])->group(function () {
         // Profile Management
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
