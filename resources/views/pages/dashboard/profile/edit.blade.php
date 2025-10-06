@@ -43,7 +43,7 @@
                 @include('pages.dashboard.profile.partials.update-password-form')
             </div>
 
-            @if (!Auth::user()->provider_name)
+            @if (Auth::user()->password && !Auth::user()->provider_name)
                 <div class="mt-8 max-w-xl">
                     @include('pages.dashboard.profile.partials.delete-user-form')
                 </div>

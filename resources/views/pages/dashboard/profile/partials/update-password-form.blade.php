@@ -10,7 +10,7 @@
     </header>
 
 
-    @if (Auth::user()->password && Auth::user()->provider_name)
+    @if (Auth::user()->password && !Auth::user()->provider_name)
         <form class="mt-6 space-y-6" method="post" action="{{ route('password.update') }}">
             @csrf
             @method('put')
