@@ -2,57 +2,32 @@
 
 namespace App\Http\Requests\Api;
 
+use App\Http\Requests\User\UpdateUserRequest as BaseUpdateUserRequest;
 use App\Models\User;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Response;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ValidationException;
 
-class UpdateUserRequest extends FormRequest
+class UpdateUserRequest extends BaseUpdateUserRequest
 {
-    protected $roles;
-    public function prepareForValidation()
+    protected function prepareForValidation(): void
     {
-        // Ambil ID user dari route
-        $userId = request()->route('user');
-        // Jika user tidak ditemukan, langsung return response JSON
-        if (!User::find($userId)) {
+        parent::prepareForValidation();
+
+        $userId = $this->resolveUserId();
+
+        if ($userId && ! User::query()->whereKey($userId)->exists()) {
             abort(response()->json([
                 'success' => false,
                 'message' => 'User not found.',
             ], Response::HTTP_NOT_FOUND));
         }
-        // Inisialisasi nilai enum dari model
-        $this->roles = implode(',', User::getRoleOptions());
-    }
-
-
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @throws ValidationException
      */
-    public function rules(): array
-    {
-        $userId = request()->route('user'); // Ambil ID user dari URL
-        return [
-            'name' => 'required|string|max:255',
-            'username' => 'required|string|min:4|max:25|alpha_num|lowercase|unique:users,username,' . $userId,
-            'role' => 'required|in:' . $this->roles,
-            'email' => 'required|string|email|indisposable|max:255|unique:users,email,' . $userId,
-            'email_verified_at' => 'nullable|boolean',
-            'password' => 'nullable|string|min:6', // Password tidak wajib diupdate
-        ];
-    }
-
-    public function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    protected function failedValidation(Validator $validator): void
     {
         $response = response()->json([
             'success' => false,

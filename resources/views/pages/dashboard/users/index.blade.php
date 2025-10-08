@@ -86,7 +86,7 @@
                                     <x-input-label for="role" :value="__('Role')" />
                                     <x-select-input id="role" name="role">
                                         @foreach ($roles as $role)
-                                            <option value="{{ $role }}">{{ ucfirst($role) }}</option>
+                                            <option value="{{ $role->value }}">{{ $role->label() }}</option>
                                         @endforeach
                                     </x-select-input>
                                 </div>
@@ -301,7 +301,7 @@
                         },
                         success: function(response) {
                             closeModal('#user-modal');
-                            $('#myTable').DataTable().ajax.reload();
+                            $('#myTable').DataTable().ajax.reload(null, false);
                             MyZkToast.success(response.message);
                         },
                         error: function(error) {
@@ -353,7 +353,7 @@
                         type: "DELETE",
                         url: `{{ route('admin.users.destroy', ':userId') }}`.replace(':userId', userId),
                         success: function(response) {
-                            $('#myTable').DataTable().ajax.reload();
+                            $('#myTable').DataTable().ajax.reload(null, false);
                             MyZkToast.success(response.message);
                         },
                         error: function(error) {

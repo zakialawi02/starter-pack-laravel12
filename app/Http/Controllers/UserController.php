@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserRole;
+use App\Http\Requests\User\StoreUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
-    protected $roles;
-
-    public function __construct()
-    {
-        // Inisialisasi nilai enum dari model
-        $this->roles = implode(',', User::getRoleOptions());
-    }
-
     /**
      * Display a listing of the resource.
      */
@@ -26,13 +22,14 @@ class UserController extends Controller
 
             return DataTables::of($query)
                 ->addIndexColumn()
-                ->addColumn('action', function ($data) {
-                    return '<button href="#" class="btn bg-primary edit-user" data-id="' . $data->id . ' "><span class="ri-edit-box-line" title="Edit"></span></button>
-                <button type="submit" class="btn bg-error delete-user" data-id="' . $data->id . ' "><span class="ri-delete-bin-line" title="Delete"></span></button>';
+                ->addColumn('action', function (User $user) {
+                    return '<button href="#" class="btn bg-primary edit-user" data-id="' . $user->id . ' "><span class="ri-edit-box-line" title="Edit"></span></button>
+                <button type="submit" class="btn bg-error delete-user" data-id="' . $user->id . ' "><span class="ri-delete-bin-line" title="Delete"></span></button>';
                 })
-                ->addColumn('photo', function ($data) {
-                    return '<img src="' . asset($data->profile_photo_path) . '" width="30">';
+                ->addColumn('photo', function (User $user) {
+                    return '<img src="' . asset($user->profile_photo_path) . '" width="30">';
                 })
+                ->editColumn('role', fn (User $user) => $user->role instanceof UserRole ? $user->role->value : $user->role)
                 ->rawColumns(['photo', 'action'])
                 ->removeColumn(['profile_photo_path', 'updated_at', 'id'])
                 ->make(true);
@@ -42,31 +39,23 @@ class UserController extends Controller
             'title' => __('messages.users_management'),
         ];
 
-        // Ambil data enum role dari model
-        $roles = explode(',', $this->roles);
-
-        return view('pages.dashboard.users.index', compact('data', 'roles'));
+        return view('pages.dashboard.users.index', [
+            'data' => $data,
+            'roles' => UserRole::cases(),
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request): JsonResponse
     {
-        $validated = $request->validate([
-            'name' => 'required|max:255',
-            'username' => 'required|min:4|max:25|alpha_num|lowercase|unique:users,username',
-            'role' => 'required|in:' . $this->roles,
-            'email' => 'required|email|unique:users,email',
-            'email_verified_at' => 'nullable',
-            'password' => 'required|min:6',
-        ]);
-        $user = User::create($validated);
-        $data = User::where('id', $user->id)->first();
-        $data['created_at'] = $data->created_at->format('d M Y');
+        $validated = $this->prepareEmailVerification($request->validated());
+
+        $user = User::create($validated)->fresh();
 
         return response()->json([
-            'user' => $data,
+            'user' => UserResource::make($user)->toArray($request),
             'message' => __('messages.user_created_success'),
         ]);
     }
@@ -74,62 +63,48 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(User $user): JsonResponse
     {
-        return response()->json($user);
+        return response()->json(UserResource::make($user));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user): JsonResponse
     {
-        $validated = $request->validate([
-            'name' => 'required|max:255',
-            'username' => 'required|min:4|max:25|alpha_num|lowercase|unique:users,username,' . $user?->id,
-            'role' => 'required|in:' . $this->roles,
-            'email' => 'required|email|indisposable|unique:users,email,' . $user?->id,
-            'email_verified_at' => 'nullable',
-            'password' => 'nullable|min:6',
-        ]);
-        // Cek jika username adalah admin atau superadmin dan mencoba mengubah role
-        if (in_array($user->username, ['admin', 'superadmin']) && $request->has('role') && $request->role !== $user->role) {
+        if (in_array($user->username, ['admin', 'superadmin'], true)
+            && $request->filled('role')
+            && $request->input('role') !== ($user->role instanceof UserRole ? $user->role->value : $user->role)) {
             return response()->json([
                 'success' => false,
                 'message' => __('messages.role_change_error'),
                 'errors' => ['403' => [__('messages.role_change_error')]],
             ], 403);
         }
-        if (empty($validated['password'])) {
-            unset($validated['password']);
-        } else {
-            $validated['password'] = bcrypt($validated['password']);
-        }
-        $userFromDB = User::where('id', $user->id)->first();
-        // Cek jika username adalah admin atau superadmin dan mencoba mengubah email_verified_at selain ke true
-        if (in_array($user->username, ['admin', 'superadmin']) && isset($validated['email_verified_at']) && $validated['email_verified_at'] !== "1") {
+
+        if (in_array($user->username, ['admin', 'superadmin'], true)
+            && $request->has('email_verified_at')
+            && ! $request->boolean('email_verified_at')) {
             return response()->json([
                 'success' => false,
                 'message' => __('messages.email_verification_change_error'),
                 'errors' => ['403' => [__('messages.email_verification_change_error')]],
             ], 403);
         }
-        if ($validated['email_verified_at'] == "1") {
-            if (is_null($userFromDB->email_verified_at)) {
-                $validated['email_verified_at'] = now();
-            } else {
-                unset($validated['email_verified_at']);
-            }
-        } elseif ($validated['email_verified_at'] == "0") {
-            $validated['email_verified_at'] = null;
+
+        $validated = $this->prepareEmailVerification($request->validated(), $user);
+
+        if (empty($validated['password'])) {
+            unset($validated['password']);
         }
 
         $user->update($validated);
-        $user = User::where('id', $user->id)->first();
+        $user->refresh();
 
         return response()->json([
-            'user' => $user,
-            'status' => $userFromDB->email_verified_at?->toDateTimeString() ?? false,
+            'user' => UserResource::make($user)->toArray($request),
+            'status' => $user->email_verified_at?->toDateTimeString() ?? false,
             'message' => __('messages.user_updated_success'),
         ]);
     }
@@ -137,10 +112,9 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(User $user): JsonResponse
     {
-        // Check if the user is admin or superadmin
-        if (in_array($user->username, ['admin', 'superadmin'])) {
+        if (in_array($user->username, ['admin', 'superadmin'], true)) {
             return response()->json([
                 'success' => false,
                 'message' => __('messages.admin_delete_error'),
@@ -151,5 +125,32 @@ class UserController extends Controller
         $user->delete();
 
         return response()->json(['message' => __('messages.user_deleted_success')]);
+    }
+
+    /**
+     * Normalise the email verification input for persistence.
+     *
+     * @param  array<string, mixed>  $validated
+     * @return array<string, mixed>
+     */
+    private function prepareEmailVerification(array $validated, ?User $user = null): array
+    {
+        if (! array_key_exists('email_verified_at', $validated)) {
+            return $validated;
+        }
+
+        $shouldVerify = (bool) $validated['email_verified_at'];
+
+        if ($shouldVerify) {
+            if ($user && $user->email_verified_at) {
+                unset($validated['email_verified_at']);
+            } else {
+                $validated['email_verified_at'] = now();
+            }
+        } else {
+            $validated['email_verified_at'] = null;
+        }
+
+        return $validated;
     }
 }

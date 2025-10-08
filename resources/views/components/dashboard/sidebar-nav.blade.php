@@ -1,3 +1,15 @@
+@php
+    use App\Enums\UserRole;
+    use Illuminate\Support\Facades\Auth;
+
+    $currentUser = Auth::user();
+    $isSuperAdmin = $currentUser && (
+        $currentUser->role instanceof UserRole
+            ? $currentUser->role === UserRole::SuperAdmin
+            : $currentUser->role === UserRole::SuperAdmin->value
+    );
+@endphp
+
 <nav class="hs-accordion-group flex w-full flex-col flex-wrap p-3" data-hs-accordion-always-open>
     <ul class="flex flex-col space-y-1">
         <x-dashboard.nav-item href="/" icon="ri-home-4-line" text="{{ __('Home') }}" />
@@ -18,12 +30,12 @@
         <div class="text-base-content-muted border-foreground/20 border-b px-1 pt-3 text-sm font-bold">
             <p>{{ __('Manage') }}</p>
         </div>
-        @if (Auth::user()->role == 'superadmin')
+        @if ($isSuperAdmin)
             <x-dashboard.nav-item href="admin.users.index" icon="ri-user-line" text="{{ __('Users') }}" />
             <x-dashboard.nav-item href="docs" icon="ri-file-list-3-line" text="{{ __('Route Docs') }}" target="_blank" />
         @endif
 
-        @if (Auth::user()->role == 'superadmin')
+        @if ($isSuperAdmin)
             <div class="text-base-content-muted border-foreground/30 border-b px-1 pt-3 text-sm font-bold">
                 <p>{{ __('Settings') }}</p>
             </div>
