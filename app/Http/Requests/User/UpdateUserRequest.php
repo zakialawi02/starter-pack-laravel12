@@ -24,7 +24,7 @@ class UpdateUserRequest extends FormRequest
 
         return [
             'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'min:4', 'max:25', 'alpha_num', 'lowercase', Rule::unique('users', 'username')->ignore($userId)],
+            'username' => ['required', 'string', 'min:4', 'max:25', 'regex:/^[a-z0-9_]+$/', 'lowercase', Rule::unique('users', 'username')->ignore($userId)],
             'role' => ['required', new Enum(UserRole::class)],
             'email' => ['required', 'string', 'email:filter', 'indisposable', 'max:255', Rule::unique('users', 'email')->ignore($userId)],
             'email_verified_at' => ['nullable', 'boolean'],

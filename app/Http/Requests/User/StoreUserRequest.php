@@ -20,7 +20,7 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'min:4', 'max:25', 'alpha_num', 'lowercase', 'unique:users,username'],
+            'username' => ['required', 'string', 'min:4', 'max:25', 'regex:/^[a-z0-9_]+$/', 'lowercase', 'unique:users,username'],
             'role' => ['required', new Enum(UserRole::class)],
             'email' => ['required', 'string', 'email:filter', 'indisposable', 'max:255', 'unique:users,email'],
             'email_verified_at' => ['nullable', 'boolean'],
