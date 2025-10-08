@@ -301,7 +301,7 @@
                         },
                         success: function(response) {
                             closeModal('#user-modal');
-                            $('#myTable').DataTable().ajax.reload();
+                            $('#myTable').DataTable().ajax.reload(null, false);
                             MyZkToast.success(response.message);
                         },
                         error: function(error) {
@@ -353,7 +353,7 @@
                         type: "DELETE",
                         url: `{{ route('admin.users.destroy', ':userId') }}`.replace(':userId', userId),
                         success: function(response) {
-                            $('#myTable').DataTable().ajax.reload();
+                            $('#myTable').DataTable().ajax.reload(null, false);
                             MyZkToast.success(response.message);
                         },
                         error: function(error) {
