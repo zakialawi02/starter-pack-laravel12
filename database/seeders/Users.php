@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\UserRole;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
@@ -21,7 +22,7 @@ class Users extends Seeder
                 'username' => 'superadmin',
                 'email' => 'superadmin@mail.com',
                 'password' => Hash::make('superadmin'),
-                'role' => 'superadmin',
+                'role' => UserRole::SuperAdmin->value,
                 'profile_photo_path' => '/assets/img/profile/admin.png',
                 'created_at' => now(),
                 'email_verified_at' => now(),
@@ -33,7 +34,7 @@ class Users extends Seeder
                 'username' => 'admin',
                 'email' => 'admin@mail.com',
                 'password' => Hash::make('admin'),
-                'role' => 'admin',
+                'role' => UserRole::Admin->value,
                 'profile_photo_path' => '/assets/img/profile/admin.png',
                 'email_verified_at' => now(),
                 'created_at' => now(),
@@ -45,7 +46,7 @@ class Users extends Seeder
                 'username' => 'user',
                 'email' => 'user@mail.com',
                 'password' => Hash::make('user'),
-                'role' => 'user',
+                'role' => UserRole::User->value,
                 'profile_photo_path' => '/assets/img/profile/user.png',
                 'email_verified_at' => now(),
                 'created_at' => now(),

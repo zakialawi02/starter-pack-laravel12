@@ -2,45 +2,17 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Models\User;
+use App\Http\Requests\User\StoreUserRequest as BaseStoreUserRequest;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Response;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ValidationException;
 
-class StoreUserRequest extends FormRequest
+class StoreUserRequest extends BaseStoreUserRequest
 {
-    protected $roles;
-    public function prepareForValidation()
-    {
-        // Inisialisasi nilai enum dari model
-        $this->roles = implode(',', User::getRoleOptions());
-    }
-
     /**
-     * Determine if the user is authorized to make this request.
+     * @throws ValidationException
      */
-    public function authorize(): bool
-    {
-        return true;
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
-    public function rules(): array
-    {
-        return [
-            'name' => 'required|string|max:255',
-            'username' => 'required|string|min:4|max:25|alpha_num|lowercase|unique:users,username',
-            'role' => 'required|in:' . $this->roles,
-            'email' => 'required|string|email|indisposable|max:255|unique:users,email',
-            'password' => 'required|string|min:6',
-        ];
-    }
-
-    public function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    protected function failedValidation(Validator $validator): void
     {
         $response = response()->json([
             'success' => false,
