@@ -23,6 +23,12 @@ use App\Http\Controllers\Socialite\ProviderRedirectController;
 Route::get('/auth/{provider}/redirect', ProviderRedirectController::class)->name('auth.redirect');
 Route::get('/auth/{provider}/callback', ProviderCallbackController::class)->name('auth.callback');
 
+if (app()->environment('testing')) {
+    Route::middleware(['auth', 'role:superadmin'])
+        ->get('/test-superadmin', fn () => response()->noContent())
+        ->name('test.superadmin');
+}
+
 // Dashboard Routes
 Route::prefix('dashboard')->name('admin.')->group(function () {
     // Super Admin Only Routes

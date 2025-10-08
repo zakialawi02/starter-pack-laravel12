@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Enums\UserRole;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -32,7 +32,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'provider_id',
         'provider_name',
         'provider_token',
-        'provider_refresh_token'
+        'provider_refresh_token',
     ];
 
     /**
@@ -44,7 +44,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'remember_token',
         'provider_token',
-        'provider_refresh_token'
+        'provider_refresh_token',
     ];
 
     /**
@@ -57,28 +57,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'role' => UserRole::class,
         ];
-    }
-
-    public static function getRoleOptions()
-    {
-        // Check the type of database being used
-        $driver = DB::getDriverName();
-
-        if ($driver === 'mysql') {
-            // Retrieve column description from the users table
-            $column = DB::select("SHOW COLUMNS FROM users WHERE Field = 'role'");
-            // Extract data type from query result
-            $type = $column[0]->Type;
-            // Extract enum values using regex
-            preg_match('/enum\((.*)\)/', $type, $matches);
-            // Return enum values as an array
-            return str_getcsv($matches[1], ',', "'");
-        } elseif ($driver === 'sqlite') {
-            // If using SQLite, ENUM is not supported, an alternative solution must be created.
-            return ['superadmin', 'user']; // Adjust according to expected values
-        }
-
-        return []; // Return empty if the driver is not recognized
     }
 }
