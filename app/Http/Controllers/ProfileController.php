@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Jobs\ProcessProfilePhoto;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -85,6 +86,9 @@ class ProfileController extends Controller
         // Menyimpan file ke storage publik dengan nama baru
         $file->storeAs('profile_photos', $newFileName, 'public');
         $path = '/storage/profile_photos/' . $newFileName;
+        // Menyimulasikan proses manipulasi foto melalui queue
+        ProcessProfilePhoto::dispatch($user->id, $path);
+
         // Memperbarui foto profil pengguna
         $user->update([
             'profile_photo_path' => $path, // Menyimpan path file di database
