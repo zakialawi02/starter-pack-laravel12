@@ -12,6 +12,11 @@ class ProcessProfilePhoto implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    /**
+     * The queue connection name where the job should be pushed.
+     */
+    public string $queue = 'images';
+
     public function __construct(public string $userId, public string $photoPath)
     {
     }
@@ -23,6 +28,6 @@ class ProcessProfilePhoto implements ShouldQueue
 
     public function tags(): array
     {
-        return ['profile-photo', "user:{$this->userId}"];
+        return ['images', 'profile-photo', "user:{$this->userId}"];
     }
 }

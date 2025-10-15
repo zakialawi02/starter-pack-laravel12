@@ -12,14 +12,17 @@ class MailController extends Controller
     {
         $user = User::where('username', $username)->firstOrFail();
 
-        SendUserMail::dispatch($user->email, $user->name);
+        for ($i = 0; $i < 5; $i++) {
+            SendUserMail::dispatch($user->email, $user->name);
+        }
 
         return response()->json([
-            'message' => 'Email is being sent via queue.',
+            'message' => '5 queued emails are being sent.',
             'user' => [
                 'username' => $user->username,
                 'email' => $user->email,
             ],
+            'queued_jobs' => 5,
         ], 202);
     }
 }
