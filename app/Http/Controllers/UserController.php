@@ -8,6 +8,7 @@ use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
@@ -29,7 +30,7 @@ class UserController extends Controller
                 ->addColumn('photo', function (User $user) {
                     return '<img src="' . asset($user->profile_photo_path) . '" width="30">';
                 })
-                ->editColumn('role', fn (User $user) => $user->role instanceof UserRole ? $user->role->value : $user->role)
+                ->editColumn('role', fn (User $user) => $user->getRoleNames()->first() ?? ($user->role instanceof UserRole ? $user->role->value : $user->role))
                 ->rawColumns(['photo', 'action'])
                 ->removeColumn(['profile_photo_path', 'updated_at', 'id'])
                 ->make(true);
@@ -41,7 +42,7 @@ class UserController extends Controller
 
         return view('pages.dashboard.users.index', [
             'data' => $data,
-            'roles' => UserRole::cases(),
+            'roles' => Role::orderBy('name')->get(),
         ]);
     }
 
@@ -53,6 +54,11 @@ class UserController extends Controller
         $validated = $this->prepareEmailVerification($request->validated());
 
         $user = User::create($validated)->fresh();
+
+        // Assign Spatie role
+        if (! empty($validated['role'])) {
+            $user->syncRoles([$validated['role']]);
+        }
 
         return response()->json([
             'user' => UserResource::make($user)->toArray($request),
@@ -101,6 +107,11 @@ class UserController extends Controller
 
         $user->update($validated);
         $user->refresh();
+
+        // Sync Spatie role
+        if (! empty($validated['role'])) {
+            $user->syncRoles([$validated['role']]);
+        }
 
         return response()->json([
             'user' => UserResource::make($user)->toArray($request),

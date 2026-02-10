@@ -54,8 +54,10 @@ class Users extends Seeder
             ]
         ];
 
-        foreach ($users as $user) {
-            User::create($user);
+        foreach ($users as $userData) {
+            $user = User::create($userData);
+            // Assign Spatie role matching the enum role
+            $user->assignRole($userData['role']);
         }
     }
 }

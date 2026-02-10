@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Socialite\ProviderCallbackController;
@@ -34,6 +36,8 @@ Route::prefix('dashboard')->name('admin.')->group(function () {
     // Super Admin Only Routes
     Route::middleware(['auth', 'verified', 'role:superadmin'])->group(function () {
         Route::resource('users', UserController::class)->except('create', 'edit');
+        Route::resource('roles', RoleController::class)->except('create', 'edit');
+        Route::resource('permissions', PermissionController::class)->except('create', 'edit');
     });
 
     // Super Admin & Admin Routes

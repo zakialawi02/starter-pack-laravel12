@@ -86,7 +86,7 @@
                                     <x-input-label for="role" :value="__('Role')" />
                                     <x-select-input id="role" name="role">
                                         @foreach ($roles as $role)
-                                            <option value="{{ $role->value }}">{{ $role->label() }}</option>
+                                            <option value="{{ $role->name }}">{{ ucfirst($role->name) }}</option>
                                         @endforeach
                                     </x-select-input>
                                 </div>
