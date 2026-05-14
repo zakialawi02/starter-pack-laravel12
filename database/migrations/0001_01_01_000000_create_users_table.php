@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->string('profile_photo_path', 2048)->default('/assets/img/profile/user.png');
-            $table->enum('role', ['admin', 'user'])->default('user');
+            $table->enum('role', ['superadmin', 'admin', 'user'])->default('user');
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
             $table->softDeletes();
