@@ -44,16 +44,16 @@
     --radius: 0.5rem;
     --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
     --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-    --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
-        0 1px 2px -1px hsl(0 0% 0% / 0.1);
-    --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
-        0 1px 2px -1px hsl(0 0% 0% / 0.1);
-    --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
-        0 2px 4px -1px hsl(0 0% 0% / 0.1);
-    --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
-        0 4px 6px -1px hsl(0 0% 0% / 0.1);
-    --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
-        0 8px 10px -1px hsl(0 0% 0% / 0.1);
+    --shadow-sm:
+        0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --shadow:
+        0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --shadow-md:
+        0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
+    --shadow-lg:
+        0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
+    --shadow-xl:
+        0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
     --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
     --tracking-normal: 0em;
     --spacing: 0.25rem;
@@ -92,16 +92,16 @@
     --radius: 0.5rem;
     --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
     --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-    --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
-        0 1px 2px -1px hsl(0 0% 0% / 0.1);
-    --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
-        0 1px 2px -1px hsl(0 0% 0% / 0.1);
-    --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
-        0 2px 4px -1px hsl(0 0% 0% / 0.1);
-    --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
-        0 4px 6px -1px hsl(0 0% 0% / 0.1);
-    --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
-        0 8px 10px -1px hsl(0 0% 0% / 0.1);
+    --shadow-sm:
+        0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --shadow:
+        0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --shadow-md:
+        0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
+    --shadow-lg:
+        0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
+    --shadow-xl:
+        0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
     --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
     --tracking-normal: 0em;
     --spacing: 0.25rem;
@@ -210,63 +210,148 @@
         cursor: not-allowed;
         opacity: 0.7;
     }
-}
 
-button.btn {
-    @apply px-2 py-[5px] rounded-md text-primary-foreground;
-}
-.btn {
-    @apply px-2 py-1.5 rounded-md text-primary-foreground;
-}
-.btn:hover {
-    @apply opacity-75;
-}
+    button.btn {
+        @apply px-2 py-[5px] rounded-md text-primary-foreground;
+    }
+    .btn {
+        @apply px-2 py-1.5 rounded-md text-primary-foreground;
+    }
+    .btn:hover {
+        @apply opacity-75;
+    }
+    .btn-sm {
+        @apply px-2 py-1 text-sm rounded-md text-primary-foreground;
+    }
 
-.badge {
-    @apply text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm text-primary-foreground;
+    .btn-primary {
+        @apply bg-primary text-primary-foreground;
+    }
+    .btn-primary:hover {
+        @apply bg-primary/90;
+    }
+    .btn-primary:focus {
+        @apply ring-pink-100 ring-primary ring-offset-2;
+    }
+    .btn-primary:disabled {
+        @apply bg-primary/50 cursor-not-allowed;
+    }
+    .btn-danger {
+        @apply bg-error text-neutral;
+    }
+    .btn-danger:hover {
+        @apply bg-error/90;
+    }
+    .btn-danger:focus {
+        @apply ring-1 ring-error ring-offset-2;
+    }
+    .btn-danger:disabled {
+        @apply bg-error/50 cursor-not-allowed;
+    }
+
+    .badge {
+        @apply text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm text-primary-foreground;
+    }
 }
 
 /* Datatables */
+/* Datatables */
+.table-container {
+    @apply relative w-full -mx-6;
+    width: calc(100% + 3rem);
+}
+
 .table {
     @apply w-full text-left border-collapse table-auto;
 }
 
 .table td,
 .table th {
-    @apply px-4 py-2 border-b border-foreground;
+    @apply px-4 py-3 border-b border-border/50 transition-colors duration-200 whitespace-nowrap;
 }
 
-.table thead {
-    @apply bg-foreground;
-}
-.table thead th {
-    @apply text-background;
-}
-
-.table tbody tr:nth-child(odd) {
-    @apply bg-neutral;
-}
-.table tbody tr:nth-child(even) {
-    @apply bg-muted/70;
-}
-
-.dt-container > div:first-child {
-    @apply flex items-center justify-between flex-col md:flex-row;
-}
-
-.dt-container > div:nth-child(3) {
-    @apply flex items-center justify-between flex-col md:flex-row;
-    -webkit-overflow-scrolling: touch;
-}
-
+/* Fix for empty table/no records found alignment */
 .dt-empty {
     @apply p-2 text-center;
 }
 
-.dt-back-info {
-    @apply text-sm text-muted;
+.table thead {
+    @apply bg-muted/30;
 }
 
+.table thead th {
+    @apply text-muted-foreground font-bold uppercase tracking-wider text-[11px];
+}
+
+/* Zebra striping (Even/Odd) */
+.table tbody tr:nth-child(odd) {
+    @apply bg-background;
+}
+.table tbody tr:nth-child(even) {
+    @apply bg-muted;
+}
+
+.dt-container {
+    @apply flex flex-col w-full!;
+}
+
+/* Force full width on internal DT elements */
+.dt-scroll,
+.dt-scroll-head,
+.dt-scroll-headInner,
+.dt-scroll-headInner table,
+.dt-scroll-body,
+.dt-scroll-body table {
+    width: 100% !important;
+    min-width: 100% !important;
+}
+
+/* Scroll area for table only */
+.dt-scroll-body {
+    @apply overflow-x-auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.dt-info {
+    @apply text-xs md:text-sm text-muted-foreground font-medium px-6 py-4;
+}
+
+.dt-paging {
+    @apply flex items-center gap-1 px-6 py-4;
+}
+
+/* Footer layout refinement */
+@media (min-width: 768px) {
+    .dt-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        @apply border-t border-border/50 mt-2;
+    }
+    .dt-scroll {
+        grid-column: span 2;
+    }
+    .dt-info {
+        @apply flex items-center border-t-0!;
+        grid-column: 1;
+    }
+    .dt-paging {
+        @apply flex items-center justify-end border-t-0!;
+        grid-column: 2;
+    }
+}
+
+@media (max-width: 767px) {
+    .dt-info {
+        @apply border-t border-border/50 text-center pb-2 mt-2;
+    }
+    .dt-paging {
+        @apply justify-center pt-0;
+    }
+}
+
+.dt-paging nav {
+    @apply flex items-center gap-1;
+}
 .dt-paging .pagination a:first-child {
     @apply rounded-l;
 }
@@ -274,20 +359,28 @@ button.btn {
     @apply rounded-r;
 }
 .dt-paging .pagination a {
-    @apply bg-neutral border-base-content border-[1px] text-base-content font-normal px-2 py-1.5;
+    @apply size-8 inline-flex items-center justify-center border border-border bg-transparent transition-all cursor-pointer;
+    @apply text-muted-foreground hover:bg-muted hover:text-foreground;
+
     &[aria-current] {
-        @apply bg-foreground/80 text-background;
+        @apply bg-primary text-primary-foreground border-primary shadow-sm;
     }
+
     &[aria-disabled] {
-        @apply opacity-50 cursor-not-allowed;
+        @apply opacity-40 cursor-not-allowed hover:bg-transparent;
     }
 }
 
 .dt-length {
-    @apply gap-0! -space-y-1!;
+    @apply flex items-center gap-2 mb-4 px-2;
 }
+
 .dt-length select {
-    @apply md:order-first order-last px-6 mr-2 text-sm text-muted-foreground border-foreground rounded-md shadow-xs outline-hidden bg-neutral ring-0 focus:border-primary focus:ring-2 focus:ring-primary;
+    @apply appearance-none rounded-xl border-border bg-background py-1.5 ps-3 pe-9 text-sm font-medium focus:border-primary focus:ring-primary transition-all cursor-pointer;
+}
+
+.dt-length label {
+    @apply text-sm text-muted-foreground font-medium order-last;
 }
 
 .dt-search input {

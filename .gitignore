@@ -22,6 +22,7 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+package-lock.json
 
 # Ignore Python venv
 scripts/venv/

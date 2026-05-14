@@ -8,17 +8,11 @@ class ModifyPersonalAccessTokensTable extends Migration
 {
     public function up()
     {
-        Schema::table('personal_access_tokens', function (Blueprint $table) {
-            // Ubah tipe data dari 'tokenable_id' menjadi UUID
-            $table->uuid('tokenable_id')->change();
-        });
+        // No longer needed as the base migration was fixed to use uuidMorphs
     }
 
     public function down()
     {
-        Schema::table('personal_access_tokens', function (Blueprint $table) {
-            // Kembalikan tipe data ke asalnya jika perlu rollback
-            $table->unsignedBigInteger('tokenable_id')->change();
-        });
+        // No longer needed
     }
 }

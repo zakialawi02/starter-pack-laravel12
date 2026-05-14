@@ -1,12 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Socialite\ProviderCallbackController;
 use App\Http\Controllers\Socialite\ProviderRedirectController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +25,7 @@ Route::get('/auth/{provider}/callback', ProviderCallbackController::class)->name
 
 if (app()->environment('testing')) {
     Route::middleware(['auth', 'role:superadmin'])
-        ->get('/test-superadmin', fn () => response()->noContent())
+        ->get('/test-superadmin', fn() => response()->noContent())
         ->name('test.superadmin');
 }
 
@@ -33,6 +33,12 @@ if (app()->environment('testing')) {
 Route::prefix('dashboard')->name('admin.')->group(function () {
     // Super Admin Only Routes
     Route::middleware(['auth', 'verified', 'role:superadmin'])->group(function () {
+        // User Management
+        Route::get('users/export', [UserController::class, 'export'])->name('users.export');
+        Route::get('users/template', [UserController::class, 'downloadTemplate'])->name('users.template');
+        Route::post('users/import-preview', [UserController::class, 'importPreview'])->name('users.import-preview');
+        Route::post('users/import-confirm', [UserController::class, 'importConfirm'])->name('users.import-confirm');
+        Route::delete('users/batch', [UserController::class, 'batchDestroy'])->name('users.batch-destroy');
         Route::resource('users', UserController::class)->except('create', 'edit');
     });
 
