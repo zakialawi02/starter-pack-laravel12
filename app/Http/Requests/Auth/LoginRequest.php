@@ -14,13 +14,17 @@ class LoginRequest extends FormRequest
     protected $id_type;
     protected function prepareForValidation()
     {
-        if (filter_var($this->input('id_user'), FILTER_VALIDATE_EMAIL)) {
+        $id_user = Str::lower($this->input('id_user'));
+
+        if (filter_var($id_user, FILTER_VALIDATE_EMAIL)) {
             $this->id_type = 'email';
         } else {
             $this->id_type = 'username';
         }
+
         $this->merge([
-            $this->id_type => $this->input('id_user')
+            'id_user' => $id_user,
+            $this->id_type => $id_user,
         ]);
     }
 
